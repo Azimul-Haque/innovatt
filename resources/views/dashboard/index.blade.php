@@ -111,7 +111,7 @@
             </thead>
             <tbody>
               @foreach($attendances as $attendance)
-                @foreach($teachers as $teacher)
+                @foreach(Auth::user()->institute->users as $teacher)
                   @if($attendance->device_pin == $teacher->device_pin)
                     <tr>
                       <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
