@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Upazilla;
 use App\Institute;
+use App\Attendance;
 
 use Carbon\Carbon;
 use DB, Hash, Auth, Image, File, Session;
@@ -161,8 +162,10 @@ class DashboardController extends Controller
     public function getSingleInstitute($device_id)
     {
         $institute = Institute::where('device_id', $device_id)->first();
+        $attendance = Attendance::where('device_id', $device_id)->get();
 
         return view('dashboard.institutes.single')
-                            ->withInstitute($institute);
+                            ->withInstitute($institute)
+                            ->withAttendance($attendance);
     }
 }

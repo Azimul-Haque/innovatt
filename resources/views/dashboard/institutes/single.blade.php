@@ -39,6 +39,28 @@
           </table>
         </div>
       </div>
+      <div class="col-md-8">
+        <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
+          {{ $attendance }}
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>শিক্ষক</th>
+                <th>পদবি</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($institute->users as $teacher)
+                <tr>
+                  <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
+                  <td>{{ $teacher->designation }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   @endif
 @stop
