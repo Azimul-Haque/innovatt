@@ -10,7 +10,7 @@
     <h1>
       {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
       <div class="pull-right">
-        {{-- <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success" title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a> --}}
+        <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
       </div>
     </h1>
 @stop
