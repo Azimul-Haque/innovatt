@@ -25,7 +25,12 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $attendances = Attendance::where('device_id', Auth::user()->institute->device_id)->get();
+        if(!empty(Auth::user()->institute->device_id)) {
+            $attendances = Attendance::where('device_id', Auth::user()->institute->device_id)->get();
+        } else {
+            $attendances = collect();
+        }
+        
         return view('dashboard.index')->withAttendances($attendances);
     }
 
