@@ -42,8 +42,12 @@ Route::auth();
 Route::resource('users','UserController');
 Route::get('/dashboard', ['as'=>'dashboard.index','uses'=>'DashboardController@index']);
 Route::get('/users', ['as'=>'dashboard.users','uses'=>'DashboardController@getUsers']);
-Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@index']);
-Route::get('/institutes', ['as'=>'dashboard.institutes','uses'=>'DashboardController@index']);
+Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
+
+Route::get('/institutes', ['as'=>'dashboard.institutes','uses'=>'DashboardController@getInstitutes']);
+Route::get('/institutes/create', ['as'=>'dashboard.institutes.create','uses'=>'DashboardController@createInstitute']);
+Route::post('/institutes/store', ['as'=>'dashboard.institutes.store','uses'=>'DashboardController@storeInstitute']);
+
 Route::get('/personal/profile', ['as'=>'dashboard.personal.profile','uses'=>'DashboardController@index']);
 
 
