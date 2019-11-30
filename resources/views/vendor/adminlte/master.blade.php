@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
     @yield('title', config('adminlte.title', 'AdminLTE 2'))
-    @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
+    @yield('title_postfix', config('adminlte.title_postfix', '')) | Innova Attendance Management Solution</title>
     
     <meta name="description" content="Official website of Killa BD. Developed by A. H. M. Azimul Haque and Md. Abdul Mannan.">
     <meta name="keywords" content="Killa, Killa BD">

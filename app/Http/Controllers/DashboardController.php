@@ -6,10 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\Group;
-use App\Loanname;
-use App\Savingname;
-use App\Schemename;
+use App\Upazilla;
 
 use Carbon\Carbon;
 use DB, Hash, Auth, Image, File, Session;
@@ -25,6 +22,11 @@ class DashboardController extends Controller
     }
 
     public function index()
+    {
+        return view('dashboard.index');
+    }
+
+    public function getUsers()
     {
         return view('dashboard.index');
     }

@@ -41,9 +41,15 @@
             <!-- Logo -->
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">{!! config('adminlte.logo_mini', '<b>A</b>LT') !!}</span>
+                <span class="logo-mini">
+                  <img src="{{ asset('images/favicon.png') }}" style="height: 30px; width: auto;">
+                  {{-- {!! config('adminlte.logo_mini', '<b>A</b>LT') !!} --}}
+                </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</span>
+                <span class="logo-lg">
+                  {{-- <img src="{{ asset('images/favicon.png') }}" style="height: 30px; width: auto;"> --}}
+                  {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                </span>
             </a>
 
             <!-- Header Navbar -->
@@ -133,94 +139,42 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
-                    <li class="treeview {{ Request::is('dashboard') ? 'active' : '' }} {{ Request::is('programs/*') ? 'active' : '' }} {{ Request::is('group/*') ? 'active' : '' }} {{ Request::is('staff/*') ? 'active' : '' }}">
-                        <a href="#">
-                            <i class="fa fa-fw fa-university"></i><span>Programs</span>
-                            <span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    {{-- <li class="header">Dashboard</li> --}}
+                    <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.index') }}">
+                            <i class="fa fa-fw fa-tachometer"></i>
+                            <span>ড্যাশবোর্ড</span>
                         </a>
-                        <ul class="treeview-menu {{ Request::is('dashboard') ? 'menu-open' : '' }} {{ Request::is('programs/*') ? 'menu-open' : '' }}">
-                          <li class="{{ Request::is('programs/features') ? 'active' : '' }}">
-                            <a href="{{ route('programs.features') }}"><i class="fa fa-list-ol"></i> Program Features</a>
-                          </li>
-                          @foreach($univstaffs as $staff)
-                            @if((Auth::user()->role == 'admin') || (Auth::user()->role != 'admin' && Auth::user()->id == $staff->id))
-                            <li class="treeview {{-- {{ Request::is('dashboard') ? 'active menu-open' : '' }} {{ Request::is('programs/*') ? 'active menu-open' : '' }} --}} {{ Request::is('staff/'.$staff->id.'/*') ? 'active' : '' }} {{ Request::is('group/'. $staff->id .'/*') ? 'active' : '' }}">
-                              <a href="#"><i class="fa fa-user-circle-o"></i> {{ $staff->name }}
-                                <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                              </a>
-                              <ul class="treeview-menu {{-- {{ Request::is('dashboard') ? 'menu-open' : '' }} {{ Request::is('programs/*') ? 'menu-open' : '' }} --}}">
-                                <li class="{{ Request::is('staff/'.$staff->id.'/features') ? 'active' : '' }}">
-                                  <a href="{{ route('staff.features', $staff->id) }}"><i class="fa fa-list-ol"></i> Staff Features</a>
-                                </li>
-                                @foreach($staff->groups as $group)
-                                <li class="treeview {{ Request::is('group/'. $staff->id .'/'. $group->id .'/*') ? 'active' : '' }}">
-                                  <a href="#" @if($group->status == 1) style="color: #00C0EF;" @endif>
-                                    <i class="fa fa-users"></i>
-                                    {{ $group->name }}
-                                    <span class="pull-right-container">
-                                      <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                  </a>
-                                  <ul class="treeview-menu {{ Request::is('group/'. $staff->id .'/'. $group->id .'/*') ? 'menu-open' : '' }}">
-                                    <li class="{{ Request::is('group/'. $staff->id .'/'. $group->id .'/features') ? 'active' : '' }}">
-                                      <a href="{{ route('group.features', [$staff->id, $group->id]) }}"><i class="fa fa-list-ol"></i> Group Features</a>
-                                    </li>
-                                    @foreach($group->members->sortBy('passbook') as $member)
-                                        @if($member->status == 1) {{-- if member is Active --}}
-                                          <li class="{{ Request::is('group/'. $staff->id .'/'. $group->id .'/'.$member->id.'/member') ? 'active' : '' }} {{ Request::is('group/'. $staff->id .'/'. $group->id .'/'.$member->id.'/member/*') ? 'active' : '' }}">
-                                            <a href="{{ route('dashboard.member.single', [$staff->id, $group->id, $member->id]) }}" @if($member->loans->count() > 0) style="color: #DD4B39;" @endif>
-                                              <i class="fa fa-user"></i> {{ $member->name }}-{{ $member->fhusband }}
-                                            </a>
-                                          </li>
-                                        @endif
-                                    @endforeach
-                                  </ul>
-                                </li>
-                                @endforeach
-                                {{-- <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li> --}}
-                              </ul>
-                            </li>
-                            @endif
-                          @endforeach
-                        </ul>
                     </li>
                     @if(Auth::user()->role == 'admin')
-                        <li class="{{ Request::is('staffs') ? 'active' : '' }} {{ Request::is('staffs/*') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.staffs') }}">
-                                <i class="fa fa-fw fa-user-circle"></i>
-                                <span>Staffs</span>
+                        <li class="{{ Request::is('users') ? 'active' : '' }} {{ Request::is('users/*') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.users') }}">
+                                <i class="fa fa-fw fa-users"></i>
+                                <span>ব্যবহারকারী তালিকা</span>
                             </a>
                         </li>
-                        <li class="{{ Request::is('groups') ? 'active' : '' }} {{ Request::is('groups/*') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.groups') }}">
-                                <i class="fa fa-fw fa-address-card"></i>
-                                <span>Groups</span>
-                            </a>
-                        </li>
-                        <li class="{{ Request::is('loanandsavingnames') ? 'active' : '' }} {{ Request::is('loannames') ? 'active' : '' }} {{ Request::is('loannames/*') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.loanandsavingnames') }}">
-                                <i class="fa fa-fw fa-tags"></i>
-                                <span>Loan, Saving, Scheme Names</span>
-                            </a>
-                        </li>
-                        <li class="{{ Request::is('old/data/*') ? 'active' : '' }}">
-                            <a href="{{ route('olddata.index') }}">
-                                <i class="fa fa-fw fa-address-book-o"></i>
-                                <span>Old Data Entry</span>
+                        <li class="{{ Request::is('upazillas') ? 'active' : '' }} {{ Request::is('upazillas/*') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.upazillas') }}">
+                                <i class="fa fa-fw fa-map-marker"></i>
+                                <span>উপজেলা তালিকা</span>
                             </a>
                         </li>
                     @endif
-                    {{-- <li class="header">Personal Profile</li>
-                    <li class="{{ Request::is('dashboard/personal/profile') ? 'active' : '' }}">
+                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
+                        <li class="{{ Request::is('institutes') ? 'active' : '' }} {{ Request::is('institutes/*') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.institutes') }}">
+                                <i class="fa fa-fw fa-university"></i>
+                                <span>প্রতিষ্ঠান তালিকা</span>
+                            </a>
+                        </li>
+                    @endif
+                    {{-- <li class="header">Personal Profile</li> --}}
+                    <li class="{{ Request::is('personal/profile') ? 'active' : '' }}">
                         <a href="{{ route('dashboard.personal.profile') }}">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span>Your Profile</span>
+                            <i class="fa fa-fw fa-user-circle"></i>
+                            <span>ব্যক্তিগত প্রোফাইল</span>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

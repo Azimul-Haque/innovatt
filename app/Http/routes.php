@@ -41,6 +41,10 @@ Route::auth();
 // dashboard routes
 Route::resource('users','UserController');
 Route::get('/dashboard', ['as'=>'dashboard.index','uses'=>'DashboardController@index']);
+Route::get('/users', ['as'=>'dashboard.users','uses'=>'DashboardController@getUsers']);
+Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@index']);
+Route::get('/institutes', ['as'=>'dashboard.institutes','uses'=>'DashboardController@index']);
+Route::get('/personal/profile', ['as'=>'dashboard.personal.profile','uses'=>'DashboardController@index']);
 
 
 

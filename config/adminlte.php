@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Surjo Somobay',
+    'title' => 'Innova Attendance',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Surjo</b> Somobay',
+    'logo' => '<b>Innova</b> Attendance',
 
-    'logo_mini' => '<b>S</b>S',
+    'logo_mini' => '<b>I</b>A',
 
     /*
     |--------------------------------------------------------------------------
