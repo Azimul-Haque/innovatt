@@ -57,7 +57,7 @@
                     <tr>
                       <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
                       <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
-                      <td>{{ bangla(date('F d, Y h:i A', strtotime($attendance->timestampdata))) }}</td>
+                      <td>{{ bangla(date('F d, Y h:i a', strtotime($attendance->timestampdata))) }}</td>
                     </tr>
                   @endif
                 @endforeach
