@@ -28,6 +28,15 @@
               <td>{{ $upazilla->district_bangla }}</td>
               <td>{{ $upazilla->upazilla_bangla }}</td>
               <td>{{ $upazilla->institutes->count() }}</td>
+              <td>
+                @php
+                  $totalteachersupazilla = 0;
+                  foreach ($upazilla->institutes as $institute) {
+                    $totalteachersupazilla = $totalteachersupazilla + $institute->users->count();
+                  }
+                @endphp
+                {{ bangla($totalteachersupazilla) }} জন
+              </td>
             </tr>
           @endforeach
         </tbody>

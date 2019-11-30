@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->integer('upazilla_id')->unsigned();
-            $table->integer('isntitute_id')->unsigned();
+            $table->integer('institute_id')->unsigned();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

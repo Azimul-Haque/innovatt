@@ -19,7 +19,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('getInstitutes', 'createInstitute');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'createUser');
     }
 
     public function index()
@@ -31,14 +31,24 @@ class DashboardController extends Controller
     {
         $admins = User::where('role', 'admin')->get();
         $teos = User::where('role', 'teo')->get();
-        $headmasters = User::where('role', 'headmaster')->get();
-        $teachers = User::where('role', 'teacher')->paginate(20);
+        $teachers = User::where('role', 'headmaster')
+                        ->orWhere('role', 'teacher')
+                        ->paginate(10);
 
         return view('dashboard.users.index')
                         ->withAdmins($admins)
                         ->withTeos($teos)
-                        ->withHeadmasters($headmasters)
                         ->withTeachers($teachers);
+    }
+
+    public function createUser()
+    {
+        $institutes = Institute::all();
+        $upazillas = Upazilla::all();
+
+        return view('dashboard.institutes.create')
+                            ->withInstitutes($institutes)
+                            ->withUpazillas($upazillas);
     }
 
     public function editUser($id)
@@ -53,14 +63,14 @@ class DashboardController extends Controller
 
     public function getUpazillas()
     {
-        $upazillas = Upazilla::withCount('institutes')->orderBy('institutes_count', 'desc')->paginate(20);
+        $upazillas = Upazilla::withCount('institutes')->orderBy('institutes_count', 'desc')->paginate(15);
 
         return view('dashboard.upazillas')->withUpazillas($upazillas);
     }
 
     public function getInstitutes()
     {
-        $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->paginate(20);
+        $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->paginate(15);
 
         return view('dashboard.institutes.index')->withInstitutes($institutes);
     }
@@ -117,5 +127,13 @@ class DashboardController extends Controller
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!'); 
         return redirect()->route('dashboard.institutes');
+    }
+
+    public function getSingleInstitute($device_id)
+    {
+        $institute = Institute::where('device_id', $device_id)->first();
+
+        return view('dashboard.institutes.single')
+                            ->withInstitute($institute);
     }
 }

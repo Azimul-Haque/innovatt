@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'প্রতিষ্ঠান তালিকা')
+@section('title', 'প্রতিষ্ঠান তথ্য')
 
 @section('css')
 
@@ -8,16 +8,16 @@
 
 @section('content_header')
     <h1>
-      সকল প্রতিষ্ঠান
+      {{ $institute->name }}
       <div class="pull-right">
-        <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success" title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a>
+        {{-- <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success" title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a> --}}
       </div>
     </h1>
 @stop
 
 @section('content')
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
-    <div class="table-responsive">
+  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster')
+    {{-- <div class="table-responsive">
       <table class="table">
         <thead>
           <tr>
@@ -31,12 +31,11 @@
         <tbody>
           @foreach($institutes as $institute)
             <tr>
-              <td><a href="{{ route('dashboard.institute.single', $institute->device_id) }}">{{ $institute->name }}</a></td>
+              <td>{{ $institute->name }}</td>
               <td>{{ $institute->upazilla->upazilla_bangla }}, {{ $institute->upazilla->district_bangla }}</td>
               <td>{{ $institute->device_id }}</td>
               <td>{{ bangla($institute->users->count()) }} জন</td>
               <td>
-                <a href="{{ route('dashboard.institute.single', $institute->device_id) }}" class="btn btn-info btn-sm" title="প্রতিষ্ঠান বৃত্তান্ত দেখুন"><i class="fa fa-eye"></i> বিস্তারিত</a>
                 <a href="{{ route('dashboard.institutes.edit', $institute->id) }}" class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
               </td>
             </tr>
@@ -46,6 +45,6 @@
       <div>
         {{ $institutes->links() }}
       </div>
-    </div>
+    </div> --}}
   @endif
 @stop

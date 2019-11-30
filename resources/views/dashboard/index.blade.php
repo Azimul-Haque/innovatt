@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-  @if(Auth::user()->role == 'admin')
+  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
   <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
@@ -29,7 +29,15 @@
 
         <div class="info-box-content">
           <span class="info-box-text">মোট শিক্ষক</span>
-          <span class="info-box-number">২৫৮ জন</span>
+          <span class="info-box-number">
+            @php
+              $totalteachersupazilla = 0;
+              foreach (Auth::user()->upazilla->institutes as $institute) {
+                $totalteachersupazilla = $totalteachersupazilla + $institute->users->count();
+              }
+            @endphp
+            {{ bangla($totalteachersupazilla) }} জন
+        </span>
         </div>
       </div>
     </div>
