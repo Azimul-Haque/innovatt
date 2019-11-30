@@ -18,7 +18,6 @@ class CreateAttendancesTable extends Migration
             $table->string('timestampdata');
             $table->string('device_id');
             $table->integer('count')->unsigned();
-            $table->integer('institute_id')->unsigned();
             $table->timestamps();
         });
     }
