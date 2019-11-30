@@ -53,7 +53,7 @@
             <tbody>
               @foreach($attendances as $attendance)
                 @foreach($teachers as $teacher)
-                  @if($attendances->device_pin == $teacher->device_pin)
+                  @if($attendance->device_pin == $teacher->device_pin)
                     <tr>
                       <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
                       <td>{{ $attendance->timestampdata }}</td>
