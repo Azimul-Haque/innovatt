@@ -41,6 +41,16 @@ class DashboardController extends Controller
                         ->withTeachers($teachers);
     }
 
+    public function editUser($id)
+    {
+        // $institute = Institute::find($id);
+        // $upazillas = Upazilla::all();
+
+        // return view('dashboard.institutes.edit')
+        //                     ->withInstitute($institute)
+        //                     ->withUpazillas($upazillas);
+    }
+
     public function getUpazillas()
     {
         $upazillas = Upazilla::withCount('institutes')->orderBy('institutes_count', 'desc')->paginate(20);

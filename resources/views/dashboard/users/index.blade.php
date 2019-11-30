@@ -16,34 +16,57 @@
 @stop
 
 @section('content')
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>নাম</th>
-            <th>উপজেলা</th>
-            <th>ডিভাইস আইডি (SN)</th>
-            <th>শিক্ষক সংখ্যা</th>
-            <th>কার্যক্রম</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($institutes as $institute)
-            <tr>
-              <td>{{ $institute->name }}</td>
-              <td>{{ $institute->upazilla->upazilla_bangla }}</td>
-              <td>{{ $institute->device_id }}</td>
-              <td>12</td>
-              <td>
-                <a href="{{ route('dashboard.institutes.edit', $institute->id) }}" class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-      <div>
-        {{ $institutes->links() }}
+  @if(Auth::user()->role == 'admin')
+    <div class="row">
+      <div class="col-md-6">
+        <big>অ্যাডমিনগণ</big>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>নাম</th>
+                <th>মোবাইল</th>
+                <th>কার্যক্রম</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($admins as $admin)
+                <tr>
+                  <td>{{ $admin->name }}</td>
+                  <td>{{ $admin->phone }}</td>
+                  <td>
+                    <a href="{{ route('dashboard.users.edit', $admin->id) }}" class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <big>শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</big>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>নাম</th>
+                <th>মোবাইল</th>
+                <th>কার্যক্রম</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($teos as $teo)
+                <tr>
+                  <td>{{ $teo->name }}</td>
+                  <td>{{ $teo->phone }}</td>
+                  <td>
+                    <a href="{{ route('dashboard.users.edit', $teo->id) }}" class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   @endif

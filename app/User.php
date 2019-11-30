@@ -10,6 +10,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Upazilla');
     }
 
+    public function isntitute() {
+        return $this->belongsTo('App\Isntitute');
+    }
+
     // public function loaninstallments() {
     //     return $this->hasMany('App\Loaninstallment');
     // }
