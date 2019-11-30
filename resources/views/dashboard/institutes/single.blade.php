@@ -56,8 +56,8 @@
                   @if($attendance->device_pin == $teacher->device_pin)
                     <tr>
                       <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
-                      <td>{{ $attendance->timestampdata }}</td>
-                      <td>{{ $attendance->timestampdata }}</td>
+                      <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
+                      <td>{{ bangla(date('F d, Y h:i A', strtotime($attendance->timestampdata))) }}</td>
                     </tr>
                   @endif
                 @endforeach
