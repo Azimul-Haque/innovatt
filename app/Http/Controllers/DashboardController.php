@@ -31,9 +31,14 @@ class DashboardController extends Controller
     {
         $admins = User::where('role', 'admin')->get();
         $teos = User::where('role', 'teo')->get();
-        $headmaster = User::where('role', 'teo')->get();
+        $headmasters = User::where('role', 'headmaster')->get();
+        $teachers = User::where('role', 'teacher')->paginate(20);
 
-        return view('dashboard.users.index');
+        return view('dashboard.users.index')
+                        ->withAdmins($admins)
+                        ->withTeos($teos)
+                        ->withHeadmasters($headmasters)
+                        ->withTeachers($teachers);
     }
 
     public function getUpazillas()
