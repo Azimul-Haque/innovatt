@@ -19,7 +19,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">মোট প্রতিষ্ঠান</span>
-          <span class="info-box-number">১২৫ টি</span>
+          <span class="info-box-number">{{ bangla(Auth::user()->upazilla->institutes->count()) }} টি</span>
         </div>
       </div>
     </div>

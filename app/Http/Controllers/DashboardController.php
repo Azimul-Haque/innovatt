@@ -29,7 +29,9 @@ class DashboardController extends Controller
 
     public function getUsers()
     {
-        $users = User::all(); // alada korte hobe type wise
+        $admins = User::where('role', 'admin')->get();
+        $teos = User::where('role', 'teo')->get();
+        $headmaster = User::where('role', 'teo')->get();
 
         return view('dashboard.users.index');
     }
