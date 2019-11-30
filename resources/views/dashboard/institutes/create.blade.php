@@ -27,7 +27,7 @@
             
             {!! Form::label('upazilla_id', 'উপজেলা *') !!}
             <select name="upazilla_id" id="upazilla_id" class="form-control" required>
-              <option value="" selected="" disabled="">উপজেলা সিলেক্ট করুন</option>
+              <option value="" selected="" disabled="">উপজেলা নির্ধারণ করুন</option>
               @foreach($upazillas as $upazilla)
                 <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
               @endforeach

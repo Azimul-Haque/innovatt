@@ -46,9 +46,38 @@ class DashboardController extends Controller
         $institutes = Institute::all();
         $upazillas = Upazilla::all();
 
-        return view('dashboard.institutes.create')
+        return view('dashboard.users.create')
                             ->withInstitutes($institutes)
                             ->withUpazillas($upazillas);
+    }
+
+    public function storeUser(Request $request)
+    {
+        $this->validate($request, [
+          'name'             => 'required',
+          'designation'      => 'required',
+          'role'             => 'required',
+          'phone'            => 'required|unique:users',
+          'device_pin'       => 'required',
+          'upazilla_id'      => 'required',
+          'institute_id'     => 'required',
+        ]);
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->designation = $request->designation;
+        $user->unique_key = generate_token(100);
+        $user->role = $request->role;
+        $user->type = $request->role;
+        $user->phone = $request->phone;
+        $user->email = $request->phone . '@innovaatt.com';
+        $user->device_pin = $request->device_pin;
+        $user->upazilla_id = $request->upazilla_id;
+        $user->institute_id = $request->institute_id;
+        $user->save();
+
+        Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
+        return redirect()->route('dashboard.users');
     }
 
     public function editUser($id)

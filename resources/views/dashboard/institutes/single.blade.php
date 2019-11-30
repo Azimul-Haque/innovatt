@@ -17,34 +17,28 @@
 
 @section('content')
   @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster')
-    {{-- <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>নাম</th>
-            <th>উপজেলা</th>
-            <th>ডিভাইস আইডি (SN)</th>
-            <th>শিক্ষক সংখ্যা</th>
-            <th>কার্যক্রম</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($institutes as $institute)
-            <tr>
-              <td>{{ $institute->name }}</td>
-              <td>{{ $institute->upazilla->upazilla_bangla }}, {{ $institute->upazilla->district_bangla }}</td>
-              <td>{{ $institute->device_id }}</td>
-              <td>{{ bangla($institute->users->count()) }} জন</td>
-              <td>
-                <a href="{{ route('dashboard.institutes.edit', $institute->id) }}" class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-      <div>
-        {{ $institutes->links() }}
+    <div class="row">
+      <div class="col-md-4">
+        <big>শিক্ষক তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>শিক্ষক</th>
+                <th>পদবি</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($institute->users as $teacher)
+                <tr>
+                  <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
+                  <td>{{ $teacher->designation }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div> --}}
+    </div>
   @endif
 @stop
