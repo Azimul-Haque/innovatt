@@ -23,7 +23,9 @@
           <tr>
             <th>নাম</th>
             <th>উপজেলা</th>
+            <th>ডিভাইস আইডি (SN)</th>
             <th>শিক্ষক সংখ্যা</th>
+            <th>কার্যক্রম</th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +33,11 @@
             <tr>
               <td>{{ $institute->name }}</td>
               <td>{{ $institute->upazilla->upazilla_bangla }}</td>
+              <td>{{ $institute->device_id }}</td>
+              <td>12</td>
+              <td>
+                <a href="{{ route('dashboard.institutes.edit', $institute->id) }}" class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
+              </td>
             </tr>
           @endforeach
         </tbody>

@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
     public function getInstitutes()
     {
-        $institutes = Institute::paginate(20);
+        $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->paginate(20);
 
         return view('dashboard.institutes.index')->withInstitutes($institutes);
     }
@@ -57,8 +57,19 @@ class DashboardController extends Controller
 
     public function storeInstitute(Request $request)
     {
-        $upazillas = Upazilla::all();
+        $this->validate($request, [
+          'name'             => 'required',
+          'device_id'        => 'required|unique:institutes',
+          'upazilla_id'      => 'required'
+        ]);
 
-        return view('dashboard.institutes.create')->withUpazillas($upazillas);
+        $institute = new Institute;
+        $institute->name = $request->name;
+        $institute->device_id = $request->device_id;
+        $institute->upazilla_id = $request->upazilla_id;
+        $institute->save();
+
+        Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
+        return redirect()->route('dashboard.institutes');
     }
 }

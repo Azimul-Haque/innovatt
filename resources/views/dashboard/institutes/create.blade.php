@@ -19,61 +19,22 @@
           <div class="panel-heading">প্রতিষ্ঠান যোগ ফরম (* অর্থ বাধ্যতামূলক)</div>
           {!! Form::open(['route' => 'dashboard.institutes.store', 'method' => 'POST']) !!}
           <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6">
-                {!! Form::label('name', 'প্রতিষ্ঠানের নাম *') !!}
-                {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::label('device_id', 'ডিভাইস আইডি () *') !!}
-                {!! Form::text('device_id', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off', 'readonly' => '')) !!}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                {!! Form::label('meeting_day', 'Meeting Day *') !!}
-                <select name="meeting_day" class="form-control" required>
-                  <option selected="" disabled="">Select Meeting Day</option>
-                  <option value="1">Saturday</option>
-                  <option value="2">Sunday</option>
-                  <option value="3">Monday</option>
-                  <option value="4">Tuesday</option>
-                  <option value="5">Wednesday</option>
-                  <option value="6">Thursday</option>
-                  <option value="7">Friday</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                {!! Form::label('village', 'Village *') !!}
-                {!! Form::text('village', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-md-6">
-                {!! Form::label('status', 'Status *') !!}<br/>
-                <label class="radio-inline">
-                  <input type="radio" name="status" id="status" value="1" checked> Active
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="status" id="status" value="0"> Inactive
-                </label>
-              </div>
-              <div class="col-md-6">
-                {!! Form::label('user_id', 'Assign Staff *') !!}
-                <select name="user_id" id="user_id" class="form-control" required>
-                  <option selected="" disabled="">Select Staff</option>
-                  @foreach($upazillas as $upazilla)
-                    <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
+            {!! Form::label('name', 'প্রতিষ্ঠানের নাম *') !!}
+            {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!} <br/>
+
+            {!! Form::label('device_id', 'ডিভাইস আইডি (বক্স/ মেশিনের গায়ে স্টিকারে SN এর পরের অংশটুকু) *') !!}
+            {!! Form::text('device_id', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!} <br/>
             
-            
+            {!! Form::label('upazilla_id', 'উপজেলা *') !!}
+            <select name="upazilla_id" id="upazilla_id" class="form-control" required>
+              <option value="" selected="" disabled="">উপজেলা সিলেক্ট করুন</option>
+              @foreach($upazillas as $upazilla)
+                <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
+              @endforeach
+            </select>            
           </div>
           <div class="panel-footer">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> দাখিল করুন</button>
           </div>
           {!! Form::close() !!}
         </div>
@@ -96,6 +57,6 @@
       });
     });
 
-    $('#user_id').select2();
+    $('#upazilla_id').select2();
   </script>
 @endsection

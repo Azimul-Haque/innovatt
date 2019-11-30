@@ -16,7 +16,7 @@ class CreateInstitutesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('device_id');
-            $table->integer('upazilla_id');
+            $table->integer('upazilla_id')->unsigned();
             $table->timestamps();
         });
     }
