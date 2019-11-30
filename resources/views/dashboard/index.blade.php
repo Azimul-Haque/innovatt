@@ -1,20 +1,20 @@
 @extends('adminlte::page')
 
-@section('title', 'Microfinance Management')
+@section('title', 'ড্যাশবোর্ড')
 
 @section('css')
 
 @stop
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>উপজেলাঃ </h1>
 @stop
 
 @section('content')
   @if(Auth::user()->role == 'admin')
   <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
-      <a href="{{ route('dashboard.staffs') }}">
+      <a href="#!">
         <div class="info-box">
           <span class="info-box-icon bg-aqua"><i class="fa fa-user-circle-o"></i></span>
 
@@ -26,7 +26,7 @@
       </a>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
-      <a href="{{ route('dashboard.groups') }}">
+      <a href="#!">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-address-card"></i></span>
 
@@ -42,7 +42,7 @@
     <div class="clearfix visible-sm-block"></div>
 
     <div class="col-md-3 col-sm-6 col-xs-12">
-      <a href="{{ route('dashboard.loanandsavingnames') }}">
+      <a href="#!">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-tags"></i></span>
 
@@ -54,7 +54,7 @@
       </a>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
-      <a href="{{ route('olddata.index') }}">
+      <a href="#!">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-address-book-o"></i></span>
 
