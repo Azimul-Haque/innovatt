@@ -8,7 +8,7 @@
 
 @section('content_header')
     <h1>
-      {{ $institute->name }}
+      {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
       <div class="pull-right">
         {{-- <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success" title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a> --}}
       </div>
