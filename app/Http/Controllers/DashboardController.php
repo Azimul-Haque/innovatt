@@ -162,10 +162,12 @@ class DashboardController extends Controller
     public function getSingleInstitute($device_id)
     {
         $institute = Institute::where('device_id', $device_id)->first();
-        $attendance = Attendance::where('device_id', $device_id)->get();
+        $attendances = Attendance::where('device_id', $device_id)->get();
+        $teachers = User::where('institute_id', $institute->id)->get();
 
         return view('dashboard.institutes.single')
                             ->withInstitute($institute)
-                            ->withAttendance($attendance);
+                            ->withAttendances($attendances)
+                            ->withTeachers($teachers);
     }
 }

@@ -41,21 +41,26 @@
       </div>
       <div class="col-md-8">
         <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
-          {{ $attendance }}
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
                 <th>শিক্ষক</th>
-                <th>পদবি</th>
+                <th>প্রবেশ</th>
+                <th>প্রস্থান</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($institute->users as $teacher)
-                <tr>
-                  <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
-                  <td>{{ $teacher->designation }}</td>
-                </tr>
+              @foreach($attendances as $attendance)
+                @foreach($teachers as $teacher)
+                  @if($attendances->device_pin == $teacher->device_pin)
+                    <tr>
+                      <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
+                      <td>{{ $attendance->timestampdata }}</td>
+                      <td>{{ $attendance->timestampdata }}</td>
+                    </tr>
+                  @endif
+                @endforeach
               @endforeach
             </tbody>
           </table>
