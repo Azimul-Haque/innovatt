@@ -27,6 +27,7 @@
             <tr>
               <td>{{ $upazilla->district_bangla }}</td>
               <td>{{ $upazilla->upazilla_bangla }}</td>
+              <td>{{ $upazilla->institutes->count() }}</td>
             </tr>
           @endforeach
         </tbody>

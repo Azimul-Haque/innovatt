@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
     public function getUpazillas()
     {
-        $upazillas = Upazilla::paginate(20);
+        $upazillas = Upazilla::withCount('institutes')->orderBy('institutes_count', 'desc')->paginate(20);
 
         return view('dashboard.upazillas')->withUpazillas($upazillas);
     }
@@ -70,6 +70,35 @@ class DashboardController extends Controller
         $institute->save();
 
         Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
+        return redirect()->route('dashboard.institutes');
+    }
+
+    public function editInstitute($id)
+    {
+        $institute = Institute::find($id);
+        $upazillas = Upazilla::all();
+
+        return view('dashboard.institutes.edit')
+                            ->withInstitute($institute)
+                            ->withUpazillas($upazillas);
+    }
+
+    public function updateInstitute(Request $request, $id)
+    {
+        $institute = Institute::find($id);
+
+        $this->validate($request, [
+          'name'             => 'required',
+          'device_id'        => 'required|unique:institutes,device_id,' . $institute->id,
+          'upazilla_id'      => 'required'
+        ]);
+
+        $institute->name = $request->name;
+        $institute->device_id = $request->device_id;
+        $institute->upazilla_id = $request->upazilla_id;
+        $institute->save();
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!'); 
         return redirect()->route('dashboard.institutes');
     }
 }

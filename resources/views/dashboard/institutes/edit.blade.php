@@ -17,7 +17,7 @@
       <div class="col-md-8">
         <div class="panel panel-primary">
           <div class="panel-heading">প্রতিষ্ঠান যোগ ফরম (* অর্থ বাধ্যতামূলক)</div>
-          {!! Form::open(['route' => 'dashboard.institutes.store', 'method' => 'POST']) !!}
+          {!! Form::model($institute, ['route' => ['dashboard.institutes.update', $institute->id], 'method' => 'PUT']) !!}
           <div class="panel-body">
             {!! Form::label('name', 'প্রতিষ্ঠানের নাম *') !!}
             {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!} <br/>
@@ -29,7 +29,7 @@
             <select name="upazilla_id" id="upazilla_id" class="form-control" required>
               <option value="" selected="" disabled="">উপজেলা সিলেক্ট করুন</option>
               @foreach($upazillas as $upazilla)
-                <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
+                <option value="{{ $upazilla->id }}" @if($institute->upazilla_id == $upazilla->id) selected="" @endif>{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
               @endforeach
             </select>            
           </div>
