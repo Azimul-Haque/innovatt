@@ -17,11 +17,6 @@ use Purifier;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
@@ -29,15 +24,8 @@ class DashboardController extends Controller
         $this->middleware('admin')->except('index');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('dashboard.index');
     }
-
-    
 }

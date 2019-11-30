@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSavingnamesTable extends Migration
+class CreateUpazillasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,12 @@ class CreateSavingnamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('savingnames', function (Blueprint $table) {
+        Schema::create('upazillas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
+            $table->string('district');
+            $table->string('district_bangla');
+            $table->string('upazilla');
+            $table->string('upazilla_bangla');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateSavingnamesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('savingnames');
+        Schema::drop('upazillas');
     }
 }

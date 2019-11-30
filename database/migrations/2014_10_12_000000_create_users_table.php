@@ -19,12 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('role');
             $table->string('type');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('father');
-            $table->string('nid');
-            $table->string('checkno');
-            $table->string('bank');
-            $table->string('acno');
+            $table->string('phone')->unique();
+            $table->integer('upazilla_id')->unsigned();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
