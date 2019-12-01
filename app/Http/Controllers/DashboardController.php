@@ -26,7 +26,10 @@ class DashboardController extends Controller
     public function index()
     {
         if(!empty(Auth::user()->institute->device_id)) {
-            $attendances = Attendance::where('device_id', Auth::user()->institute->device_id)->get();
+            $attendances = Attendance::where('device_id', Auth::user()->institute->device_id)
+                                     ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                     ->orderBy('timestampdata', 'asc')
+                                     ->get();
         } else {
             $attendances = collect();
         }
@@ -103,6 +106,8 @@ class DashboardController extends Controller
         $teacher = User::find($id);
         $attendances = Attendance::where('device_pin', $teacher->device_pin)
                                  ->where('device_id', $teacher->institute->device_id)
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                 ->orderBy('timestampdata', 'asc')
                                  ->get();
 
         return view('dashboard.users.single')
@@ -188,7 +193,10 @@ class DashboardController extends Controller
     public function getSingleInstitute($device_id)
     {
         $institute = Institute::where('device_id', $device_id)->first();
-        $attendances = Attendance::where('device_id', $device_id)->get();
+        $attendances = Attendance::where('device_id', $device_id)
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                 ->orderBy('timestampdata', 'asc')
+                                 ->get();
         $teachers = User::where('institute_id', $institute->id)->get();
 
         return view('dashboard.institutes.single')
