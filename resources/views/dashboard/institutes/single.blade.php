@@ -11,7 +11,7 @@
       {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
       <div class="pull-right">
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster')
-          <a href="{{ route('dashboard.institute.user.add', $institute->device_id ) }}" class="btn btn-primary" title="নতুন শিক্ষক যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক যোগ</a>
+          <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary" title="নতুন শিক্ষক যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক যোগ</a>
         @endif
         <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
       </div>

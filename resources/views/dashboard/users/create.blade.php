@@ -17,7 +17,7 @@
       <div class="col-md-8">
         <div class="panel panel-primary">
           <div class="panel-heading">শিক্ষক/ ব্যবহারকারী যোগ ফরম (* অর্থ বাধ্যতামূলক)</div>
-          {!! Form::open(['route' => 'dashboard.users.store', 'method' => 'POST']) !!}
+          {!! Form::open(['route' => 'dashboard.institute.user.store', 'method' => 'POST']) !!}
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">

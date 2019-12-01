@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'createUser', 'getSigleUser');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'getSigleUser');
     }
 
     public function index()
@@ -207,5 +207,36 @@ class DashboardController extends Controller
                             ->withInstitute($institute)
                             ->withInstitutes($institutes)
                             ->withUpazillas($upazillas);
+    }
+
+    public function storeInstituteUser(Request $request)
+    {
+        $this->validate($request, [
+          'name'             => 'required',
+          'designation'      => 'required',
+          'role'             => 'required',
+          'phone'            => 'required|unique:users',
+          'device_pin'       => 'required',
+          'upazilla_id'      => 'required',
+          'institute_id'     => 'required',
+        ]);
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->designation = $request->designation;
+        $user->unique_key = generate_token(100);
+        $user->role = $request->role;
+        $user->type = $request->role;
+        $user->phone = $request->phone;
+        $user->email = $request->phone . '@innovaatt.com';
+        $user->device_pin = $request->device_pin;
+        $user->upazilla_id = $request->upazilla_id;
+        $user->institute_id = $request->institute_id;
+        $user->password = Hash::make('secret');
+        $user->save();
+
+
+        Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
+        return redirect()->route('dashboard.institute.single', $request->device_id);
     }
 }

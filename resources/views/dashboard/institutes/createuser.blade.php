@@ -17,10 +17,12 @@
       <div class="col-md-8">
         <div class="panel panel-primary">
           <div class="panel-heading">শিক্ষক/ ব্যবহারকারী যোগ ফরম (* অর্থ বাধ্যতামূলক)</div>
-          {!! Form::open(['route' => 'dashboard.users.store', 'method' => 'POST']) !!}
+          {!! Form::open(['route' => 'dashboard.institute.user.store', 'method' => 'POST']) !!}
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
+                {!! Form::hidden('device_id', $institute->device_id) !!}
+                
                 {!! Form::label('name', 'নাম *') !!}
                 {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!}
               </div>
@@ -54,7 +56,7 @@
                 <select name="upazilla_id" id="upazilla_id" class="form-control" required>
                   <option value="" selected="" disabled="">উপজেলা নির্ধারণ করুন</option>
                   @foreach($upazillas as $upazilla)
-                    <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
+                    <option value="{{ $upazilla->id }}" @if($upazilla->id == $institute->upazilla_id) selected="" @endif>{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
                   @endforeach
                 </select>    
               </div>
@@ -66,8 +68,8 @@
                 {!! Form::label('institute_id', 'প্রতিষ্ঠান *') !!}
                 <select name="institute_id" id="institute_id" class="form-control" required>
                   <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>
-                  @foreach($institutes as $institute)
-                    <option value="{{ $institute->id }}">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
+                  @foreach($institutes as $institutesingle)
+                    <option value="{{ $institutesingle->id }}" @if($institutesingle->id == $institute->id) selected="" @endif>{{ $institutesingle->name }}, {{ $institutesingle->upazilla->upazilla_bangla }}</option>
                   @endforeach
                 </select>    
               </div>
