@@ -206,6 +206,9 @@ class DashboardController extends Controller
                                  ->get();
         $teachers = User::where('institute_id', $institute->id)->get();
 
+        // delete mid entries
+        
+        // delete mid entries
         return view('dashboard.institutes.single')
                             ->withInstitute($institute)
                             ->withAttendances($attendances)

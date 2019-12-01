@@ -16,6 +16,7 @@
 @stop
 
 @section('content')
+  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster' || Auth::user()->id == $teacher->id)
   <div class="row">
     <div class="col-md-4">
       <big>শিক্ষক তথ্য</big>
@@ -75,4 +76,5 @@
       </div>
     </div>
   </div>
+  @endif
 @stop
