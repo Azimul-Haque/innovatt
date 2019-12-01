@@ -55,6 +55,20 @@
               </tr>
             </thead>
             <tbody>
+              @php
+                $datearray = [];
+                $counter = 0;
+                foreach($attendances as $attendance) {
+                  foreach($teachers as $teacher) {
+                    if($attendance->device_pin == $teacher->device_pin) {
+                      $datearray[$teacher->phone][$counter]['device_pin'] = $attendance->device_pin;
+                      $datearray[$teacher->phone][$counter]['timestampdata'] = $attendance->timestampdata;
+                      $counter++;
+                    }
+                  }
+                }
+                echo json_encode($datearray);
+              @endphp
               @foreach($attendances as $attendance)
                 @foreach($teachers as $teacher)
                   @if($attendance->device_pin == $teacher->device_pin)
