@@ -170,24 +170,39 @@
         </div>
       </div>
       <div class="col-md-8">
-        <big>উপস্থিতি তালিকা
+        <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F, Y')) }}</b>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
+                <th>তারিখ</th>
                 <th>প্রবেশ</th>
                 <th>প্রস্থান</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($attendances as $attendance)
-                @if($attendance->device_pin == Auth::user()->device_pin)
+              @php
+                  $datearray = [];
+                  $counter = 0;
+                  foreach($attendances as $attendance) {
+                    if($attendance->device_pin == Auth::user()->device_pin){
+                      $datearray[date('F d, Y', strtotime($attendance->timestampdata))][$counter]['timestampdata'] = $attendance->timestampdata;
+                      $counter++;
+                    }
+                  }
+                  // echo json_encode($datearray);
+                @endphp
+                @foreach($datearray as $teacher)
                   <tr>
-                    <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
-                    <td>{{ bangla(date('F d, Y h:i a', strtotime($attendance->timestampdata))) }}</td>
+                    <td>{{ date('F d, Y', strtotime(reset($teacher)['timestampdata'])) }}</td>
+                    <td>{{ date('h:i A', strtotime(reset($teacher)['timestampdata'])) }}</td>
+                    <td>
+                      @if(reset($teacher) != end($teacher))
+                        {{ date('h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                      @endif
+                    </td>
                   </tr>
-                @endif
-              @endforeach
+                @endforeach
             </tbody>
           </table>
         </div>

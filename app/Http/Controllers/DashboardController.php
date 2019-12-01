@@ -30,11 +30,18 @@ class DashboardController extends Controller
                                      ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                      ->orderBy('timestampdata', 'asc')
                                      ->get();
+            $attendancesthismonth = Attendance::where('device_id', Auth::user()->institute->device_id)
+                                     ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m')"), "=", Carbon::now()->format('Y-m'))
+                                     ->orderBy('timestampdata', 'asc')
+                                     ->get();
         } else {
             $attendances = collect();
+            $attendancesthismonth = collect();
         }
         
-        return view('dashboard.index')->withAttendances($attendances);
+        return view('dashboard.index')
+                    ->withAttendances($attendances)
+                    ->withAttendancesthismonth($attendancesthismonth);
     }
 
     public function getUsers()
