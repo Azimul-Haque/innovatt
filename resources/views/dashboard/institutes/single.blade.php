@@ -32,7 +32,7 @@
               @foreach($institute->users as $teacher)
                 <tr>
                   <td>
-                    <a href="{{ route('dashboard.user.single', $teacher->id) }}">{{ $teacher->name }}</a>
+                    <a href="{{ route('dashboard.user.single', $teacher->id) }}" title="বিস্তারিত দেখুন">{{ $teacher->name }}</a>
                     <br/>
                     <small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
                   </td>
