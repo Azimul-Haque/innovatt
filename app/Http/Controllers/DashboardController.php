@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'createUser', 'getSigleUser');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createUser', 'getSigleUser');
     }
 
     public function index()
@@ -81,6 +81,7 @@ class DashboardController extends Controller
         $user->device_pin = $request->device_pin;
         $user->upazilla_id = $request->upazilla_id;
         $user->institute_id = $request->institute_id;
+        $user->password = Hash::make('secret');
         $user->save();
 
         Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
