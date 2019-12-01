@@ -46,6 +46,7 @@ Route::get('/users', ['as'=>'dashboard.users','uses'=>'DashboardController@getUs
 Route::get('/users/create', ['as'=>'dashboard.users.create','uses'=>'DashboardController@createUser']);
 Route::post('/users/store', ['as'=>'dashboard.users.store','uses'=>'DashboardController@storeUser']);
 Route::get('/users/{id}/edit', ['as'=>'dashboard.users.edit','uses'=>'DashboardController@editUser']);
+Route::get('/user/{id}', ['as'=>'dashboard.user.single','uses'=>'DashboardController@getSigleUser']);
 
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
 Route::get('/upazilla/{id}/school/list', ['as'=>'dashboard.upazillas.schools','uses'=>'DashboardController@getUpazillaSchools']);
