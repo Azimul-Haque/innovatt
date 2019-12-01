@@ -31,7 +31,7 @@
             <tr><td>ডিভাইস পিনঃ {{ $teacher->device_pin }}</td></tr>
             <tr>
               <td>
-                <a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a>
+                যোগাযোগঃ <a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a>
               </td>
             </tr>
           </tbody>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="col-md-8">
-      <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
+      <big>উপস্থিতি তালিকা
       <div class="table-responsive">
         <table class="table">
           <thead>

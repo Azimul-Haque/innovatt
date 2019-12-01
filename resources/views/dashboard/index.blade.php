@@ -127,6 +127,51 @@
       </div>
     </div>
   @elseif(Auth::user()->role == 'teacher')
-    Teacher
+    <div class="row">
+      <div class="col-md-4">
+        <big>শিক্ষক তথ্য</big>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ Auth::user()->name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>পদবিঃ {{ Auth::user()->designation }}</td></tr>
+              <tr><td>ডিভাইস পিনঃ {{ Auth::user()->device_pin }}</td></tr>
+              <tr>
+                <td>
+                  যোগাযোগঃ <a href="tel:{{ Auth::user()->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ Auth::user()->phone }}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <big>উপস্থিতি তালিকা
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>প্রবেশ</th>
+                <th>প্রস্থান</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($attendances as $attendance)
+                @if($attendance->device_pin == Auth::user()->device_pin)
+                  <tr>
+                    <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
+                    <td>{{ bangla(date('F d, Y h:i a', strtotime($attendance->timestampdata))) }}</td>
+                  </tr>
+                @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   @endif
 @stop
