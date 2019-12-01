@@ -106,7 +106,7 @@ class DashboardController extends Controller
         $teacher = User::find($id);
         $attendances = Attendance::where('device_pin', $teacher->device_pin)
                                  ->where('device_id', $teacher->institute->device_id)
-                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m')"), "=", Carbon::now()->format('Y-m')) // teacher er jonno monthly data
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
 
@@ -194,7 +194,7 @@ class DashboardController extends Controller
     {
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
-                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))  // teachers der jonno daily data
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
         $teachers = User::where('institute_id', $institute->id)->get();

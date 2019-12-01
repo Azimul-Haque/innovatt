@@ -88,6 +88,20 @@
               </tr>
             </thead>
             <tbody>
+              @php
+                $datearray = [];
+                $counter = 0;
+                foreach($attendances as $attendance) {
+                  foreach(Auth::user()->institute->users as $teacher) {
+                    if(($attendance->device_pin == $teacher->device_pin)) {
+                      $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
+                      $datearray[$teacher->id][$counter]['name'] = $teacher->name;
+                      $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
+                      $counter++;
+                    }
+                  }
+                }
+              @endphp
               @foreach(Auth::user()->institute->users as $teacher)
                 <tr>
                   <td>
@@ -114,16 +128,18 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($attendances as $attendance)
-                @foreach(Auth::user()->institute->users as $teacher)
-                  @if($attendance->device_pin == $teacher->device_pin)
-                    <tr>
-                      <td>{{ $teacher->name }}<br/><small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small></td>
-                      <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
-                      <td>{{ bangla(date('F d, Y h:i a', strtotime($attendance->timestampdata))) }}</td>
-                    </tr>
-                  @endif
-                @endforeach
+              @foreach($datearray as $teacher)
+                <tr>
+                  <td>
+                    {{ reset($teacher)['name'] }}<br/><small><a href="tel:{{ reset($teacher)['phone'] }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ reset($teacher)['phone'] }}</a></small>
+                  </td>
+                  <td>{{ date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata'])) }}</td>
+                  <td>
+                    @if(reset($teacher) != end($teacher))
+                      {{ date('F d, Y h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                    @endif
+                  </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
