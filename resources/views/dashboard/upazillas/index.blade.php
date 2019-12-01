@@ -16,8 +16,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th>জেলা</th>
             <th>উপজেলা</th>
+            <th>জেলা</th>
             <th>প্রতিষ্ঠান সংখ্যা</th>
             <th>শিক্ষক সংখ্যা</th>
           </tr>
@@ -25,8 +25,8 @@
         <tbody>
           @foreach($upazillas as $upazilla)
             <tr>
+              <td><a href="{{ route('dashboard.upazillas.schools', $upazilla->id) }}" title="প্রতিষ্ঠান তালিকা দেখুন">{{ $upazilla->upazilla_bangla }}</a></td>
               <td>{{ $upazilla->district_bangla }}</td>
-              <td>{{ $upazilla->upazilla_bangla }}</td>
               <td>{{ $upazilla->institutes->count() }}</td>
               <td>
                 @php

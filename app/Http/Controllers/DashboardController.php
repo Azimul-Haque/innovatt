@@ -101,7 +101,14 @@ class DashboardController extends Controller
     {
         $upazillas = Upazilla::withCount('institutes')->orderBy('institutes_count', 'desc')->paginate(15);
 
-        return view('dashboard.upazillas')->withUpazillas($upazillas);
+        return view('dashboard.upazillas.index')->withUpazillas($upazillas);
+    }
+
+    public function getUpazillaSchools($id)
+    {
+        $institutes = Institute::where('upazilla_id', $id)->paginate(15);
+
+        return view('dashboard.institutes.index')->withInstitutes($institutes);
     }
 
     public function getInstitutes()
