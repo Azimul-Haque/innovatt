@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createUser', 'getSigleUser');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'createUser', 'getSigleUser');
     }
 
     public function index()
@@ -195,5 +195,17 @@ class DashboardController extends Controller
                             ->withInstitute($institute)
                             ->withAttendances($attendances)
                             ->withTeachers($teachers);
+    }
+
+    public function createInstituteUser($device_id)
+    {
+        $institute = Institute::where('device_id', $device_id)->first();
+        $institutes = Institute::all();
+        $upazillas = Upazilla::all();
+
+        return view('dashboard.institutes.createuser')
+                            ->withInstitute($institute)
+                            ->withInstitutes($institutes)
+                            ->withUpazillas($upazillas);
     }
 }
