@@ -46,8 +46,11 @@
                   {{-- {!! config('adminlte.logo_mini', '<b>A</b>LT') !!} --}}
                 </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">
-                  {{-- <img src="{{ asset('images/favicon.png') }}" style="height: 30px; width: auto;"> --}}
+                <span class="logo-lg hidden-xs">
+                  {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                </span>
+                <span class="logo-lg visible-xs">
+                  <img src="{{ asset('images/favicon.png') }}" style="height: 30px; width: auto;"> 
                   {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                 </span>
             </a>

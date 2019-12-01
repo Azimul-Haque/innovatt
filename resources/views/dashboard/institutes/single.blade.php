@@ -31,7 +31,7 @@
             <tbody>
               @foreach($institute->users as $teacher)
                 <tr>
-                  <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
+                  <td>{{ $teacher->name }}<br/><small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small></td>
                   <td>{{ $teacher->designation }}</td>
                 </tr>
               @endforeach
@@ -55,7 +55,7 @@
                 @foreach($teachers as $teacher)
                   @if($attendance->device_pin == $teacher->device_pin)
                     <tr>
-                      <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
+                      <td>{{ $teacher->name }}<br/><small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small></td>
                       <td>{{ date('F d, Y h:i A', strtotime($attendance->timestampdata)) }}</td>
                       <td>{{ bangla(date('F d, Y h:i a', strtotime($attendance->timestampdata))) }}</td>
                     </tr>
