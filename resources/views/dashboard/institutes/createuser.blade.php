@@ -34,7 +34,6 @@
                 {!! Form::label('role', 'ধরন *') !!}
                 <select name="role" class="form-control" required="">
                   <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>
-                  <option value="teo">শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</option>
                   <option value="headmaster">প্রধান শিক্ষক</option>
                   <option value="teacher">সহকারী শিক্ষক</option>
                 </select>
@@ -57,7 +56,6 @@
                   @foreach($upazillas as $upazilla)
                     <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
                   @endforeach
-                  <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
                 </select>    
               </div>
             </div> <br/>
@@ -71,7 +69,6 @@
                   @foreach($institutes as $institute)
                     <option value="{{ $institute->id }}">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                   @endforeach
-                  <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
                 </select>    
               </div>
             </div> <br/>

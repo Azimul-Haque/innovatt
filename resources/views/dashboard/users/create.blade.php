@@ -57,7 +57,6 @@
                   @foreach($upazillas as $upazilla)
                     <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
                   @endforeach
-                  <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
                 </select>    
               </div>
             </div> <br/>
