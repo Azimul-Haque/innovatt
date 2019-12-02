@@ -20,28 +20,18 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'getSigleUser', 'getPersonalProfile', 'updatePersonalProfile');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSigleUser', 'getPersonalProfile', 'updatePersonalProfile');
     }
 
     public function index()
-    {
-        if(!empty(Auth::user()->institute->device_id)) {
-            $attendances = Attendance::where('device_id', Auth::user()->institute->device_id)
-                                     ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
-                                     ->orderBy('timestampdata', 'asc')
-                                     ->get();
-            $attendancesthismonth = Attendance::where('device_id', Auth::user()->institute->device_id)
-                                     ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m')"), "=", Carbon::now()->format('Y-m'))
-                                     ->orderBy('timestampdata', 'asc')
-                                     ->get();
+    {   
+        if(Auth::user()->role == 'headmaster') {
+            return redirect()->route('dashboard.institute.single', Auth::user()->institute->device_id);
+        } elseif(Auth::user()->role == 'teacher') {
+            return redirect()->route('dashboard.user.single', Auth::user()->id);
         } else {
-            $attendances = collect();
-            $attendancesthismonth = collect();
+            return view('dashboard.index');
         }
-        
-        return view('dashboard.index')
-                    ->withAttendances($attendances)
-                    ->withAttendancesthismonth($attendancesthismonth);
     }
 
     public function getUsers()
@@ -112,21 +102,34 @@ class DashboardController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $institute = Institute::find($id);
-
+        $user = User::find($id);
         $this->validate($request, [
           'name'             => 'required',
-          'device_id'        => 'required|unique:institutes,device_id,' . $institute->id,
-          'upazilla_id'      => 'required'
+          'designation'      => 'required',
+          'role'             => 'required',
+          'phone'            => 'required|unique:users,phone,' . $user->id,
+          'device_pin'       => 'required',
+          'upazilla_id'      => 'required',
+          'institute_id'     => 'required',
+          'password'         => 'required'
         ]);
 
-        $institute->name = $request->name;
-        $institute->device_id = $request->device_id;
-        $institute->upazilla_id = $request->upazilla_id;
-        $institute->save();
+        $user->name = $request->name;
+        $user->designation = $request->designation;
+        $user->role = $request->role;
+        $user->phone = $request->phone;
+        $user->device_pin = $request->device_pin;
+        $user->upazilla_id = $request->upazilla_id;
+        $user->institute_id = $request->institute_id;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!'); 
-        return redirect()->route('dashboard.institutes');
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        if(Auth::user()->role == 'admin') {
+            return redirect()->route('dashboard.users');
+        } else {
+            return redirect()->route('dashboard.institute.single', $user->institute->device_id);
+        }
     }
 
     public function getSigleUser($id)
@@ -254,7 +257,7 @@ class DashboardController extends Controller
           'phone'            => 'required|unique:users',
           'device_pin'       => 'required',
           'upazilla_id'      => 'required',
-          'institute_id'     => 'required',
+          'institute_id'     => 'required'
         ]);
 
         $user = new User;
