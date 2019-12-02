@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'getSigleUser');
+        $this->middleware('admin')->except('index', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'getSigleUser', 'getPersonalProfile', 'updatePersonalProfile');
     }
 
     public function index()
@@ -100,12 +100,33 @@ class DashboardController extends Controller
 
     public function editUser($id)
     {
-        // $institute = Institute::find($id);
-        // $upazillas = Upazilla::all();
+        $teacher = User::find($id);
+        $institutes = Institute::all();
+        $upazillas = Upazilla::all();
 
-        // return view('dashboard.institutes.edit')
-        //                     ->withInstitute($institute)
-        //                     ->withUpazillas($upazillas);
+        return view('dashboard.users.edit')
+                            ->withTeacher($teacher)
+                            ->withInstitutes($institutes)
+                            ->withUpazillas($upazillas);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $institute = Institute::find($id);
+
+        $this->validate($request, [
+          'name'             => 'required',
+          'device_id'        => 'required|unique:institutes,device_id,' . $institute->id,
+          'upazilla_id'      => 'required'
+        ]);
+
+        $institute->name = $request->name;
+        $institute->device_id = $request->device_id;
+        $institute->upazilla_id = $request->upazilla_id;
+        $institute->save();
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!'); 
+        return redirect()->route('dashboard.institutes');
     }
 
     public function getSigleUser($id)
@@ -253,5 +274,33 @@ class DashboardController extends Controller
 
         Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!'); 
         return redirect()->route('dashboard.institute.single', $request->device_id);
+    }
+
+    public function getPersonalProfile()
+    {
+        $institutes = Institute::all();
+        $upazillas = Upazilla::all();
+
+        return view('dashboard.users.profile')
+                            ->withInstitutes($institutes)
+                            ->withUpazillas($upazillas);
+    }
+
+    public function updatePersonalProfile(Request $request, $id)
+    {
+        $this->validate($request, [
+          'name'             => 'required',
+          'designation'      => 'required',
+          'password'         => 'required'
+        ]);
+
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->designation = $request->designation;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!'); 
+        return redirect()->route('dashboard.personal.profile');
     }
 }

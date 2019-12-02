@@ -45,7 +45,8 @@ Route::get('/dashboard', ['as'=>'dashboard.index','uses'=>'DashboardController@i
 Route::get('/users', ['as'=>'dashboard.users','uses'=>'DashboardController@getUsers']);
 Route::get('/users/create', ['as'=>'dashboard.users.create','uses'=>'DashboardController@createUser']);
 Route::post('/users/store', ['as'=>'dashboard.users.store','uses'=>'DashboardController@storeUser']);
-Route::get('/users/{id}/edit', ['as'=>'dashboard.users.edit','uses'=>'DashboardController@editUser']);
+Route::get('/user/{id}/edit', ['as'=>'dashboard.users.edit','uses'=>'DashboardController@editUser']);
+Route::put('/user/{id}/update', ['as'=>'dashboard.users.update','uses'=>'DashboardController@updateUser']);
 Route::get('/user/{id}', ['as'=>'dashboard.user.single','uses'=>'DashboardController@getSigleUser']);
 
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
@@ -60,7 +61,8 @@ Route::get('/institute/{device_id}', ['as'=>'dashboard.institute.single','uses'=
 Route::get('/institute/user/create/{device_id}', ['as'=>'dashboard.institute.user.create','uses'=>'DashboardController@createInstituteUser']);
 Route::post('/institute/user/sote', ['as'=>'dashboard.institute.user.store','uses'=>'DashboardController@storeInstituteUser']);
 
-Route::get('/personal/profile', ['as'=>'dashboard.personal.profile','uses'=>'DashboardController@index']);
+Route::get('/personal/profile', ['as'=>'dashboard.personal.profile','uses'=>'DashboardController@getPersonalProfile']);
+Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','uses'=>'DashboardController@updatePersonalProfile']);
 
 
 

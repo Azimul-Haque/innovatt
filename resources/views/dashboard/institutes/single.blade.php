@@ -24,11 +24,12 @@
       <div class="col-md-4">
         <big>শিক্ষক তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table table-condensed">
             <thead>
               <tr>
                 <th>শিক্ষক</th>
                 <th>পদবি</th>
+                <th width="20%">কার্যক্রম</th>
               </tr>
             </thead>
             <tbody>
@@ -40,6 +41,9 @@
                     <small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
                   </td>
                   <td>{{ $teacher->designation }}</td>
+                  <td>
+                    <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
+                  </td>
                 </tr>
               @endforeach
             </tbody>
@@ -77,7 +81,7 @@
       <div class="col-md-8">
         <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table table-condensed">
             <thead>
               <tr>
                 <th>শিক্ষক</th>
