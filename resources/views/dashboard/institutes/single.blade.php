@@ -86,7 +86,7 @@
                   </td>
                   <td>
                     @if(reset($teacher) != end($teacher))
-                      {{ Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata'])) }}
+                      {{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}
                     @endif
                   </td>
                 </tr>

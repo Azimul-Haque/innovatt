@@ -32,6 +32,12 @@
         $en = array( 'am', 'pm' );
         $bn = array( 'পূর্বাহ্ন', 'অপরাহ্ন' );
         $str = str_replace( $en, $bn, $str );
+        $en = array( 'hour', 'minutes', 'seconds' );
+        $bn = array( 'ঘণ্টা', 'মিনিট', 'সেকেন্ড' );
+        $str = str_replace( $en, $bn, $str );
+        $en = array( 'after', 'before' );
+        $bn = array( '', '' );
+        $str = str_replace( $en, $bn, $str );
         return $str;
   }
   
