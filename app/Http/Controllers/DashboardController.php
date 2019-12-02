@@ -132,7 +132,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function getSigleUser($id)
+    public function getSingleUser($id)
     {
         $teacher = User::find($id);
         $attendances = Attendance::where('device_pin', $teacher->device_pin)
