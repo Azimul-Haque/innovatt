@@ -71,7 +71,7 @@
               <li class="item">
                 বাৎসরিক রিপোর্ট ({{ bangla(date('Y')) }})
                 <div class="pull-right">
-                  <a href="#!" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                  <a href="{{ route('report.institute.yearly', $institute->device_id) }}" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
                 </div>
               </li>
             </ul>

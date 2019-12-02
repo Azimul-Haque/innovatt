@@ -70,6 +70,7 @@ Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','u
 // reports
 Route::get('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyReport']);
 Route::get('/report/institute/pdf/monthly/{device_id}', ['as'=>'report.institute.monthly','uses'=>'ReportController@getInstituteMonthlyReport']);
+Route::get('/report/institute/pdf/yearly/{device_id}', ['as'=>'report.institute.yearly','uses'=>'ReportController@getInstituteYearlyReport']);
 // Route::get('/report/program/top/sheet/product', ['as'=>'report.program.topsheetproduct','uses'=>'ReportController@generateProgramTopSheetProduct']);
 // Route::get('/report/program/top/sheet/savings', ['as'=>'report.program.topsheetsavings','uses'=>'ReportController@generateProgramTopSheetsavings']);
 // Route::get('/report/program/transaction/summary', ['as'=>'report.program.transactionsummary','uses'=>'ReportController@generateTransactionSummary']);

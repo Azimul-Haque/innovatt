@@ -43,7 +43,7 @@
   <p align="center" style="padding-top: -20px;">
     <span style="font-size: 20px;">
       {{ $institute->name }}<br/>
-      মাসিক উপস্থিতি রিপোর্ট ({{ bangla(date('F, Y')) }})
+      বাৎসরিক উপস্থিতি রিপোর্ট ({{ bangla(date('Y')) }})
     </span><br/>
   </p>
   
@@ -59,25 +59,28 @@
         $datearray = [];
         $counter = 0;
         foreach($attendances as $attendance) {
-          $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+          $datearray[date('my', strtotime($attendance->timestampdata))]['month'] = $attendance->timestampdata;
+          $datearray2 = [];
           foreach($teachers as $teacher) {
             if(($attendance->device_pin == $teacher->device_pin)) {
-              $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-              $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-              $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+              $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
+              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
             }
           }
           $counter++;
         }
       @endphp
-      @foreach($datearray as $datesingles)
+      @foreach($datearray as $months)
         <tr>
-          <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
-          <td>{{ print_r($datesingles) }}</td>
+          <td colspan="4" class="yellowbackground">{{ bangla(date('F , Y', strtotime($months['month']))) }}</td>
         </tr>
-        @foreach($datesingles['data'] as $teacher)
+        @foreach($months as $days)
+          
           <tr>
-            <td>
+            <td colspan="4" >{{ print_r($days->date) }}</td>
+            {{-- <td>
               {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ {{ reset($teacher)['phone'] }}</small>
             </td>
             <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
@@ -90,7 +93,7 @@
               @if(reset($teacher) != end($teacher))
                 <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
               @endif
-            </td>
+            </td> --}}
           </tr>
         @endforeach
       @endforeach

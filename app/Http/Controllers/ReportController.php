@@ -36,7 +36,7 @@ class ReportController extends Controller
 
     	$pdf = PDF::loadView('dashboard.reports.institutedaily', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
     	$fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
-    	return $pdf->stream($fileName); // stream
+    	return $pdf->download($fileName); // stream
     }
 
     public function getInstituteMonthlyReport($device_id) 
@@ -49,7 +49,21 @@ class ReportController extends Controller
     	$teachers = User::where('institute_id', $institute->id)->get();
 
     	$pdf = PDF::loadView('dashboard.reports.institutemonthly', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
-    	$fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
+    	$fileName = 'Institute_Monthly_Report_'. $device_id .'.pdf';
+    	return $pdf->stream($fileName); // stream
+    }
+
+    public function getInstituteYearlyReport($device_id) 
+    {
+    	$institute = Institute::where('device_id', $device_id)->first();
+    	$attendances = Attendance::where('device_id', $device_id)
+    	                         ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y')"), "=", Carbon::now()->format('Y'))  // teachers der jonno daily data
+    	                         ->orderBy('timestampdata', 'asc')
+    	                         ->get();
+    	$teachers = User::where('institute_id', $institute->id)->get();
+
+    	$pdf = PDF::loadView('dashboard.reports.instituteyearly', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
+    	$fileName = 'Institute_Yearly_Report_'. $device_id .'.pdf';
     	return $pdf->stream($fileName); // stream
     }
 }
