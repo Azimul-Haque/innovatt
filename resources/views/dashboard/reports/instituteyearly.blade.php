@@ -33,6 +33,9 @@
   .yellowbackground {
     background: rgba(243,156,18, 0.5);
   }
+  .blackishbackground {
+    background: rgba(160,160,160, 0.5);
+  }
   </style>
 </head>
 <body>
@@ -60,13 +63,12 @@
         $counter = 0;
         foreach($attendances as $attendance) {
           $datearray[date('my', strtotime($attendance->timestampdata))]['month'] = $attendance->timestampdata;
-          $datearray2 = [];
           foreach($teachers as $teacher) {
             if(($attendance->device_pin == $teacher->device_pin)) {
-              $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
-              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-              // $datearray[date('my', strtotime($attendance->timestampdata))][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+              $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+              $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
+              $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+              $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
             }
           }
           $counter++;
@@ -74,13 +76,15 @@
       @endphp
       @foreach($datearray as $months)
         <tr>
-          <td colspan="4" class="yellowbackground">{{ bangla(date('F , Y', strtotime($months['month']))) }}</td>
+          <td colspan="4" class="yellowbackground">{{ bangla(date('F, Y', strtotime($months['month']))) }}</td>
         </tr>
-        @foreach($months as $days)
-          
+        @foreach($months['days'] as $days)
           <tr>
-            <td colspan="4" >{{ print_r($days->date) }}</td>
-            {{-- <td>
+            <td colspan="4" class="blackishbackground">{{ bangla(date('F d, Y', strtotime($days['date']))) }}</td>
+          </tr>
+          @foreach($days['data'] as $teacher)
+          <tr>
+            <td>
               {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ {{ reset($teacher)['phone'] }}</small>
             </td>
             <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
@@ -93,8 +97,9 @@
               @if(reset($teacher) != end($teacher))
                 <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
               @endif
-            </td> --}}
+            </td>
           </tr>
+          @endforeach
         @endforeach
       @endforeach
     </table>

@@ -73,7 +73,6 @@
       @foreach($datearray as $datesingles)
         <tr>
           <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
-          <td>{{ print_r($datesingles) }}</td>
         </tr>
         @foreach($datesingles['data'] as $teacher)
           <tr>
