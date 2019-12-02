@@ -59,7 +59,7 @@
               <li class="item">
                 দৈনিক রিপোর্ট ({{ bangla(date('F d, Y')) }})
                 <div class="pull-right">
-                  <a href="#!" class="btn btn-success btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                  <a href="{{ route('report.institute.daily', $institute->device_id) }}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
                 </div>
               </li>
               <li class="item">
