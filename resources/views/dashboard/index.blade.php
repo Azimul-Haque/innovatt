@@ -125,6 +125,7 @@
                 <th>শিক্ষক</th>
                 <th>প্রবেশ</th>
                 <th>প্রস্থান</th>
+                <th>অবস্থানকাল</th>
               </tr>
             </thead>
             <tbody>
@@ -137,6 +138,11 @@
                   <td>
                     @if(reset($teacher) != end($teacher))
                       {{ date('F d, Y h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                    @endif
+                  </td>
+                  <td>
+                    @if(reset($teacher) != end($teacher))
+                      <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
                     @endif
                   </td>
                 </tr>
@@ -178,6 +184,7 @@
                 <th>তারিখ</th>
                 <th>প্রবেশ</th>
                 <th>প্রস্থান</th>
+                <th>অবস্থানকাল</th>
               </tr>
             </thead>
             <tbody>
@@ -199,6 +206,11 @@
                     <td>
                       @if(reset($teacher) != end($teacher))
                         {{ date('h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                      @endif
+                    </td>
+                    <td>
+                      @if(reset($teacher) != end($teacher))
+                        <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
                       @endif
                     </td>
                   </tr>

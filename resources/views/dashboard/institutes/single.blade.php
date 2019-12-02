@@ -45,6 +45,34 @@
             </tbody>
           </table>
         </div>
+        <div class="box box-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-pie-chart"></i> প্রতিষ্ঠানের রিপোর্ট</h3>
+            <div class="box-tools pull-right"></div>
+          </div>
+          <div class="box-body">
+            <ul class="products-list product-list-in-box">
+              <li class="item">
+                দৈনিক রিপোর্ট ({{ bangla(date('F d, Y')) }})
+                <div class="pull-right">
+                  <a href="#!" class="btn btn-success btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                </div>
+              </li>
+              <li class="item">
+                মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
+                <div class="pull-right">
+                  <a href="#!" class="btn btn-info btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                </div>
+              </li>
+              <li class="item">
+                বাৎসরিক রিপোর্ট ({{ bangla(date('Y')) }})
+                <div class="pull-right">
+                  <a href="#!" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="col-md-8">
         <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
@@ -86,7 +114,7 @@
                   </td>
                   <td>
                     @if(reset($teacher) != end($teacher))
-                      {{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}
+                      <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
                     @endif
                   </td>
                 </tr>
