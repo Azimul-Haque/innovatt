@@ -68,7 +68,6 @@
       @endphp
       @foreach($datearray as $teacher)
         <tr>
-          <td>{{ print_r($teacher) }}</td>
           <td>
             {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ {{ reset($teacher)['phone'] }}</small>
           </td>
