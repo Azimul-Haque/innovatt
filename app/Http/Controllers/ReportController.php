@@ -50,7 +50,7 @@ class ReportController extends Controller
 
     	$pdf = PDF::loadView('dashboard.reports.institutemonthly', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
     	$fileName = 'Institute_Monthly_Report_'. $device_id .'.pdf';
-    	return $pdf->stream($fileName); // stream
+    	return $pdf->download($fileName); // stream
     }
 
     public function getInstituteYearlyReport($device_id) 
@@ -64,6 +64,6 @@ class ReportController extends Controller
 
     	$pdf = PDF::loadView('dashboard.reports.instituteyearly', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
     	$fileName = 'Institute_Yearly_Report_'. $device_id .'.pdf';
-    	return $pdf->stream($fileName); // stream
+    	return $pdf->download($fileName); // stream
     }
 }
