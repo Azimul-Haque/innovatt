@@ -37,12 +37,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p class="text-med black-text letter-spacing-1 margin-ten no-margin-bottom text-uppercase font-weight-600 xs-margin-top-five">Head Office</p>
-                            <p><i class="fa fa-map-marker black-text"></i> Killa Consultancy</p>
+                            <p><i class="fa fa-map-marker black-text"></i> Dhaka,Bangladesh</p>
                         </div>
                         <div class="col-md-6 xs-text-center">
                             <p class="text-med black-text letter-spacing-1 margin-ten no-margin-bottom text-uppercase font-weight-600 xs-margin-top-five">Contact Info.</p>
                             <p class="black-text no-margin-bottom"><strong><i class="fa fa-phone black-text"></i></strong> <a href="tel:+8801515297658">+88 01515297658</a></p>
-                            <p class="black-text"><strong><i class="fa fa-envelope black-text"></i></strong> <a href="mailto:info@killabd.com">info@killabd.com</a></p>
+                            <p class="black-text"><strong><i class="fa fa-envelope black-text"></i></strong> <a href="mailto:info@innovaatt.com">info@innovaatt.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
 
                 <div class="col-md-6 col-sm-6">
                     <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Contact Form</span><br/><br/><br/>
-                    {!! Form::open(['route' => 'index.storeformmessage', 'method' => 'POST']) !!}
+                    {{-- {!! Form::open(['route' => 'index.storeformmessage', 'method' => 'POST']) !!} --}}
                         <div id="success" class="no-margin-lr"></div>
                         <input name="name" type="text" value="{{ old('name') }}" placeholder="Name" required="" />
                         <input name="email" type="email" value="{{ old('email') }}" placeholder="Email"  required="" />
@@ -65,7 +65,7 @@
                         <input type="text" name="contact_sum_result" id="" class="form-control" placeholder="{{ $contact_num1 }} + {{ $contact_num2 }} = ?" required="">
                         
                         <button id="contact-us-button" type="submit" class="highlight-button-dark btn btn-small button xs-margin-bottom-five"><i class="fa fa-paper-plane"></i> Send</button>
-                    </form>
+                    {{-- {!! Form::close() !!} --}}
                 </div>
             </div>
         </div>
