@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('title')
-    Microfinance Management Solution
+    Innova Attendance Management Solution
 @endsection
 
 @section('css')
@@ -47,8 +47,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-10 text-center center-col">
                     <span class="margin-five no-margin-top display-block letter-spacing-2">EST. 2018</span>
-                    <h2>Killa-Knowledge Information and Learning for Local Adaptation</h2>
-                    <p class="text-med width-90 center-col margin-seven no-margin-bottom"> We've been crafting beautiful websites, launching stunning brands and making clients happy for years. With our prestigious craftsmanship, remarkable client care and passion for design.</p>
+                    <h2>Innova Attendance Management Solution</h2>
+                    <p class="text-med width-90 center-col margin-seven no-margin-bottom"> We've been promisingly providing fingerprint attendance device, machines and software. Efficient GPRS remote push server is available too.</p>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-md-6 col-sm-6">
-                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Recent Projects</span>
+                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Attendance Machine</span>
                 </div>
                 <!-- end section title -->
                 <!-- section highlight text -->
@@ -107,7 +107,7 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-md-6 col-sm-6">
-                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Latest Publications</span>
+                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Attendance Software</span>
                 </div>
                 <!-- end section title -->
                 <!-- section highlight text -->
@@ -148,7 +148,7 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-md-6 col-sm-6">
-                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Killa at a Glance</span>
+                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Attendance App</span>
                 </div>
                 <!-- end section title -->
                 <!-- section highlight text -->
@@ -165,16 +165,16 @@
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="300ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="10" data-speed="7000"></span>
-                        <span class="counter-title">Employee</span>
+                        <span class="timer counter-number" data-to="5" data-speed="7000"></span>
+                        <span class="counter-title">Upazilla</span>
                     </a>
                 </div>
                 <!-- end counter -->
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="600ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="15" data-speed="7000"></span>
-                        <span class="counter-title">Ongoing Project</span>
+                        <span class="timer counter-number" data-to="178" data-speed="7000"></span>
+                        <span class="counter-title">Institutions/ Schools</span>
                     </a>
                 </div>
                 <!-- end counter -->
@@ -189,8 +189,8 @@
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 text-center counter-section wow fadeInUp" data-wow-duration="1200ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="20" data-speed="7000"></span>
-                        <span class="counter-title">Publications</span>
+                        <span class="timer counter-number" data-to="50" data-speed="7000"></span>
+                        <span class="counter-title">Software Solutions</span>
                     </a>
                 </div>
                 <!-- end counter -->
@@ -206,10 +206,10 @@
                     <i class="medium-icon black-text no-margin icon-toolbox"></i>
                 </div>
                 <div class="col-md-6 no-padding">
-                    <span class="text-med text-uppercase letter-spacing-2 margin-two black-text font-weight-600 xs-margin-top-six xs-margin-bottom-six display-block">Want to Work With Us?</span>
+                    <span class="text-med text-uppercase letter-spacing-2 margin-two black-text font-weight-600 xs-margin-top-six xs-margin-bottom-six display-block">Want to setup an Attendance Device/ Software?</span>
                 </div>
                 <div class="col-md-5 no-padding">
-                    <a class="highlight-button-dark btn btn-medium button xs-margin-bottom-five xs-no-margin-right" href="{{ route('index.about') }}">About</a>
+                    <a class="highlight-button-dark btn btn-medium button xs-margin-bottom-five xs-no-margin-right" href="tel:01515297658"><i class="fa fa-phone"></i> Call for Price</a>
                     <a class="highlight-button btn btn-medium button xs-margin-bottom-five xs-no-margin-right" href="{{ route('index.contact') }}">Contact Us</a>
                 </div>
             </div>

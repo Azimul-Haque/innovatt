@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-    <title>@yield('title')</title>
+    <title>@yield('title') | Primary School Attendance Device & Software</title>
     <meta name="description" content="Official website of Sujo Somobay Samity. Developed by A. H. M. Azimul Haque and Md. Abdul Mannan.">
     <meta name="keywords" content="Surjo Somobay Samity, SurjoSSL, Somobay Somiti">
     <meta charset="utf-8">
@@ -87,14 +87,14 @@
                     <!-- address -->
                     <div class="col-md-4 col-sm-4 text-center">
                         <i class="icon-map-pin small-icon black-text"></i>
-                        <h6 class="black-text margin-two no-margin-bottom">Killa Consultancy, Dhaka</h6>
+                        <h6 class="black-text margin-two no-margin-bottom">Innova Attendance, Dhaka</h6>
                     </div>
                     <!-- end address -->
                     <!-- email -->
                     <div class="col-md-4 col-sm-4 text-center">
                         <i class="icon-envelope small-icon black-text"></i>
                         <h6 class="margin-two no-margin-bottom">
-                            <a href="mailto:info@killabd.com" class="black-text">info@killabd.com</a>
+                            <a href="mailto:info@innovaatt.com" class="black-text">info@innovaatt.com</a>
                         </h6>
                     </div>
                     <!-- end email -->
@@ -108,7 +108,7 @@
                     <h5>About Us</h5>
                     <!-- end headline -->
                     <!-- text -->
-                    <p class="footer-text">Killa Consultancy was established in the year 201* with a view to .... ... ...</p>
+                    <p class="footer-text">We've been promisingly providing fingerprint attendance device, machines and software.</p>
                     <!-- end text -->
                 </div>
                 <div class="col-md-2 col-sm-3 col-xs-4 footer-link2 col-md-offset-3">
