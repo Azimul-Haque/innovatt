@@ -206,22 +206,6 @@ class DashboardController extends Controller
                                  ->get();
         $teachers = User::where('institute_id', $institute->id)->get();
 
-        // delete mid entries
-        $allattendances = Attendance::where('device_id', $device_id)
-                                 ->orderBy('timestampdata', 'asc')
-                                 ->get();
-        $datearray = [];
-        $counter = 0;
-        foreach($allattendances as $attendance) {
-          foreach($teachers as $teacher) {
-            if(($attendance->device_pin == $teacher->device_pin)) {
-              $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-              $counter++;
-            }
-          }
-        }
-        dd($allattendances);
-        // delete mid entries
         return view('dashboard.institutes.single')
                             ->withInstitute($institute)
                             ->withAttendances($attendances)
