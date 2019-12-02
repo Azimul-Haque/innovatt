@@ -110,10 +110,10 @@
                   <td>
                     {{ reset($teacher)['name'] }}<br/><small><a href="tel:{{ reset($teacher)['phone'] }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ reset($teacher)['phone'] }}</a></small>
                   </td>
-                  <td>{{ date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata'])) }}</td>
+                  <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
                   <td>
                     @if(reset($teacher) != end($teacher))
-                      {{ date('F d, Y h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                      {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
                     @endif
                   </td>
                   <td>

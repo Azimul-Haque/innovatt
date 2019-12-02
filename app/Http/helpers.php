@@ -29,8 +29,8 @@
         $bn = array('শনিবার','রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার');
         $str = str_replace( $en, $bn, $str );
         $str = str_replace( $en_short, $bn_short, $str );
-        $en = array( 'am', 'pm' );
-        $bn = array( 'পূর্বাহ্ন', 'অপরাহ্ন' );
+        $en = array( 'am', 'pm', 'AM', 'PM' );
+        $bn = array( 'পূর্বাহ্ন', 'অপরাহ্ন', 'পূর্বাহ্ন', 'অপরাহ্ন' );
         $str = str_replace( $en, $bn, $str );
         $en = array( 'hours', 'hour', 'minutes', 'minute', 'seconds', 'second' );
         $bn = array( 'ঘণ্টা', 'ঘণ্টা', 'মিনিট', 'মিনিট', 'সেকেন্ড', 'সেকেন্ড' );

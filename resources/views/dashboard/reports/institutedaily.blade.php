@@ -34,8 +34,8 @@
 </head>
 <body>
   <h2 align="center">
-    <img src="{{ public_path('images/logo.png') }}" style="height: 80px; width: auto;"><br/>
-    Innova Attendance Management Solution
+    <img src="{{ public_path('images/logo.png') }}" style="height: 50px; width: auto;"><br/>
+    <span style="font-family: Calibri;">Innova Attendance Management Solution</span>
   </h2>
   <p align="center" style="padding-top: -20px;">
     <span style="font-size: 20px;">
@@ -71,13 +71,13 @@
           <td>
             {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ {{ reset($teacher)['phone'] }}</small>
           </td>
-          <td>{{ date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata'])) }}</td>
-          <td>
+          <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+          <td align="center">
             @if(reset($teacher) != end($teacher))
-              {{ date('F d, Y h:i A', strtotime(end($teacher)['timestampdata'])) }}
+              {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
             @endif
           </td>
-          <td>
+          <td align="center">
             @if(reset($teacher) != end($teacher))
               <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
             @endif
