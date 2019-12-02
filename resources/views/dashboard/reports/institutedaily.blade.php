@@ -27,8 +27,11 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
-  .graybackground {
-    background: rgba(192,192,192, 0.7);
+  .bluebackground {
+    background: rgba(0,153,204, 0.5);
+  }
+  .yellowbackground {
+    background: rgba(243,156,18, 0.5);
   }
   </style>
 </head>
@@ -47,10 +50,10 @@
   <div class="" style="padding-top: 0px;">
     <table class="">
       <tr>
-        <th class="graybackground" width="30%">শিক্ষক</th>
-        <th class="graybackground" width="27%">প্রবেশ</th>
-        <th class="graybackground" width="27%">প্রস্থান</th>
-        <th class="graybackground">অবস্থানকাল</th>
+        <th class="bluebackground" width="30%">শিক্ষক</th>
+        <th class="bluebackground" width="27%">প্রবেশ</th>
+        <th class="bluebackground" width="27%">প্রস্থান</th>
+        <th class="bluebackground">অবস্থানকাল</th>
       </tr>
       @php
         $datearray = [];
