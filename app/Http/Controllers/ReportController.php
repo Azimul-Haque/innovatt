@@ -38,4 +38,18 @@ class ReportController extends Controller
     	$fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
     	return $pdf->stream($fileName); // stream
     }
+
+    public function getInstituteMonthlyReport($device_id) 
+    {
+    	$institute = Institute::where('device_id', $device_id)->first();
+    	$attendances = Attendance::where('device_id', $device_id)
+    	                         ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m')"), "=", Carbon::now()->format('Y-m'))  // teachers der jonno daily data
+    	                         ->orderBy('timestampdata', 'asc')
+    	                         ->get();
+    	$teachers = User::where('institute_id', $institute->id)->get();
+
+    	$pdf = PDF::loadView('dashboard.reports.institutemonthly', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers]);
+    	$fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
+    	return $pdf->stream($fileName); // stream
+    }
 }

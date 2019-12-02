@@ -65,7 +65,7 @@
               <li class="item">
                 মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
                 <div class="pull-right">
-                  <a href="#!" class="btn btn-info btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                  <a href="{{ route('report.institute.monthly', $institute->device_id) }}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
                 </div>
               </li>
               <li class="item">
