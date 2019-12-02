@@ -55,6 +55,7 @@
                 <th>শিক্ষক</th>
                 <th>প্রবেশ</th>
                 <th>প্রস্থান</th>
+                <th>অবস্থানকাল</th>
               </tr>
             </thead>
             <tbody>
@@ -81,6 +82,11 @@
                   <td>
                     @if(reset($teacher) != end($teacher))
                       {{ date('F d, Y h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                    @endif
+                  </td>
+                  <td>
+                    @if(reset($teacher) != end($teacher))
+                      {{ Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata'])) }}
                     @endif
                   </td>
                 </tr>
