@@ -10,7 +10,7 @@
     <h1>
       {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
       <div class="pull-right">
-        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster')
+        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
           <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary" title="নতুন শিক্ষক যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক যোগ</a>
         @endif
         <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
@@ -19,7 +19,7 @@
 @stop
 
 @section('content')
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'headmaster')
+  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
     <div class="row">
       <div class="col-md-4">
         <big>শিক্ষক তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>
