@@ -44,7 +44,6 @@ class DashboardController extends Controller
                     $totalpresenttoday++;
                 }
             }
-            dd($teachers);
             return view('dashboard.index')->withTotalpresenttoday($totalpresenttoday);
         }
     }
