@@ -91,11 +91,11 @@
               @endphp
               @foreach($datearray as $teacher)
                 <tr>
-                  <td>{{ date('F d, Y', strtotime(reset($teacher)['timestampdata'])) }}</td>
-                  <td>{{ date('h:i A', strtotime(reset($teacher)['timestampdata'])) }}</td>
+                  <td>{{ bangla(date('F d, Y', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                  <td>{{ bangla(date('h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
                   <td>
                     @if(reset($teacher) != end($teacher))
-                      {{ date('h:i A', strtotime(end($teacher)['timestampdata'])) }}
+                      {{ bangla(date('h:i A', strtotime(end($teacher)['timestampdata']))) }}
                     @endif
                   </td>
                   <td>
