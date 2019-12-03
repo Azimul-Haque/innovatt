@@ -94,7 +94,7 @@
                     <div class="col-md-4 col-sm-4 text-center">
                         <i class="icon-envelope small-icon black-text"></i>
                         <h6 class="margin-two no-margin-bottom">
-                            <a href="mailto:info@innovaatt.com" class="black-text">info@innovaatt.com</a>
+                            <a href="mailto:info@innoatt.com" class="black-text">info@innoatt.com</a>
                         </h6>
                     </div>
                     <!-- end email -->

@@ -42,7 +42,7 @@
                         <div class="col-md-6 xs-text-center">
                             <p class="text-med black-text letter-spacing-1 margin-ten no-margin-bottom text-uppercase font-weight-600 xs-margin-top-five">Contact Info.</p>
                             <p class="black-text no-margin-bottom"><strong><i class="fa fa-phone black-text"></i></strong> <a href="tel:+8801515297658">+88 01515297658</a></p>
-                            <p class="black-text"><strong><i class="fa fa-envelope black-text"></i></strong> <a href="mailto:info@innovaatt.com">info@innovaatt.com</a></p>
+                            <p class="black-text"><strong><i class="fa fa-envelope black-text"></i></strong> <a href="mailto:info@innoatt.com">info@innoatt.com</a></p>
                         </div>
                     </div>
                 </div>
