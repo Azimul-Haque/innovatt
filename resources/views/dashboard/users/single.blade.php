@@ -48,19 +48,19 @@
             <li class="item">
               দৈনিক রিপোর্ট ({{ bangla(date('F d, Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-success btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="#!" class="btn btn-success btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
             <li class="item">
               মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-info btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="#!" class="btn btn-info btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
             <li class="item">
               বাৎসরিক রিপোর্ট ({{ bangla(date('Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="#!" class="btn btn-warning btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
           </ul>
