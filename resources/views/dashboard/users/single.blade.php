@@ -21,7 +21,7 @@
     <div class="col-md-4">
       <big>শিক্ষক তথ্য</big>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-condensed">
           <thead>
             <tr>
               <th>{{ $teacher->name }}</th>
@@ -68,9 +68,9 @@
       </div>
     </div>
     <div class="col-md-8">
-      <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F, Y')) }}</b>
+      <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F, Y')) }}</b></big>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-condensed">
           <thead>
             <tr>
               <th>তারিখ</th>

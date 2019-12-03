@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="col-md-8">
-        <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b>
+        <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b></big>
         <div class="table-responsive">
           <table class="table table-condensed">
             <thead>
