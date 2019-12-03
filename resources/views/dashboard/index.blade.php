@@ -55,7 +55,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">আজকের উপস্থিতি</span>
-          <span class="info-box-number">২৪৬ জন</span>
+          <span class="info-box-number">{{ bangla($totalpresenttoday) }} জন</span>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">আজকের অনুপস্থিতি</span>
-          <span class="info-box-number">১২ জন</span>
+          <span class="info-box-number">{{ bangla($totalteachersupazilla - $totalpresenttoday) }} জন</span>
         </div>
       </div>
     </div>
