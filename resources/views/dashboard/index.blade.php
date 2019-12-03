@@ -91,9 +91,9 @@
       <div class="box box-primary" style="position: relative; left: 0px; top: 0px;">
           <div class="box-header ui-sortable-handle" style="">
             <i class="fa fa-bar-chart"></i>
-            <h3 class="box-title">দৈনিক উপস্থিতির তুলনা</h3>
+            <h3 class="box-title">উপস্থিতি ও অনুপস্থিতির তুলনা</h3>
             <div class="box-tools pull-right text-muted">
-              {{ date('F d, Y') }}
+              {{ date('F, Y') }}
             </div>
           </div>
           <!-- /.box-header -->
