@@ -166,7 +166,7 @@
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="300ms">
                     <a href="#!">
                         <span class="timer counter-number" data-to="5" data-speed="7000"></span>
-                        <span class="counter-title">Upazilla</span>
+                        <span class="counter-title">Upazillas</span>
                     </a>
                 </div>
                 <!-- end counter -->
