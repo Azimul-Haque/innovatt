@@ -87,7 +87,7 @@
               @foreach($teachers as $teacher)
                 <tr>
                   <td>{{ $teacher->name }}<br/><small>{{ $teacher->phone }}</small></td>
-                  <td>{{ designation($teacher->type) }}</td>
+                  <td>{{ designation($teacher->role) }}</td>
                   <td>{{ $teacher->institute->name }}</td>
                   <td>{{ $teacher->upazilla->upazilla_bangla }}</td>
                   <td>
