@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>পদবিঃ {{ $teacher->designation }}</td></tr>
+            <tr><td>পদবিঃ {{ designation($teacher->type) }}</td></tr>
             <tr><td>ডিভাইস পিনঃ {{ $teacher->device_pin }}</td></tr>
             <tr>
               <td>

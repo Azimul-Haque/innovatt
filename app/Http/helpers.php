@@ -97,6 +97,16 @@
           return 'Other';
   }
 
+  function designation($var) {
+    if($var == 'teo') {
+      return 'শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ';
+    } elseif($var == 'headmaster') {
+      return 'প্রধান শিক্ষক';
+    } elseif ($var == 'teacher') {
+      return 'সহকারী শিক্ষক';
+    }
+  }
+
   function statuscolor($var) 
   {
       if ($var == 1)

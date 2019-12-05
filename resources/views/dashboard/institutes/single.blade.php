@@ -40,7 +40,7 @@
                     <br/>
                     <small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
                   </td>
-                  <td>{{ $teacher->designation }}</td>
+                  <td>{{ designation($teacher->type) }}</td>
                   <td>
                     <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
                   </td>
