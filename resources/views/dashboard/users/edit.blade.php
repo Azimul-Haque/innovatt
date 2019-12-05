@@ -26,8 +26,12 @@
               {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!}
             </div>
             <div class="col-md-6">
-              {!! Form::label('designation', 'পদবি নাম *') !!}
-              {!! Form::text('designation', null, array('class' => 'form-control', 'required' => '')) !!}
+              {!! Form::label('gender', 'লিঙ্গ *') !!}
+              <select name="gender" class="form-control" required="">
+                <option value="" selected="" disabled="">লিঙ্গ নির্ধারণ করুন</option>
+                <option value="1" @if($teacher->gender == 1) selected="" @endif>পুরুষ</option>
+                <option value="2" @if($teacher->gender == 2) selected="" @endif>মহিলা</option>
+              </select>
             </div>
           </div> <br/>
           <div class="row">

@@ -22,8 +22,12 @@
             {!! Form::label('name', 'নাম *') !!}
             {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!}<br/>
 
-            {!! Form::label('designation', 'পদবি নাম *') !!}
-            {!! Form::text('designation', null, array('class' => 'form-control', 'required' => '')) !!}<br/>
+            {!! Form::label('gender', 'লিঙ্গ *') !!}
+            <select name="gender" class="form-control" required="">
+              <option value="" selected="" disabled="">লিঙ্গ নির্ধারণ করুন</option>
+              <option value="1" @if(Auth::user()->gender == 1) selected="" @endif>পুরুষ</option>
+              <option value="2" @if(Auth::user()->gender == 2) selected="" @endif>মহিলা</option>
+            </select><br/>
 
             {!! Form::label('password', 'পাসওয়ার্ড *') !!}
             {!! Form::password('password', array('class' => 'form-control', 'required' => '')) !!}<br/>

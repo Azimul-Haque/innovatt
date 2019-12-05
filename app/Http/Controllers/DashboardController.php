@@ -76,7 +76,7 @@ class DashboardController extends Controller
     {
         $this->validate($request, [
           'name'             => 'required',
-          'designation'      => 'required',
+          'gender'           => 'required',
           'role'             => 'required',
           'phone'            => 'required|unique:users',
           'device_pin'       => 'required',
@@ -86,7 +86,7 @@ class DashboardController extends Controller
 
         $user = new User;
         $user->name = $request->name;
-        $user->designation = $request->designation;
+        $user->gender = $request->gender;
         $user->unique_key = generate_token(100);
         $user->role = $request->role;
         $user->type = $request->role;
@@ -119,7 +119,7 @@ class DashboardController extends Controller
         $user = User::find($id);
         $this->validate($request, [
           'name'             => 'required',
-          'designation'      => 'required',
+          'gender'      => 'required',
           'role'             => 'required',
           'phone'            => 'required|unique:users,phone,' . $user->id,
           'device_pin'       => 'required',
@@ -129,7 +129,7 @@ class DashboardController extends Controller
         ]);
 
         $user->name = $request->name;
-        $user->designation = $request->designation;
+        $user->gender = $request->gender;
         $user->role = $request->role;
         $user->phone = $request->phone;
         $user->device_pin = $request->device_pin;
@@ -266,7 +266,7 @@ class DashboardController extends Controller
     {
         $this->validate($request, [
           'name'             => 'required',
-          'designation'      => 'required',
+          'gender'           => 'required',
           'role'             => 'required',
           'phone'            => 'required|unique:users',
           'device_pin'       => 'required',
@@ -276,7 +276,7 @@ class DashboardController extends Controller
 
         $user = new User;
         $user->name = $request->name;
-        $user->designation = $request->designation;
+        $user->gender = $request->gender;
         $user->unique_key = generate_token(100);
         $user->role = $request->role;
         $user->type = $request->role;
@@ -307,13 +307,13 @@ class DashboardController extends Controller
     {
         $this->validate($request, [
           'name'             => 'required',
-          'designation'      => 'required',
+          'gender'      => 'required',
           'password'         => 'required'
         ]);
 
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
-        $user->designation = $request->designation;
+        $user->gender = $request->gender;
         $user->password = Hash::make($request->password);
         $user->save();
 
