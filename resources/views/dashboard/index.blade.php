@@ -82,7 +82,11 @@
             @php
               $totalfemalesupazilla = 0;
               foreach (Auth::user()->upazilla->institutes as $institute) {
-                $totalfemalesupazilla = $totalfemalesupazilla + $institute->users->where('gender', 2)->count();
+                foreach ($institute->users as $user) {
+                  if($user->gender == 2) {
+                    $totalfemalesupazilla++;
+                  }
+                }
               }
             @endphp
             {{ bangla($totalfemalesupazilla) }} জন
@@ -100,7 +104,11 @@
             @php
               $totalmalesupazilla = 0;
               foreach (Auth::user()->upazilla->institutes as $institute) {
-                $totalmalesupazilla = $totalmalesupazilla + $institute->users->where('gender', 1)->count();
+                foreach ($institute->users as $user) {
+                  if($user->gender == 1) {
+                    $totalmalesupazilla++;
+                  }
+                }
               }
             @endphp
             {{ bangla($totalmalesupazilla) }} জন
