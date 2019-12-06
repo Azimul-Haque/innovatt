@@ -86,7 +86,7 @@ class DashboardController extends Controller
 
         $user = new User;
         $user->name = $request->name;
-        $user->gender = $request->gender;
+        $user->gender = $request->gender; // 1 = Male, 2 = Female
         $user->unique_key = generate_token(100);
         $user->role = $request->role;
         $user->type = $request->role;
