@@ -114,10 +114,10 @@
 
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-check-square-o"></i></span>
+        <span class="info-box-icon bg-green"><i class="fa fa-clock-o"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">আজকের উপস্থিতি</span>
+          <span class="info-box-text">বিলম্বিত প্রবেশ</span>
           <span class="info-box-number">{{ bangla($totalpresenttoday) }} জন</span>
         </div>
       </div>
@@ -127,7 +127,7 @@
         <span class="info-box-icon bg-yellow"><i class="fa fa-flag-o"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">আজকের অনুপস্থিতি</span>
+          <span class="info-box-text">পূর্বে প্রস্থান</span>
           <span class="info-box-number">{{ bangla($totalteachersupazilla - $totalpresenttoday) }} জন</span>
         </div>
       </div>
