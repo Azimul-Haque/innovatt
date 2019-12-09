@@ -18,7 +18,7 @@
 @section('content')
   @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" id="datatable-institutes">
         <thead>
           <tr>
             <th>ক্রমিক</th>
@@ -50,4 +50,26 @@
       </div>
     </div>
   @endif
+@stop
+
+@section('js')
+  <script type="text/javascript">
+  $(function () {
+    //$.fn.dataTable.moment('DD MMMM, YYYY hh:mm:ss tt');
+    $('#datatable-institutes').DataTable({
+      'paging'      : true,
+      'pageLength'  : 15,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      'order': [[ 0, "asc" ]],
+       columnDefs: [
+              // { targets: [5], type: 'date'}
+       ]
+    });
+    $('#datatable-members_wrapper').removeClass( 'form-inline' );
+  })
+  </script>
 @stop
