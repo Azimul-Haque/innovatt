@@ -78,8 +78,8 @@
               </select>    
             </div>
             <div class="col-md-6">
-              {!! Form::label('password', 'পাসওয়ার্ড *') !!}
-              {!! Form::password('password', array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
+              {!! Form::label('password', 'পাসওয়ার্ড (ঐচ্ছিক)') !!}
+              {!! Form::password('password', array('class' => 'form-control', 'autocomplete' => 'off')) !!}
             </div>
           </div>
         </div>

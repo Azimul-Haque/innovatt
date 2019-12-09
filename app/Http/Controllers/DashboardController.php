@@ -145,7 +145,7 @@ class DashboardController extends Controller
           'device_pin'       => 'required',
           'upazilla_id'      => 'required',
           'institute_id'     => 'required',
-          'password'         => 'required'
+          'password'         => 'sometimes'
         ]);
 
         $user->name = $request->name;
@@ -155,7 +155,9 @@ class DashboardController extends Controller
         $user->device_pin = $request->device_pin;
         $user->upazilla_id = $request->upazilla_id;
         $user->institute_id = $request->institute_id;
-        $user->password = Hash::make($request->password);
+        if(!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
         $user->save();
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
