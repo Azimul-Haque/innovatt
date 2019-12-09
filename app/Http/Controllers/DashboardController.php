@@ -189,14 +189,14 @@ class DashboardController extends Controller
 
     public function getUpazillaSchools($id)
     {
-        $institutes = Institute::where('upazilla_id', $id)->paginate(15);
+        $institutes = Institute::where('upazilla_id', $id)->get(); //paginate(15);
 
         return view('dashboard.institutes.index')->withInstitutes($institutes);
     }
 
     public function getInstitutes()
-    {
-        $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->paginate(15);
+    {   
+        $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->get(); //paginate(15);
 
         return view('dashboard.institutes.index')->withInstitutes($institutes);
     }
@@ -212,12 +212,14 @@ class DashboardController extends Controller
     {
         $this->validate($request, [
           'name'             => 'required',
+          'serial'             => 'required',
           'device_id'        => 'required|unique:institutes',
           'upazilla_id'      => 'required'
         ]);
 
         $institute = new Institute;
         $institute->name = $request->name;
+        $institute->serial = $request->serial;
         $institute->device_id = $request->device_id;
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();
@@ -242,11 +244,13 @@ class DashboardController extends Controller
 
         $this->validate($request, [
           'name'             => 'required',
+          'serial'             => 'required',
           'device_id'        => 'required|unique:institutes,device_id,' . $institute->id,
           'upazilla_id'      => 'required'
         ]);
 
         $institute->name = $request->name;
+        $institute->serial = $request->serial;
         $institute->device_id = $request->device_id;
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();

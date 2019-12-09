@@ -21,6 +21,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th>ক্রমিক</th>
             <th>নাম</th>
             <th>উপজেলা</th>
             <th>ডিভাইস আইডি (SN)</th>
@@ -31,6 +32,7 @@
         <tbody>
           @foreach($institutes as $institute)
             <tr>
+              <td>{{ $institute->serial }}</td>
               <td><a href="{{ route('dashboard.institute.single', $institute->device_id) }}">{{ $institute->name }}</a></td>
               <td>{{ $institute->upazilla->upazilla_bangla }}, {{ $institute->upazilla->district_bangla }}</td>
               <td>{{ $institute->device_id }}</td>
@@ -44,7 +46,7 @@
         </tbody>
       </table>
       <div>
-        {{ $institutes->links() }}
+        {{-- {{ $institutes->links() }} --}}
       </div>
     </div>
   @endif
