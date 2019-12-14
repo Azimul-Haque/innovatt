@@ -231,7 +231,6 @@
 </script>
 <script>
     $("#owl-demo").owlCarousel ({
-
         slideSpeed : 800,
         autoPlay: 4000,
         items : 1,
