@@ -6,13 +6,24 @@
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
                         <div class="slider-text-middle padding-left-right-px animated fadeInUp">
-                            <span class="owl-title white-text" style="background: rgba(0,0,0,0.3); padding: 10px;">Ensuring Attendance, Ensuring the future of Bangladesh</span>
+                            {{-- <span class="owl-title white-text" style="background: rgba(0,0,0,0.3); padding: 10px;">Ensuring Attendance, Ensuring the future of Bangladesh</span> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="item owl-bg-img" style="background-image:url('images/slider/2.jpg');">
+            <div class="container position-relative">
+                <div class="slider-typography text-left">
+                    <div class="slider-text-middle-main">
+                        <div class="slider-text-middle padding-left-right-px animated fadeInUp">
+                            <span class="owl-title white-text" style="background: rgba(0,0,0,0.3); padding: 10px;">Ensuring Attendance, Ensuring the future of Bangladesh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item owl-bg-img" style="background-image:url('images/slider/3.jpg');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
@@ -24,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="item owl-bg-img" style="background-image:url('images/slider/3.jpg');">
+        <div class="item owl-bg-img" style="background-image:url('images/slider/4.jpg');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
