@@ -1,7 +1,7 @@
 <!-- slider -->
 <section id="slider" class="no-padding content-top-margin">
     <div id="owl-demo" class="owl-carousel owl-theme owl-half-slider dark-pagination">
-        <div class="item owl-bg-img" style="background-image:url('images/slider/1.jpg');">
+        <div class="item owl-bg-img" style="background-image:url('images/slider/1.jpg?month=12-12');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="item owl-bg-img" style="background-image:url('images/slider/2.jpg');">
+        <div class="item owl-bg-img" style="background-image:url('images/slider/2.jpg?month=12-12');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="item owl-bg-img" style="background-image:url('images/slider/3.jpg');">
+        <div class="item owl-bg-img" style="background-image:url('images/slider/3.jpg?month=12-12');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="item owl-bg-img" style="background-image:url('images/slider/4.jpg');">
+        <div class="item owl-bg-img" style="background-image:url('images/slider/4.jpg?month=12-12');">
             <div class="container position-relative">
                 <div class="slider-typography text-left">
                     <div class="slider-text-middle-main">
