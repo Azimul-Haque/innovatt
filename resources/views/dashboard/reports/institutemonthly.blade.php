@@ -74,7 +74,7 @@
         <tr>
           <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
         </tr>
-        @if(!empty($datesingles['data'])) eta na dile error dicche...
+        @if(!empty($datesingles['data'])) {{-- eta na dile error dicche... --}}
           @foreach($datesingles['data'] as $teacher)
             <tr>
               <td>

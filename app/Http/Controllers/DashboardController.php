@@ -139,7 +139,7 @@ class DashboardController extends Controller
         $user = User::find($id);
         $this->validate($request, [
           'name'             => 'required',
-          'gender'      => 'required',
+          'gender'           => 'required',
           'role'             => 'required',
           'phone'            => 'required|unique:users,phone,' . $user->id,
           'device_pin'       => 'required',
@@ -152,6 +152,7 @@ class DashboardController extends Controller
         $user->gender = $request->gender;
         $user->role = $request->role;
         $user->phone = $request->phone;
+        $user->email = $request->phone . '@innovaatt.com';
         $user->device_pin = $request->device_pin;
         $user->upazilla_id = $request->upazilla_id;
         $user->institute_id = $request->institute_id;

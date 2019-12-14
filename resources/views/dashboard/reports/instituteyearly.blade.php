@@ -82,7 +82,7 @@
           <tr>
             <td colspan="4" class="blackishbackground">{{ bangla(date('F d, Y', strtotime($days['date']))) }}</td>
           </tr>
-          @if($days['data'])
+          @if(!empty($days['data'])) {{-- eta na dile error dicche... --}}
             @foreach($days['data'] as $teacher)
             <tr>
               <td>
