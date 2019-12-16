@@ -19,7 +19,7 @@
 @stop
 
 @section('content')
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
+  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
     <div class="row">
       <div class="col-md-4">
         <big>শিক্ষক তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>

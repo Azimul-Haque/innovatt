@@ -30,17 +30,22 @@
                   <option value="" selected="" disabled="">লিঙ্গ নির্ধারণ করুন</option>
                   <option value="1">পুরুষ</option>
                   <option value="2">মহিলা</option>
+
                 </select>
               </div>
             </div> <br/>
             <div class="row">
               <div class="col-md-6">
                 {!! Form::label('role', 'ধরন *') !!}
-                <select name="role" class="form-control" required="">
+                <select name="role" id="role_dropdown" class="form-control" required="" onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)">
                   <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>
                   <option value="teo">শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</option>
                   <option value="headmaster">প্রধান শিক্ষক</option>
                   <option value="teacher">সহকারী শিক্ষক</option>
+                  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
+                    <option value="ateo">ATEO</option>
+
+                  @endif
                 </select>
               </div>
               <div class="col-md-6">
@@ -54,7 +59,7 @@
                 {!! Form::label('device_pin', 'ডিভাইস পিন (মেশিনে এই শিক্ষকের আইডি) *') !!}
                 {!! Form::number('device_pin', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 ">
                 {!! Form::label('upazilla_id', 'উপজেলা *') !!}
                 <select name="upazilla_id" id="upazilla_id" class="form-control" required>
                   <option value="" selected="" disabled="">উপজেলা নির্ধারণ করুন</option>
@@ -69,8 +74,8 @@
               
               <div class="col-md-6">
                 {!! Form::label('institute_id', 'প্রতিষ্ঠান *') !!}
-                <select name="institute_id" id="institute_id" class="form-control" required>
-                  <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>
+                <select name="institute_id[]" id="institute_id" class="form-control" required multiple="multiple">
+{{--                  <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>--}}
                   @foreach($institutes as $institute)
                     <option value="{{ $institute->id }}">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                   @endforeach
@@ -98,4 +103,17 @@
     $('#institute_id').select2();
     $('#upazilla_id').select2();
   </script>
+  <script>
+    function checkRoleDrowpdown(selected_option){
+      if(selected_option === 'teo'){
+        $('#institute_id').prop('disabled', 'disabled');
+        $("#institute_id").prop('required',false);
+      } else{
+        $("#institute_id").prop('required',true);
+        $('#institute_id').prop('disabled', false);
+      }
+    }
+    checkRoleDrowpdown();
+  </script>
+
 @endsection

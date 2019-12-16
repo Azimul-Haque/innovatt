@@ -74,26 +74,24 @@
         <tr>
           <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
         </tr>
-        @if(!empty($datesingles['data'])) {{-- eta na dile error dicche... --}}
-          @foreach($datesingles['data'] as $teacher)
-            <tr>
-              <td>
-                {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
-              </td>
-              <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
-              <td align="center">
-                @if(reset($teacher) != end($teacher))
-                  {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
-                @endif
-              </td>
-              <td align="center">
-                @if(reset($teacher) != end($teacher))
-                  <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
-                @endif
-              </td>
-            </tr>
-          @endforeach
-        @endif
+        @foreach($datesingles['data'] as $teacher)
+          <tr>
+            <td>
+              {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
+            </td>
+            <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+            <td align="center">
+              @if(reset($teacher) != end($teacher))
+                {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+              @endif
+            </td>
+            <td align="center">
+              @if(reset($teacher) != end($teacher))
+                <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
+              @endif
+            </td>
+          </tr>
+        @endforeach
       @endforeach
     </table>
   </div>
