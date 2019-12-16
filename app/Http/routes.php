@@ -50,9 +50,21 @@ Route::put('/user/{id}/update', ['as'=>'dashboard.users.update','uses'=>'Dashboa
 Route::get('/user/{id}', ['as'=>'dashboard.user.single','uses'=>'DashboardController@getSingleUser']);
 
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
+Route::get('/upazillas/ateo/{id}', ['as'=>'dashboard.upazillas.ateo','uses'=>'DashboardController@getAteo']);
 Route::get('/upazilla/{id}/school/list', ['as'=>'dashboard.upazillas.schools','uses'=>'DashboardController@getUpazillaSchools']);
+Route::get('/upazilla/present/list', ['as'=>'dashboard.upazillas.present','uses'=>'DashboardController@getUpazillaSchoolsTeachersPresentList']);
+Route::get('/upazilla/absent/list', ['as'=>'dashboard.upazillas.absent','uses'=>'DashboardController@getUpazillaSchoolsTeachersAbsentList']);
+Route::get('/upazilla/present/list/{id}', ['as'=>'dashboard.upazillas.present.ateo','uses'=>'DashboardController@getUpazillaSchoolsTeachersPresentListForAteo']);
+Route::get('/upazilla/absent/list/{id}', ['as'=>'dashboard.upazillas.absent.ateo','uses'=>'DashboardController@getUpazillaSchoolsTeachersAbsentListForAteo']);
 
 Route::get('/institutes', ['as'=>'dashboard.institutes','uses'=>'DashboardController@getInstitutes']);
+Route::get('/institute/list', ['as'=>'dashboard.institute.list','uses'=>'DashboardController@getInstituteList']);
+Route::get('/institute/teachers/female', ['as'=>'dashboard.institute.teacher.female','uses'=>'DashboardController@getFemaleTeacherList']);
+Route::get('/institute/teachers/male', ['as'=>'dashboard.institute.teacher.male','uses'=>'DashboardController@getMaleTeacherList']);
+Route::get('/institute/teachers', ['as'=>'dashboard.institute.teachers','uses'=>'DashboardController@getAllTeacherList']);
+Route::get('/institute/teachers/late', ['as'=>'dashboard.institute.teachers.late','uses'=>'DashboardController@getAllTeacherLateList']);
+Route::get('/institute/teachers/early', ['as'=>'dashboard.institute.teachers.early','uses'=>'DashboardController@getAllTeacherEarlyLeaveList']);
+
 Route::get('/institutes/create', ['as'=>'dashboard.institutes.create','uses'=>'DashboardController@createInstitute']);
 Route::post('/institutes/store', ['as'=>'dashboard.institutes.store','uses'=>'DashboardController@storeInstitute']);
 Route::get('/institutes/{id}/edit', ['as'=>'dashboard.institutes.edit','uses'=>'DashboardController@editInstitute']);
@@ -68,7 +80,7 @@ Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','u
 
 
 // reports
-Route::get('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyReport']);
+Route::get('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyCombinedReport']);
 Route::get('/report/institute/pdf/monthly/{device_id}', ['as'=>'report.institute.monthly','uses'=>'ReportController@getInstituteMonthlyReport']);
 Route::get('/report/institute/pdf/yearly/{device_id}', ['as'=>'report.institute.yearly','uses'=>'ReportController@getInstituteYearlyReport']);
 // Route::get('/report/program/top/sheet/product', ['as'=>'report.program.topsheetproduct','uses'=>'ReportController@generateProgramTopSheetProduct']);

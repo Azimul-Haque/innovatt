@@ -74,7 +74,7 @@
                 @foreach($institutes as $institute)
                   <option value="{{ $institute->id }}" @if($teacher->institute_id == $institute->id) selected="" @endif>{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                 @endforeach
-                <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
+                <option value="0" @if($teacher->institute_id == 0) selected="" @endif>শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
               </select>    
             </div>
             <div class="col-md-6">

@@ -14,17 +14,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Institute');
     }
 
-    // public function loaninstallments() {
-    //     return $this->hasMany('App\Loaninstallment');
-    // }
-
-    // public function savinginstallments() {
-    //     return $this->hasMany('App\Savinginstallment');
-    // }
-
-    // protected $fillable = [
-    //     'name', 'email', 'password',
-    // ];
+    public function institutes() {
+        return $this->hasMany('App\Institute');
+    }
 
 
     protected $hidden = [

@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->integer('upazilla_id')->unsigned();
             $table->integer('institute_id')->unsigned();
+            $table->date('leave_start_date')->nullable();
+            $table->date('leave_end_date')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
