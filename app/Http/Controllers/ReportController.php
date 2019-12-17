@@ -24,24 +24,12 @@ class ReportController extends Controller
         parent::__construct();
         $this->middleware('auth');
     }
-    public function getAllTeachers(){
-        $allTeachers = [];
-        $queryTeachers = User::where('role', 'headmaster')
-            ->orWhere('role', 'teacher')
-            ->where('upazilla_id', Auth::user()->upazilla_id)
-            ->get();
-
-        foreach ($queryTeachers as $teacher){
-            $allTeachers[] = $teacher;
-        }
-
-        return $allTeachers;
-    }
 
 
-    public function getPresentTeachers(){
+
+    public function getPresentTeachers($totalTeachers){
         $teachersPresent = [];
-        $queryTeachers = $this->getAllTeachers();
+        $queryTeachers = $totalTeachers;
 
         foreach ($queryTeachers as $teacher) {
 
@@ -80,15 +68,20 @@ class ReportController extends Controller
             ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))  // teachers der jonno daily data
             ->orderBy('timestampdata', 'asc')
             ->get();
-        $teachers = User::where('institute_id', $institute->id)->get();
+        $teachers = $institute->users;
 //        $allTeachers = $this->getAllTeachers();
-        $teachersPresent = $this->getPresentTeachers();
+        $teachersPresent = $this->getPresentTeachers($teachers);
 
-        $absentTeachers = array_diff($teachers, $teachersPresent);
+        $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
+//        dd($absentTeachers);
+
+
         $pdf = PDF::loadView('dashboard.reports.combined_report', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absentTeachers]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
+
+
 
     public function getInstituteMonthlyReport($device_id) 
     {

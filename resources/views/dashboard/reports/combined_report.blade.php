@@ -1,7 +1,7 @@
 <html>
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Report | Download | PDF</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
     <style>
         body {
             font-family: 'kalpurush', sans-serif;
@@ -105,12 +105,12 @@
         @foreach($absents as $teacher)
             <tr>
                 <td>
-                    {{ $teacher->name }}<br/><small>যোগাযোগঃ <span
-                                style="font-family: Calibri;">{{ $teacher->phone }}</span></small>
+                    {{ $teacher['name'] }}<br/><small>যোগাযোগঃ <span
+                                style="font-family: Calibri;">{{ $teacher['phone'] }}</span></small>
                 </td>
 
                 <td  align="center">
-                    @if($teacher->leave_start_date == null)
+                    @if($teacher['leave_start_date'] == null)
                         অনুপস্থিত
                     @else
                         ছুটিতে
