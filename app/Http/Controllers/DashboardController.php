@@ -371,7 +371,6 @@ class DashboardController extends Controller
             'gender' => 'required',
             'role' => 'required',
             'phone' => 'required|unique:users,phone,' . $user->id,
-            'device_pin' => 'required',
             'upazilla_id' => 'required',
             'institute_id' => 'sometimes',
             'password' => 'sometimes'
@@ -381,7 +380,6 @@ class DashboardController extends Controller
         $user->gender = $request->gender;
         $user->role = $request->role;
         $user->phone = $request->phone;
-        $user->device_pin = $request->device_pin;
         $user->upazilla_id = $request->upazilla_id;
         $user->leave_start_date = null;
         $user->leave_end_date = null;

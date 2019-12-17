@@ -109,11 +109,9 @@
 
                                         @if($teacher->role=='teacher' || $teacher->role=='headmaster')
                                             @foreach($institutes as $institute)
-
-                                                    <option value="{{ $institute->id }}"
-                                                            @if($teacher->institute_id == $institute->id ) selected="" @endif>{{ $institute->name }}
-                                                        , {{ $institute->upazilla->upazilla_bangla }}</option>
-
+                                                <option value="{{ $institute->id }}"
+                                                        @if($teacher->institute_id == $institute->id ) selected="" @endif>{{ $institute->name }}
+                                                    , {{ $institute->upazilla->upazilla_bangla }}</option>
                                             @endforeach
                                         @elseif($teacher->role=='ateo')
                                             @foreach($ateoinstitutes as $institute)
@@ -121,12 +119,11 @@
                                                         selected="" >{{ $institute->name }}
                                                     , {{ $institute->upazilla->upazilla_bangla }}</option>
                                             @endforeach
-
-                                                @foreach($institutes as $institute)
-                                                    <option value="{{ $institute->id }}"
-                                                            >{{ $institute->name }}
-                                                        , {{ $institute->upazilla->upazilla_bangla }}</option>
-                                                @endforeach
+                                            @foreach($institutes as $institute)
+                                                <option value="{{ $institute->id }}"
+                                                        >{{ $institute->name }}
+                                                    , {{ $institute->upazilla->upazilla_bangla }}</option>
+                                            @endforeach
                                         @endif
 {{--                                        <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>--}}
                                     </select>

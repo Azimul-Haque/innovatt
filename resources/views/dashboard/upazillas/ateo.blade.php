@@ -7,11 +7,7 @@
 @stop
 
 @section('content_header')
-    <h1>
-
-        <strong>{{ $ateo->name }}</strong>
-        <br><br>
-    </h1>
+    <h1>{{ $ateo->name }}</h1>
 @stop
 
 @section('content')
