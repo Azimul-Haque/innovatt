@@ -594,7 +594,8 @@ class DashboardController extends Controller
     public function getInstitutes()
     {
         $institutes = Institute::where('upazilla_id', Auth::user()->upazilla_id)->get(); //paginate(15);
-        $ateos = User::where('role', 'ateo')->get();
+        $ateos = User::where('role', 'ateo')->where('upazilla_id', Auth::user()->upazilla_id)->get();
+
         return view('dashboard.institutes.index')->withInstitutes($institutes)->withAteos($ateos);
     }
 
