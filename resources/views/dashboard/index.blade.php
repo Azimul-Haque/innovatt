@@ -17,7 +17,7 @@
 @section('content')
     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
         <div class="row">
-            <a href="{{route('dashboard.institute.list')}}">
+            <a href="{{route('dashboard.institutes')}}">
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-university"></i></span>

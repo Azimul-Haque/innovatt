@@ -230,7 +230,6 @@ class DashboardController extends Controller
             'gender' => 'required',
             'role' => 'required',
             'phone' => 'required|unique:users',
-            'device_pin' => 'required',
             'upazilla_id' => 'required',
             'institute_id' => 'sometimes',
         ]);
@@ -243,7 +242,7 @@ class DashboardController extends Controller
         $user->type = $request->role;
         $user->phone = $request->phone;
         $user->email = $request->phone . '@innovaatt.com';
-        $user->device_pin = $request->device_pin;
+        $user->device_pin = 0;
         $user->upazilla_id = $request->upazilla_id;
         $user->password = Hash::make('secret');
 //        dd($user->id);

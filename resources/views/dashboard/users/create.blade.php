@@ -60,10 +60,15 @@
             </div> <br/>
 
             <div class="row">
-              <div class="col-md-6">
-                {!! Form::label('device_pin', 'ডিভাইস পিন (মেশিনে এই শিক্ষকের আইডি) *') !!}
-                {!! Form::number('device_pin', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
-              </div>
+              @if(Auth::user()->role=='admin')
+                <div class="col-md-6">
+                  {!! Form::label('device_pin', 'ডিভাইস পিন (মেশিনে এই শিক্ষকের আইডি) *') !!}
+                  {!! Form::number('device_pin', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
+                </div>
+              @elseif(Auth::user()->role == 'teo')
+                
+              @endif
+              
               <div class="col-md-6 ">
                 {!! Form::label('upazilla_id', 'উপজেলা *') !!}
                 <select name="upazilla_id" id="upazilla_id" class="form-control" required>
@@ -76,8 +81,7 @@
             </div> <br/>
 
             <div class="row">
-
-              <div class="col-md-6">
+              <div class="col-md-12">
                 {!! Form::label('institute_id', 'প্রতিষ্ঠান *') !!}
                 <select name="institute_id[]" id="institute_id" class="form-control" required multiple="multiple">
 {{--                  <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>--}}
