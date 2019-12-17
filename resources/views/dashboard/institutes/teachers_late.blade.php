@@ -62,7 +62,8 @@
                         @foreach($allLateTeachers as $teacher)
                             <tr>
                                 <td>
-                                    {{ $teacher->name }}<br/><small><a href="tel:{{ $teacher->phone }}"
+                                    <a href="{{ route('dashboard.user.single', $teacher->id) }}">{{ $teacher->name }}</a>
+                                    <br/><small><a href="tel:{{ $teacher->phone }}"
                                                                        title="ফোন করুন"><i
                                                     class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
                                 </td>
@@ -76,7 +77,8 @@
                                     <br/>
                                 </td>
                                 <td>
-                                    {{ $teacher->institute->name }}<br/><small> {{ $teacher->institute->device_id }}</small>
+                                    <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
+                                    <br/><small> {{ $teacher->institute->device_id }}</small>
                                 </td>
                                 {{--                            <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>--}}
                                 {{--                            <td>--}}

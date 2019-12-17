@@ -17,7 +17,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 sm-4 ">
-            <big>শিক্ষকের তালিকাঃ</big>
+            <big>শিক্ষকদের তালিকাঃ</big>
 
             @php
                 $allTeachers = [];
@@ -52,9 +52,8 @@
                         @foreach($allTeachers as $teacher)
                             <tr>
                                 <td>
-                                    {{ $teacher->name }}<br/><small><a href="tel:{{ $teacher->phone }}"
-                                                                       title="ফোন করুন"><i
-                                                    class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
+                                    <a href="{{ route('dashboard.user.single', $teacher->id) }}">{{ $teacher->name }}</a>
+                                    <br/><small><a href="tel:{{ $teacher->phone }}" title="ফোন করুন"><i class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
                                 </td>
 
                                 <td>
@@ -65,7 +64,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $teacher->institute->name }}<br/><small> {{ $teacher->institute->device_id }}</small>
+                                    <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
+                                    <br/><small> {{ $teacher->institute->device_id }}</small>
                                 </td>
                                 {{--                            <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>--}}
                                 {{--                            <td>--}}
