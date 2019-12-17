@@ -20,7 +20,8 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile');
+        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList',
+ 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile');
     }
 
     public function index()
@@ -161,6 +162,16 @@ class DashboardController extends Controller
             ->withInstitutes($institutes)
             ->withUpazillas($upazillas);
     }
+    public function createAteo()
+    {
+        $upazillas = [];
+        $institutes = Auth::user()->upazilla->institutes;
+        $upazillas[] = Auth::user()->upazilla;
+//        dd($upazillas);
+        return view('dashboard.users.create')
+            ->withInstitutes($institutes)
+            ->withUpazillas($upazillas);
+    }
 
     public function storeUser(Request $request)
     {
@@ -209,6 +220,56 @@ class DashboardController extends Controller
 
         Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!');
         return redirect()->route('dashboard.users');
+    }
+
+
+    public function storeAteo(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'gender' => 'required',
+            'role' => 'required',
+            'phone' => 'required|unique:users',
+            'device_pin' => 'required',
+            'upazilla_id' => 'required',
+            'institute_id' => 'sometimes',
+        ]);
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->gender = $request->gender; // 1 = Male, 2 = Female
+        $user->unique_key = generate_token(100);
+        $user->role = $request->role;
+        $user->type = $request->role;
+        $user->phone = $request->phone;
+        $user->email = $request->phone . '@innovaatt.com';
+        $user->device_pin = $request->device_pin;
+        $user->upazilla_id = $request->upazilla_id;
+        $user->password = Hash::make('secret');
+//        dd($user->id);
+
+        if ($request->role != 'ateo'){
+            if($request->role == 'teo')
+                $user->institute_id = 0;
+            else
+                $user->institute_id = $request->institute_id[0];
+            $user->save();
+        }
+
+        else {
+            $user->institute_id = 0;
+            $user->save();
+
+            foreach ($request->institute_id as $institute) {
+                $ateoInstitute = Institute::find($institute);
+                $ateoInstitute->user_id = $user->id;
+                $ateoInstitute->save();
+//                dd($ateoInstitute);
+            }
+        }
+
+        Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!');
+        return redirect()->route('dashboard.institutes');
     }
 
     public function editUser($id)
@@ -300,6 +361,64 @@ class DashboardController extends Controller
         } else {
             return redirect()->route('dashboard.institute.single', $user->institute->device_id);
         }
+    }
+
+
+    public function updateAteo(Request $request, $id)
+    {
+        $user = User::find($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'gender' => 'required',
+            'role' => 'required',
+            'phone' => 'required|unique:users,phone,' . $user->id,
+            'device_pin' => 'required',
+            'upazilla_id' => 'required',
+            'institute_id' => 'sometimes',
+            'password' => 'sometimes'
+        ]);
+
+        $user->name = $request->name;
+        $user->gender = $request->gender;
+        $user->role = $request->role;
+        $user->phone = $request->phone;
+        $user->device_pin = $request->device_pin;
+        $user->upazilla_id = $request->upazilla_id;
+        $user->leave_start_date = null;
+        $user->leave_end_date = null;
+
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+//        dd($request->leave_start_date);
+
+
+
+        if ($request->role != 'ateo'){
+            if($request->role == 'teo')
+                $user->institute_id = 0;
+            else
+                $user->institute_id = $request->institute_id[0];
+            $user->save();
+        }
+
+        else {
+            $user->institute_id = 0;
+            $user->save();
+
+            foreach ($request->institute_id as $institute) {
+                $ateoInstitute = Institute::find($institute);
+                $ateoInstitute->user_id = $user->id;
+                $ateoInstitute->save();
+//                dd($ateoInstitute);
+            }
+        }
+
+        $user->save();
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        return redirect()->route('dashboard.institutes');
+
     }
 
     public function getSingleUser($id)
@@ -550,9 +669,22 @@ class DashboardController extends Controller
             ->orderBy('timestampdata', 'asc')
             ->get();
         $teachers = User::where('institute_id', $institute->id)->get();
+        $absents = [];
+        foreach ($teachers as $queryTeacher){
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                ->where('device_id', $queryTeacher->institute->device_id)
+                ->where('device_pin', $queryTeacher->device_pin)
+                ->first();
+            if (empty($attendance)) {
+                $absents[] = $queryTeacher;
+            }
+        }
+//        dd($absents);
+
 
         return view('dashboard.institutes.single')
             ->withInstitute($institute)
+            ->withAbsents($absents)
             ->withAttendances($attendances)
             ->withTeachers($teachers);
     }
@@ -560,7 +692,6 @@ class DashboardController extends Controller
     public function getInstituteList(){
         return view('dashboard.institutes.institute_list');
     }
-
     public function getFemaleTeacherList(){
         return view('dashboard.institutes.teachers_female');
     }
@@ -647,6 +778,4 @@ class DashboardController extends Controller
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
         return redirect()->route('dashboard.personal.profile');
     }
-
-
 }
