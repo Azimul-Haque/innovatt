@@ -17,8 +17,12 @@
       <div class="col-md-8">
         <div class="panel panel-primary">
           <div class="panel-heading">শিক্ষক/ ব্যবহারকারী যোগ ফরম (* অর্থ বাধ্যতামূলক)</div>
-          {!! Form::open(['route' => 'dashboard.users.store', 'method' => 'POST']) !!}
-          <div class="panel-body">
+          @if(Auth::user()->role=='admin')
+            {!! Form::open(['route' => 'dashboard.users.store', 'method' => 'POST']) !!}
+          @elseif(Auth::user()->role=='teo')
+            {!! Form::open(['route' => 'dashboard.users.store.ateo', 'method' => 'POST']) !!}
+          @endif
+            <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
                 {!! Form::label('name', 'নাম *') !!}
@@ -38,13 +42,14 @@
               <div class="col-md-6">
                 {!! Form::label('role', 'ধরন *') !!}
                 <select name="role" id="role_dropdown" class="form-control" required="" onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)">
+                  @if(Auth::user()->role=='admin')
                   <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>
                   <option value="teo">শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</option>
                   <option value="headmaster">প্রধান শিক্ষক</option>
                   <option value="teacher">সহকারী শিক্ষক</option>
-                  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
-                    <option value="ateo">ATEO</option>
-
+                  <option value="ateo">ATEO</option>
+                  @elseif(Auth::user()->role == 'teo')
+                    <option value="ateo" selected>ATEO</option>
                   @endif
                 </select>
               </div>
@@ -66,12 +71,12 @@
                   @foreach($upazillas as $upazilla)
                     <option value="{{ $upazilla->id }}">{{ $upazilla->upazilla_bangla }} ({{ $upazilla->district_bangla }})</option>
                   @endforeach
-                </select>    
+                </select>
               </div>
             </div> <br/>
 
             <div class="row">
-              
+
               <div class="col-md-6">
                 {!! Form::label('institute_id', 'প্রতিষ্ঠান *') !!}
                 <select name="institute_id[]" id="institute_id" class="form-control" required multiple="multiple">
@@ -80,11 +85,11 @@
                     <option value="{{ $institute->id }}">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                   @endforeach
                   <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>
-                </select>    
+                </select>
               </div>
             </div> <br/>
-            
-                    
+
+
           </div>
           <div class="panel-footer">
             <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> দাখিল করুন</button>
