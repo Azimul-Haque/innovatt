@@ -9,10 +9,14 @@
 @section('content_header')
     <h1>
         সকল প্রতিষ্ঠান
-        <div class="pull-right">
-            <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success"
-               title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a>
-        </div>
+        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
+            <div class="pull-right">
+                <a href="{{ route('dashboard.users.create.ateo') }}" class="btn btn-primary"
+                   title="নতুন ATEO যোগ করুন"><i class="fa fa-plus"></i> ATEO যোগ</a>
+                <a href="{{ route('dashboard.institutes.create') }}" class="btn btn-success"
+                   title="নতুন প্রতিষ্ঠান যোগ করুন"><i class="fa fa-plus"></i> প্রতিষ্ঠান যোগ</a>
+            </div>
+        @endif
     </h1>
 @stop
 
