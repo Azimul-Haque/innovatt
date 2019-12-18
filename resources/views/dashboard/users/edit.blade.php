@@ -49,7 +49,7 @@
                             <div class="col-md-6">
                                 {!! Form::label('role', 'ধরন *') !!}
                                     <select name="role" id="role_dropdown"  onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)" class="form-control" required="">
-                                        @if(Auth::user()->role=='admin')
+                                        @if(Auth::user()->role == 'admin')
 
                                         {{--                                    <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>--}}
                                         <option value="teo" @if($teacher->role == 'teo') selected="" @endif>শিক্ষা অফিসার/
@@ -65,14 +65,14 @@
 
                                         @elseif(Auth::user()->role=='teo')
                                             @if($teacher->role == 'ateo')
-                                            <option value="ateo" @if($teacher->role == 'ateo') selected="" @endi>ATEO</option>
+                                                <option value="ateo" @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
                                             @else
-                                            <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
-                                                প্রধান শিক্ষক
-                                            </option>
-                                            <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
-                                                শিক্ষক
-                                            </option>
+                                                <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
+                                                    প্রধান শিক্ষক
+                                                </option>
+                                                <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
+                                                    শিক্ষক
+                                                </option>
                                             @endif
                                         @endif
                                     </select>
