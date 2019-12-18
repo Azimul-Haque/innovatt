@@ -61,10 +61,19 @@
                                         <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
                                             শিক্ষক
                                         </option>
-                                            <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
+                                        <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
 
                                         @elseif(Auth::user()->role=='teo')
-                                            <option value="ateo"  selected>ATEO</option>
+                                            @if($teacher->role == 'ateo')
+                                            <option value="ateo" @if($teacher->role == 'ateo') selected="" @endi>ATEO</option>
+                                            @else
+                                            <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
+                                                প্রধান শিক্ষক
+                                            </option>
+                                            <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
+                                                শিক্ষক
+                                            </option>
+                                            @endif
                                         @endif
                                     </select>
 
