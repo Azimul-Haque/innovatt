@@ -24,10 +24,10 @@
             <div class="col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">ব্যক্তিগত তথ্য হালনাগাদ ফরম (* অর্থ বাধ্যতামূলক)</div>
-                    @if(Auth::user()->role=='admin')
-                        {!! Form::model($teacher, ['route' => ['dashboard.users.update', $teacher->id], 'method' => 'PUT']) !!}
-                    @elseif(Auth::user()->role=='teo')
+                    @if($teacher->role == 'ateo')
                         {!! Form::model($teacher, ['route' => ['dashboard.users.update.ateo', $teacher->id], 'method' => 'PUT']) !!}
+                    @else
+                        {!! Form::model($teacher, ['route' => ['dashboard.users.update', $teacher->id], 'method' => 'PUT']) !!}
                     @endif
                         <div class="panel-body">
                         <div class="row">
@@ -50,8 +50,6 @@
                                 {!! Form::label('role', 'ধরন *') !!}
                                     <select name="role" id="role_dropdown"  onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)" class="form-control" required="">
                                         @if(Auth::user()->role == 'admin')
-
-                                        {{--                                    <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>--}}
                                         <option value="teo" @if($teacher->role == 'teo') selected="" @endif>শিক্ষা অফিসার/
                                             অনুমোদিত কর্তৃপক্ষ
                                         </option>
@@ -62,7 +60,6 @@
                                             শিক্ষক
                                         </option>
                                         <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
-
                                         @elseif(Auth::user()->role=='teo')
                                             @if($teacher->role == 'ateo')
                                                 <option value="ateo" @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
@@ -86,13 +83,13 @@
                         <br/>
 
                         <div class="row">
-                            @if(Auth::user()->role=='admin')
+                            @if($teacher->role == 'ateo')
+                              
+                            @else
                               <div class="col-md-6">
                                 {!! Form::label('device_pin', 'ডিভাইস পিন (মেশিনে এই শিক্ষকের আইডি) *') !!}
                                 {!! Form::number('device_pin', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!}
                               </div>
-                            @elseif(Auth::user()->role == 'teo')
-                              
                             @endif
                             <div class="col-md-6">
                                 {!! Form::label('upazilla_id', 'উপজেলা *') !!}
