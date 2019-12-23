@@ -59,13 +59,13 @@
             <li class="item">
               মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-info btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="#!" class="btn btn-info btn-sm" title="মাসিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
             <li class="item">
               বাৎসরিক রিপোর্ট ({{ bangla(date('Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-warning btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="#!" class="btn btn-warning btn-sm" title="বাৎসরিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
           </ul>
