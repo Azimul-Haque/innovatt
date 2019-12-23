@@ -18,6 +18,7 @@ class CreateUpazillasTable extends Migration
             $table->string('district_bangla');
             $table->string('upazilla');
             $table->string('upazilla_bangla');
+            $table->string('phone')->nullable();
         });
     }
 
