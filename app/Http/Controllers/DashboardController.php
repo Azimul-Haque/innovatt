@@ -782,6 +782,6 @@ class DashboardController extends Controller
        $upazilla->contact = $request->contact;
        $upazilla->save();
        Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!');
-       return $this->index();
+       return redirect()->route('dashboard.index');
     }
 }

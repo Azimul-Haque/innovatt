@@ -7,7 +7,14 @@
 @stop
 
 @section('content_header')
-    <h1>{{ $ateo->name }}</h1>
+    <h1>
+        {{ $ateo->name }}
+        @if(Auth::user()->upazilla->contact != null)
+            (<a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
+                <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
+            </a>)
+        @endif
+    </h1>
 @stop
 
 @section('content')

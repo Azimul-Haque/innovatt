@@ -3,13 +3,25 @@
 @section('title', 'ড্যাশবোর্ড')
 
 @section('css')
-
+    <style>
+        input, label {
+            display: block;
+        }
+    </style>
 @stop
 
 @section('content_header')
     <h1>
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
             {{ Auth::user()->upazilla->upazilla_bangla }}, {{ Auth::user()->upazilla->district_bangla }}
+        @endif
+        @if(Auth::user()->upazilla->contact != null)
+            <div class="pull-right" style="font-size: 0.7em">
+                যোগাযোগ:
+                <a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)">
+                    <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
+                </a>
+            </div>
         @endif
     </h1>
 @stop
@@ -155,6 +167,16 @@
                     </div>
                 </div>
             </a>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                {!! Form::open(['route' => ['dashboard.upazilla.contact', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
+                    <label for="contact">যোগাযোগ নম্বরঃ </label>
+                    <input type="number" id="contact" name="contact" class="form-control"
+                           @if(Auth::user()->upazilla->contact!=null) value="{{Auth::user()->upazilla->contact}}" @endif>
+                    <button type="submit" class="btn btn-primary">দাখিল করুন</button>
+                {!! Form::close() !!}<br/>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">

@@ -58,6 +58,8 @@ Route::get('/upazilla/{id}/school/list', ['as'=>'dashboard.upazillas.schools','u
 Route::get('/upazilla/present/list', ['as'=>'dashboard.upazillas.present','uses'=>'DashboardController@getUpazillaSchoolsTeachersPresentList']);
 Route::get('/upazilla/absent/list', ['as'=>'dashboard.upazillas.absent','uses'=>'DashboardController@getUpazillaSchoolsTeachersAbsentList']);
 Route::get('/upazilla/present/list/{id}', ['as'=>'dashboard.upazillas.present.ateo','uses'=>'DashboardController@getUpazillaSchoolsTeachersPresentListForAteo']);
+Route::get('/upazilla/present/list/{id}', ['as'=>'dashboard.upazillas.present.ateo','uses'=>'DashboardController@getUpazillaSchoolsTeachersPresentListForAteo']);
+Route::get('/upazilla/absent/list/{id}', ['as'=>'dashboard.upazillas.absent.ateo','uses'=>'DashboardController@getUpazillaSchoolsTeachersAbsentListForAteo']);
 Route::post('/upazilla/{id}/contact', ['as'=>'dashboard.upazilla.contact','uses'=>'DashboardController@setUpazillaContact']);
 
 Route::get('/institutes', ['as'=>'dashboard.institutes','uses'=>'DashboardController@getInstitutes']);
