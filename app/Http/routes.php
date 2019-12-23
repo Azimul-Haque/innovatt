@@ -85,6 +85,7 @@ Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','u
 // reports
 Route::get('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyCombinedReport']);
 Route::get('/report/institute/pdf/monthly/{device_id}', ['as'=>'report.institute.monthly','uses'=>'ReportController@getInstituteMonthlyReport']);
+Route::post('/report/institute/pdf/query/{device_id}', ['as'=>'report.institute.query','uses'=>'ReportController@getInstituteQueryReport']);
 Route::get('/report/institute/pdf/yearly/{device_id}', ['as'=>'report.institute.yearly','uses'=>'ReportController@getInstituteYearlyReport']);
 // Route::get('/report/program/top/sheet/product', ['as'=>'report.program.topsheetproduct','uses'=>'ReportController@generateProgramTopSheetProduct']);
 // Route::get('/report/program/top/sheet/savings', ['as'=>'report.program.topsheetsavings','uses'=>'ReportController@generateProgramTopSheetsavings']);
