@@ -6,7 +6,6 @@
   body {
     font-family: 'kalpurush', sans-serif;
   }
-
   table {
       border-collapse: collapse;
       width: 100%;
@@ -62,15 +61,17 @@
         $datearray = [];
         $counter = 0;
         foreach($attendances as $attendance) {
-          $datearray[date('my', strtotime($attendance->timestampdata))]['month'] = $attendance->timestampdata;
+          $found = false;
           foreach($teachers as $teacher) {
             if(($attendance->device_pin == $teacher->device_pin)) {
+                $found = true;
               $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
               $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
               $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
               $datearray[date('my', strtotime($attendance->timestampdata))]['days'][date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
             }
           }
+          if($found)           $datearray[date('my', strtotime($attendance->timestampdata))]['month'] = $attendance->timestampdata;
           $counter++;
         }
       @endphp

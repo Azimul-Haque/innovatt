@@ -6,7 +6,6 @@
   body {
     font-family: 'kalpurush', sans-serif;
   }
-
   table {
       border-collapse: collapse;
       width: 100%;
@@ -59,15 +58,17 @@
         $datearray = [];
         $counter = 0;
         foreach($attendances as $attendance) {
-          $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+          $found = false;
           foreach($teachers as $teacher) {
             if(($attendance->device_pin == $teacher->device_pin)) {
+                $found = true;
               $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
               $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
               $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
             }
           }
-          $counter++;
+          if($found) $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+            $counter++;
         }
       @endphp
       @foreach($datearray as $datesingles)

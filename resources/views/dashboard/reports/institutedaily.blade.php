@@ -6,22 +6,18 @@
         body {
             font-family: 'kalpurush', sans-serif;
         }
-
         table {
             border-collapse: collapse;
             width: 100%;
         }
-
         table, td, th {
             border: 1px solid black;
         }
-
         th, td {
             padding: 4px;
             font-family: 'kalpurush', sans-serif;
             font-size: 13px;
         }
-
         @page {
             header: page-header;
             footer: page-footer;
@@ -30,11 +26,9 @@
             background-repeat: no-repeat;
             background-position: center center;
         }
-
         .bluebackground {
             background: rgba(0, 153, 204, 0.5);
         }
-
         .yellowbackground {
             background: rgba(243, 156, 18, 0.5);
         }
@@ -65,14 +59,12 @@
             $counter = 0;
             foreach($attendances as $attendance) {
               foreach($teachers as $teacher) {
-
                   if(($attendance->device_pin == $teacher->device_pin)) {
                       $datearray[$teacher->id][$counter]['name'] = $teacher->name;
                       $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
                       $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                       $counter++;
                   }
-
               }
             }
         @endphp

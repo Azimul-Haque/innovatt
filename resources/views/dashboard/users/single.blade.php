@@ -3,12 +3,17 @@
 @section('title', 'শিক্ষক তথ্য')
 
 @section('css')
-
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
+  <style>
+    input, label {
+      display: block;
+    }
+  </style>
 @stop
 
 @section('content_header')
     <h1>
-      {{ $teacher->name }}, {{ $teacher->institute->name }}, {{ $teacher->institute->upazilla->upazilla_bangla }} 
+      {{ $teacher->name }}, {{ $teacher->institute->name }}, {{ $teacher->institute->upazilla->upazilla_bangla }}
       @if(Auth::user()->upazilla->contact != null)
           (<a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
               <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
@@ -51,21 +56,48 @@
         <div class="box-body">
           <ul class="products-list product-list-in-box">
             <li class="item">
-              দৈনিক রিপোর্ট ({{ bangla(date('F d, Y')) }})
-              <div class="pull-right">
-                <a href="#!" class="btn btn-success btn-sm" title="কাজ চলছে..."><i class="fa fa-download"></i> ডাউনলোড</a>
+              সময় সীমা ভিত্তিক রিপোর্ট<br>
+              {{--                                <form method="POST" action="{{route('report.institute.query')}}">--}}
+              {!! Form::model($teacher, ['route' => ['report.teacher.query', $teacher->unique_key], 'method' => 'POST']) !!}
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  {{--                                        <label for="query_start_date">শুরু</label>--}}
+                  <input type="text" class="form-control" name="query_start_date"
+                         autocomplete="off"
+                         id='query_start_date' placeholder="শুরু" required>
+                </div>
+                <div class="col-md-6">
+                  {{--                                        <label for="query_end_date">শেষ</label>--}}
+                  <input type="text" class="form-control" name="query_end_date" autocomplete="off"
+                         id='query_end_date' placeholder="শেষ" required>
+                </div>
               </div>
+              <br>
+              <div class="pull-right">
+                <button type="submit"
+                        class="btn btn-primary btn-sm" title="সময় সীমা ভিত্তিক রিপোর্ট
+ ডাউনলোড করুন">
+                  <i
+                          class="fa fa-download"></i> ডাউনলোড
+                </button>
+              </div>
+              {!! Form::close() !!}
+              {{--                                </form>--}}
+
+
             </li>
             <li class="item">
               মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-info btn-sm" title="মাসিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="{{route('report.teacher.monthly', $teacher->unique_key)}}" class="btn btn-info btn-sm" title="মাসিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
             <li class="item">
               বাৎসরিক রিপোর্ট ({{ bangla(date('Y')) }})
               <div class="pull-right">
-                <a href="#!" class="btn btn-warning btn-sm" title="বাৎসরিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
+                <a href="{{route('report.teacher.yearly', $teacher->unique_key)}}" class="btn btn-warning btn-sm" title="াৎসরিক রিপোর্ট ডাউনলোড করুন"><i class="fa fa-download"></i> ডাউনলোড</a>
               </div>
             </li>
           </ul>
@@ -117,3 +149,26 @@
   </div>
   @endif
 @stop
+@section('js')
+  <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+  <script>
+    $("#query_start_date").datepicker({
+      widgetPositioning: {
+        horizontal: 'right',
+        vertical: 'bottom'
+      },
+      format: 'MM dd, yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
+    $("#query_end_date").datepicker({
+      widgetPositioning: {
+        horizontal: 'right',
+        vertical: 'bottom'
+      },
+      format: 'MM dd, yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
+  </script>
+@endsection
