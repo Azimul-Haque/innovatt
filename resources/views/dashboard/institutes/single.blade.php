@@ -3,7 +3,12 @@
 @section('title', 'প্রতিষ্ঠান তথ্য')
 
 @section('css')
-
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
+  <style>
+      input, label {
+          display: block;
+      }
+  </style>
 @stop
 
 @section('content_header')
@@ -61,6 +66,27 @@
           </div>
           <div class="box-body">
             <ul class="products-list product-list-in-box">
+              <li class="item">
+                  সময় সীমা ভিত্তিক রিপোর্ট<br>
+                  {!! Form::model($institute, ['route' => ['report.institute.query', $institute->device_id], 'method' => 'POST']) !!}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="query_start_date"
+                                   id='query_start_date' placeholder="শুরু" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="query_end_date"
+                                   id='query_end_date' placeholder="শেষ" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary btn-sm" title="সময় সীমা ভিত্তিক রিপোর্ট ডাউনলোড করুন">
+                            <i class="fa fa-download"></i> ডাউনলোড
+                        </button>
+                    </div>
+                    {!! Form::close() !!}
+              </li>
               <li class="item">
                 দৈনিক রিপোর্ট ({{ bangla(date('F d, Y')) }})
                 <div class="pull-right">
@@ -135,3 +161,27 @@
     </div>
   @endif
 @stop
+
+@section('js')
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script>
+        $("#query_start_date").datepicker({
+            widgetPositioning: {
+                horizontal: 'right',
+                vertical: 'bottom'
+            },
+            format: 'MM dd, yyyy',
+            todayHighlight: true,
+            autoclose: true,
+        });
+        $("#query_end_date").datepicker({
+            widgetPositioning: {
+                horizontal: 'right',
+                vertical: 'bottom'
+            },
+            format: 'MM dd, yyyy',
+            todayHighlight: true,
+            autoclose: true,
+        });
+    </script>
+@endsection 

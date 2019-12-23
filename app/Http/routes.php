@@ -85,12 +85,14 @@ Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','u
 
 
 // reports
-Route::get('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyCombinedReport']);
+Route::post('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyCombinedReport']);
 Route::get('/report/institute/pdf/monthly/{device_id}', ['as'=>'report.institute.monthly','uses'=>'ReportController@getInstituteMonthlyReport']);
 Route::post('/report/institute/pdf/query/{device_id}', ['as'=>'report.institute.query','uses'=>'ReportController@getInstituteQueryReport']);
 Route::get('/report/institute/pdf/yearly/{device_id}', ['as'=>'report.institute.yearly','uses'=>'ReportController@getInstituteYearlyReport']);
-// Route::get('/report/program/top/sheet/product', ['as'=>'report.program.topsheetproduct','uses'=>'ReportController@generateProgramTopSheetProduct']);
-// Route::get('/report/program/top/sheet/savings', ['as'=>'report.program.topsheetsavings','uses'=>'ReportController@generateProgramTopSheetsavings']);
-// Route::get('/report/program/transaction/summary', ['as'=>'report.program.transactionsummary','uses'=>'ReportController@generateTransactionSummary']);
+
+Route::get('/report/teacher/pdf/monthly/{unique_key}', ['as'=>'report.teacher.monthly','uses'=>'ReportController@getTeacherMonthlyReport']);
+Route::get('/report/teacher/pdf/yearly/{unique_key}', ['as'=>'report.teacher.yearly','uses'=>'ReportController@getTeacherYearlyReport']);
+Route::post('/report/teacher/pdf/query/{unique_key}', ['as'=>'report.teacher.query','uses'=>'ReportController@getTeacherQueryReport']);
+
 // dashboard routes
 // dashboard routes
