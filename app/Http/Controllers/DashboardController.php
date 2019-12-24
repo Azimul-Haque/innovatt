@@ -659,14 +659,11 @@ class DashboardController extends Controller
 
     public function getSingleInstitute($device_id)
     {
-//        dd('asd');
-
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
             ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))  // teachers der jonno daily data
             ->orderBy('timestampdata', 'asc')
             ->get();
-            dd($attendances);
         $teachers = User::where('institute_id', $institute->id)->get();
         $absents = [];
         foreach ($teachers as $queryTeacher){
