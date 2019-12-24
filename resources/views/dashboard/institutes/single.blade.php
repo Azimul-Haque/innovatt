@@ -169,12 +169,11 @@
                                 if(($attendance->device_pin == $teacher->device_pin)) {
                                   $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                                 } else{
-                                  $datearray[$teacher->id][$counter]['timestampdata'] = 'absent';
+                                  // $datearray[$teacher->id][$counter]['timestampdata'] = 'absent';
                                 }
                                 $counter++;
                               }
                             }
-                            dd($datearray);
                         @endphp
                         @foreach($datearray as $teacher)
                             <tr>
