@@ -82,30 +82,22 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        {{--                                        <label for="query_start_date">শুরু</label>--}}
                                         <input type="text" class="form-control" name="query_start_date"
                                                autocomplete="off"
                                                id='query_start_date' placeholder="শুরু" required>
                                     </div>
                                     <div class="col-md-6">
-                                        {{--                                        <label for="query_end_date">শেষ</label>--}}
                                         <input type="text" class="form-control" name="query_end_date" autocomplete="off"
                                                id='query_end_date' placeholder="শেষ" required>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="pull-right">
-                                    <button type="submit"
-                                            class="btn btn-primary btn-sm" title="সময় সীমা ভিত্তিক রিপোর্ট
-">
-                                        <i
-                                                class="fa fa-download"></i> ডাউনলোড
+                                    <button type="submit" class="btn btn-primary btn-sm" title="সময় সীমা ভিত্তিক রিপোর্ট">
+                                        <i class="fa fa-download"></i> ডাউনলোড
                                     </button>
                                 </div>
                                 {!! Form::close() !!}
-                                {{--                                </form>--}}
-
-
                             </li>
 
 

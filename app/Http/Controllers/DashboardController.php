@@ -666,6 +666,7 @@ class DashboardController extends Controller
             ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))  // teachers der jonno daily data
             ->orderBy('timestampdata', 'asc')
             ->get();
+            dd($attendances);
         $teachers = User::where('institute_id', $institute->id)->get();
         $absents = [];
         foreach ($teachers as $queryTeacher){
