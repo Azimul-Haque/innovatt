@@ -164,9 +164,9 @@
                             $counter = 0;
                             foreach($attendances as $attendance) {
                               foreach($teachers as $teacher) {
-                                $datearray[$teacher->id][$counter]['name'] = $teacher->name;
-                                $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
                                 if(($attendance->device_pin == $teacher->device_pin)) {
+                                  $datearray[$teacher->id][$counter]['name'] = $teacher->name;
+                                  $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
                                   $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                                 } else{
                                   // $datearray[$teacher->id][$counter]['timestampdata'] = 'absent';
