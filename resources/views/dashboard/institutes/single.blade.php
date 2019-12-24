@@ -174,6 +174,7 @@
                                 $counter++;
                               }
                             }
+                            dd($datearray);
                         @endphp
                         @foreach($datearray as $teacher)
                             <tr>
