@@ -33,8 +33,8 @@
                             <th>নাম</th>
                             <th>উপজেলা</th>
                             <th>ডিভাইস আইডি (SN)</th>
-                            <th>শিক্ষক/ অফিস সহকারি সংখ্যা</th>
-                            <th>কার্যক্রম</th>
+                            <th>মোট কর্মরত</th>
+                            <th width="17%">কার্যক্রম</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,10 +51,41 @@
                                 <td>
                                     <a href="{{ route('dashboard.institute.single', $institute->device_id) }}"
                                        class="btn btn-info btn-sm" title="প্রতিষ্ঠান বৃত্তান্ত দেখুন"><i
-                                                class="fa fa-eye"></i> বিস্তারিত</a>
+                                                class="fa fa-eye"></i></a>
                                     <a href="{{ route('dashboard.institutes.edit', $institute->id) }}"
                                        class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i
-                                                class="fa fa-pencil"></i> সম্পাদনা</a>
+                                                class="fa fa-pencil"></i></a>
+                                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstituteModal" data-backdrop="static" title="প্রতিষ্ঠান ডিলেট করুন">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <!-- Delete Modal -->
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteInstituteModal" role="dialog">
+                                      <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                          <div class="modal-header modal-header-danger">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> প্রতিষ্ঠান ডিলেট</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            আপনি কি নিশ্চিতভাবে এই প্রতিষ্ঠানটিকে (<b>{{ $institute->name }}</b>) মুছে দিতে চান?<br/>
+                                            <small>* সকল শিক্ষক/ অফিস সহকারি এবং তথ্য মুছে যাবে!</small>
+                                          </div>
+                                          <div class="modal-footer">
+                                            {{-- @if(!($totalloanoutstanding > 0) && !($totalsavingsbalance > 0))
+                                              {!! Form::model($member, ['route' => ['dashboard.member.close', $member->id], 'method' => 'PUT', 'class' => 'form-default']) !!}
+                                                  {!! Form::submit('Submit', array('class' => 'btn btn-danger')) !!}
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                              {!! Form::close() !!}
+                                            @endif --}}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- Delete Modal -->
+                                    <!-- Delete Modal -->
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
