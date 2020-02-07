@@ -3,7 +3,6 @@
 @section('title', 'তথ্য হালনাগাদ')
 
 @section('css')
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
     <style>
         input, label {
@@ -151,7 +150,7 @@
 
                 </div>
             </div>
-            @if($teacher->role=='teacher' || $teacher->role=='headmaster')
+            @if($teacher->role=='teacher' || $teacher->role=='headmaster' || $teacher->role=='officeassistant')
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">ছুটির বর্ণনা</div>
@@ -166,7 +165,7 @@
                             <br>
                             <div class="col-md-6">
                                 <label for="leave_start_date">শুরু</label>
-                                <input  type="text" class="form-control" name="leave_start_date" id='leave_start_date' placeholder="F d, Y" @if($teacher->leave_start_date!=null)value="{{$teacher->leave_start_date}}" @endif>
+                                <input  type="text" class="form-control" name="leave_start_date" id='leave_start_date' placeholder="F d, Y" @if($teacher->leave_start_date!=null) value="{{ date('F d, Y', strtotime($teacher->leave_start_date)) }}" @endif readonly="">
                                 {{--                                {!! Form::label('leave_end_date', 'শেষ') !!}--}}
 {{--                                {!! Form::label('leave_start_date', 'শুরু') !!}--}}
 {{--                                {!! Form::date('leave_start_date', null, array('class'=>'form-control')) !!}--}}
@@ -174,7 +173,7 @@
                             <div class="col-md-6">
                                 <label for="leave_end_date">শেষ</label>
 {{--                                {!! Form::label('leave_end_date', 'শেষ') !!}--}}
-                                <input  type="text" class="form-control" name="leave_end_date" id='leave_end_date' placeholder="F d, Y" @if($teacher->leave_end_date!=null)value="{{$teacher->leave_end_date}}" @endif>
+                                <input  type="text" class="form-control" name="leave_end_date" id='leave_end_date' placeholder="F d, Y" @if($teacher->leave_end_date!=null) value="{{ date('F d, Y', strtotime($teacher->leave_end_date)) }}" @endif readonly="">
                             </div>
                             </div>
                         </div>
@@ -224,6 +223,4 @@
             autoclose: true,
         });
     </script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
 @endsection

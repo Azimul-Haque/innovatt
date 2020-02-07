@@ -74,6 +74,31 @@
                     <div class="box-body">
                         <ul class="products-list product-list-in-box">
                             <li class="item">
+                                দৈনিক রিপোর্ট
+                                {!! Form::model($institute, ['route' => ['report.institute.daily', $institute->device_id], 'method' => 'POST']) !!}
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{--                                        <label for="query_start_date">শুরু</label>--}}
+                                        <input type="text" class="form-control" name="query_date" autocomplete="off"
+                                               id='query_date' placeholder="দিন" required>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="pull-right">
+                                            <button type="submit"
+                                                    class="btn btn-success btn-sm"
+                                                    title="দিন ভিত্তিক রিপোর্ট ডাউনলোড করুন">
+                                                <i
+                                                        class="fa fa-download"></i> ডাউনলোড
+                                            </button>
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item">
                                 সময় সীমা ভিত্তিক রিপোর্ট
                                 <br>
                                 {{--                                <form method="POST" action="{{route('report.institute.query')}}">--}}
@@ -98,33 +123,6 @@
                                     </button>
                                 </div>
                                 {!! Form::close() !!}
-                            </li>
-
-
-                            <li class="item">
-                                দৈনিক রিপোর্ট
-                                {!! Form::model($institute, ['route' => ['report.institute.daily', $institute->device_id], 'method' => 'POST']) !!}
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{--                                        <label for="query_start_date">শুরু</label>--}}
-                                        <input type="text" class="form-control" name="query_date" autocomplete="off"
-                                               id='query_date' placeholder="দিন" required>
-                                    </div>
-                                    <div class="col-md-6">
-
-                                        <div class="pull-right">
-                                            <button type="submit"
-                                                    class="btn btn-success btn-sm"
-                                                    title="দিন ভিত্তিক রিপোর্ট ডাউনলোড করুন">
-                                                <i
-                                                        class="fa fa-download"></i> ডাউনলোড
-                                            </button>
-                                        </div>
-                                        {!! Form::close() !!}
-                                    </div>
-                                </div>
                             </li>
                             <li class="item">
                                 মাসিক রিপোর্ট ({{ bangla(date('F, Y')) }})
