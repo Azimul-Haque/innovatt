@@ -178,11 +178,11 @@
                 {!! Form::open(['route' => ['dashboard.upazilla.update', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <label for="contact">প্রতিষ্ঠানে প্রবেশের সময়</label>
-                        <input type="text" id="entrance" name="entrance" class="form-control" @if(Auth::user()->upazilla->contact!=null) value="{{ date('h:i A', strtotime(Auth::user()->upazilla->entrance)) }}" @endif required="">
+                        <input type="text" id="entrance" name="entrance" class="form-control" value="{{ date('h:i A', strtotime(Auth::user()->upazilla->entrance)) }}" required="">
                     </div>
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <label for="contact">প্রতিষ্ঠানে ত্যাগের সময়</label>
-                        <input type="text" id="departure" name="departure" class="form-control" @if(Auth::user()->upazilla->contact!=null) value="{{ date('h:i A', strtotime(Auth::user()->upazilla->departure)) }}" @endif required="">
+                        <input type="text" id="departure" name="departure" class="form-control" value="{{ date('h:i A', strtotime(Auth::user()->upazilla->departure)) }}" required="">
                     </div>
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <label for="contact">যোগাযোগ নম্বর</label>
