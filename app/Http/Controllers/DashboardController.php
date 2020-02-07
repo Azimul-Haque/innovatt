@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
         if (Auth::user()->role == 'headmaster') {
             return redirect()->route('dashboard.institute.single', Auth::user()->institute->device_id);
-        } elseif (Auth::user()->role == 'teacher') {
+        } elseif (Auth::user()->role == 'teacher' || Auth::user()->role == 'officeassistant') {
             return redirect()->route('dashboard.user.single', Auth::user()->id);
         } else {
             $queryTeachers = null;
