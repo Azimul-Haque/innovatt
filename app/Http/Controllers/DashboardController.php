@@ -649,12 +649,22 @@ class DashboardController extends Controller
             'device_id' => 'required|unique:institutes,device_id,' . $institute->id,
             'upazilla_id' => 'required'
         ]);
-
+        
+        $old_device_id = $institute->device_id;
+        
         $institute->name = $request->name;
         $institute->serial = $request->serial;
         $institute->device_id = $request->device_id;
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();
+
+        // update the attendances
+        $attendances = Attendance::where('device_id', $old_device_id)->get();
+        foreach ($attendances as $attendance) {
+            $attendance->device_id = $request->device_id;
+            $attendance->save();
+        }
+        // update the attendances
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
         return redirect()->route('dashboard.institutes');
