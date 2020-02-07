@@ -157,12 +157,6 @@
                     <div class="panel-heading">ছুটির বর্ণনা</div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                {!! Form::label('on_leave', 'ছুটি *') !!}
-                                <input name="on_leave" id="on_leave"  class="form-control" type="checkbox" disabled="disabled" {{($teacher->leave_start_date != null && $teacher->leave_end_date != null) ? 'checked' : ''}} data-toggle="toggle" data-size="small" data-on="ছুটি" data-off="কর্মরত" >
-                            </div>
-                        </div>
-                        <div class="row">
                             <br>
                             <div class="col-md-6">
                                 <label for="leave_start_date">শুরু</label>
