@@ -105,12 +105,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <big>শিক্ষক তালিকা</big>
+                <big>শিক্ষক/ অফিস সহকারি তালিকা</big>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>শিক্ষক</th>
+                            <th>শিক্ষক/ অফিস সহকারি</th>
                             <th>পদবি</th>
                             <th>প্রতিষ্ঠানের নাম</th>
                             <th>উপজেলা</th>

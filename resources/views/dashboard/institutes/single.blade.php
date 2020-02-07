@@ -22,7 +22,7 @@
         <div class="pull-right">
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
                 <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary"
-                   title="নতুন শিক্ষক যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক যোগ</a>
+                   title="নতুন শিক্ষক/ অফিস সহকারি যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক/ অফিস সহকারি যোগ</a>
             @endif
             <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i
                         class="fa fa-refresh"></i> রিফ্রেশ
@@ -35,12 +35,12 @@
     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
         <div class="row">
             <div class="col-md-4">
-                <big>শিক্ষক তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>
+                <big>শিক্ষক/ অফিস সহকারি তালিকা (মোটঃ {{ bangla($institute->users->count()) }} জন)</big>
                 <div class="table-responsive">
                     <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th>শিক্ষক</th>
+                            <th>শিক্ষক/ অফিস সহকারি</th>
                             <th>পদবি</th>
                             <th width="20%">কার্যক্রম</th>
                         </tr>
@@ -152,7 +152,7 @@
                     <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th>শিক্ষক</th>
+                            <th>শিক্ষক/ অফিস সহকারি</th>
                             <th>প্রবেশ</th>
                             <th>প্রস্থান</th>
                             <th>অবস্থানকাল</th>
