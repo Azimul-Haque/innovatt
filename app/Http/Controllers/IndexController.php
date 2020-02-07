@@ -40,56 +40,6 @@ class IndexController extends Controller
         return view('index.contact');
     }
 
-    // public function getExpertise($slug)
-    // {
-    //     $expertise = Expertise::where('slug', $slug)->first();
-    //     return view('index.singleexpertise')->withExpertise($expertise);
-    // }
-
-    // public function getDirectors()
-    // {
-    //     $people = User::where('type', 'Director')
-    //                      ->where('activation_status', 1)->get();
-    //     return view('index.people')->withPeople($people);
-    // }
-
-    // public function getAdvisors()
-    // {
-    //     $people = User::where('type', 'Advisor')
-    //                      ->where('activation_status', 1)->get();
-    //     return view('index.people')->withPeople($people);
-    // }
-
-    // public function getEmployees()
-    // {
-    //     $people = User::where('type', 'Employee')
-    //                      ->where('activation_status', 1)->get();
-    //     return view('index.people')->withPeople($people);
-    // }
-
-    // public function getMembers()
-    // {
-    //     $people = User::where('type', 'Member')
-    //                      ->where('activation_status', 1)->get();
-    //     return view('index.people')->withPeople($people);
-    // }
-
-    // public function getProjects()
-    // {
-    //     $projects = Project::orderBy('id', 'desc')->get();
-    //     return view('index.projects')->withProjects($projects);
-    // }
-
-    // public function getProject($slug)
-    // {
-    //     $project = Project::where('slug', $slug)->first();
-    //     $randomprojects = Project::inRandomOrder()->get()->take(7);
-    //     return view('index.singleproject')
-    //                         ->withProject($project)
-    //                         ->withProjects($randomprojects);
-    // }
-
-
     public function storeFormMessage(Request $request)
     {
         // $this->validate($request,array(
@@ -121,7 +71,7 @@ class IndexController extends Controller
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
         Artisan::call('key:generate');
-        // Artisan::call('route:cache');
+        Artisan::call('route:cache');
         Artisan::call('config:cache');
         Session::flush();
         echo 'Config and Route Cached. All Cache Cleared';
