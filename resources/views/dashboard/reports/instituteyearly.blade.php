@@ -52,7 +52,7 @@
   <div class="" style="padding-top: 0px;">
     <table class="">
       <tr>
-        <th class="bluebackground" width="30%">শিক্ষক</th>
+        <th class="bluebackground" width="30%">শিক্ষক/ অফিস সহকারি</th>
         <th class="bluebackground" width="27%">প্রবেশ</th>
         <th class="bluebackground" width="27%">প্রস্থান</th>
         <th class="bluebackground">অবস্থানকাল</th>

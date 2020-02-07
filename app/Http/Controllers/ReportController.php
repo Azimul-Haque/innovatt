@@ -90,12 +90,12 @@ class ReportController extends Controller
     {
         $start_date = Carbon::createFromFormat('F d, Y', $request->query_start_date);
         $end_date = Carbon::createFromFormat('F d, Y', $request->query_end_date);
-        if($start_date->gt($end_date))
+//         if($start_date->gt($end_date))
 //            Session::flash('warning', 'সথিকভাবে দিন প্রবেশ করুন!');
-        return redirect()->route('dashboard.institute.single', $device_id)->with('warning', 'সথিকভাবে দিন প্রবেশ করুন!');
-        elseif($start_date->eq($end_date))
-            return $this->getInstituteDailyCombinedReport($device_id);
-//        dd($device_id);
+//         return redirect()->route('dashboard.institute.single', $device_id)->with('warning', 'সথিকভাবে দিন প্রবেশ করুন!');
+//         elseif($start_date->eq($end_date))
+//             return $this->getInstituteDailyCombinedReport($device_id);
+//         dd($device_id);
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
             ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), ">=", $start_date)
