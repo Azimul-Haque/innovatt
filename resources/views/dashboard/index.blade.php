@@ -169,15 +169,15 @@
             </a>
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                {!! Form::open(['route' => ['dashboard.upazilla.contact', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
+            {!! Form::open(['route' => ['dashboard.upazilla.contact', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
+            <div class="col-md-3 col-sm-4 col-xs-12">
                     <label for="contact">যোগাযোগ নম্বরঃ </label>
                     <input type="number" id="contact" name="contact" class="form-control"
                            @if(Auth::user()->upazilla->contact!=null) value="{{Auth::user()->upazilla->contact}}" @endif>
                     <button type="submit" class="btn btn-primary">দাখিল করুন</button>
-                {!! Form::close() !!}<br/>
-            </div>
-        </div>
+            </div><br/>
+            {!! Form::close() !!}
+        </div><br/>
         <div class="row">
             <div class="col-md-6">
                 <div class="box box-success" style="position: relative; left: 0px; top: 0px;">

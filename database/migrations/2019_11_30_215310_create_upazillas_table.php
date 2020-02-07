@@ -18,7 +18,9 @@ class CreateUpazillasTable extends Migration
             $table->string('district_bangla');
             $table->string('upazilla');
             $table->string('upazilla_bangla');
-            $table->string('phone')->nullable();
+            $table->string('contact')->nullable();
+            $table->time('entrance')->default('09:00:00');
+            $table->time('entrance')->default('16:30:00');
         });
     }
 
