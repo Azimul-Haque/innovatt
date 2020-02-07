@@ -42,7 +42,7 @@
 <p align="center" style="padding-top: -20px;">
     <span style="font-size: 20px;">
       {{ $institute->name }}<br/>
-      দৈনিক উপস্থিতি রিপোর্ট ({{ bangla(date('F d, Y')) }})
+      দৈনিক উপস্থিতি রিপোর্ট ({{ bangla(date('F d, Y', strtotime($querydate))) }})
     </span><br/>
 </p>
 

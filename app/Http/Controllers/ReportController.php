@@ -65,7 +65,7 @@ class ReportController extends Controller
         // $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
         $absents = [];
         foreach ($teachers as $teacher){
-            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)
                                     ->where('device_id', $teacher->institute->device_id)
                                     ->where('device_pin', $teacher->device_pin)
                                     ->first();
@@ -74,7 +74,7 @@ class ReportController extends Controller
             }
         }
         // dd($absents);
-        $pdf = PDF::loadView('dashboard.reports.combined_report', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absents]);
+        $pdf = PDF::loadView('dashboard.reports.combined_report', ['querydate' => $date, 'institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absents]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
         return $pdf->stream($fileName); // stream
     }
