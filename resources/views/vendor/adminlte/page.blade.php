@@ -212,10 +212,10 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
           <div class="pull-right hidden-xs">
-            <b>Version</b> 0.0.01
+            <b>Version</b> 2.0.0
           </div>
-          <strong>Copyright © {{ date('Y') }}</strong> 
-          All rights reserved.
+          <strong>Copyright &copy; {{ date('Y') }}</strong> 
+          All rights reserved by <a href="https://loencebd.com/">Loence Bangladesh.</a>
         </footer>
 
     </div>
