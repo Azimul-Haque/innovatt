@@ -22,11 +22,11 @@ class ReportController extends Controller
         $teachersPresent = [];
         $queryTeachers = $totalTeachers;
         foreach ($queryTeachers as $teacher) {
-            if($teacher->leave_start_date!=null && $teacher->leave_end_date!=null) continue;
-            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
-                ->where('device_id', $teacher->institute->device_id)
-                ->where('device_pin', $teacher->device_pin)
-                ->first();
+            if($teacher->leave_start_date != null && $teacher->leave_end_date!=null) continue;
+                $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                        ->where('device_id', $teacher->institute->device_id)
+                                        ->where('device_pin', $teacher->device_pin)
+                                        ->first();
             if (!empty($attendance)) {
                 $teachersPresent[] = $teacher;
             }
@@ -46,24 +46,26 @@ class ReportController extends Controller
         $fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
-    
+
     public function getInstituteDailyCombinedReport(Request $request, $device_id)
     {
         $date = Carbon::createFromFormat('F d, Y', $request->query_date);
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
-            ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)  // teachers der jonno daily data
-            ->orderBy('timestampdata', 'asc')
-            ->get();
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)  // teachers der jonno daily data
+                                 ->orderBy('timestampdata', 'asc')
+                                 ->get();
         $teachers = $institute->users;
 //        $allTeachers = $this->getAllTeachers();
         $teachersPresent = $this->getPresentTeachers($teachers);
+        dd($teachersPresent);
         $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
 //        dd($absentTeachers);
         $pdf = PDF::loadView('dashboard.reports.combined_report', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absentTeachers]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
+
     public function getInstituteMonthlyReport($device_id) 
     {
         $institute = Institute::where('device_id', $device_id)->first();
@@ -108,6 +110,7 @@ class ReportController extends Controller
 //        dd($teachers);
 //        $allTeachers = $this->getAllTeachers();
         $teachersPresent = $this->getPresentTeachers($teachers);
+
         $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
 //        dd(bangla(date('F d, Y', strtotime($request->query_start_date))));
         $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absentTeachers, 'start_date'=>$request->query_start_date, 'end_date'=>$request->query_end_date]);
