@@ -42,7 +42,7 @@
                         <tr>
                             <th>শিক্ষক/ অফিস সহকারি</th>
                             <th>পদবি</th>
-                            <th width="20%">কার্যক্রম</th>
+                            <th width="35%">কার্যক্রম</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -60,9 +60,38 @@
                                     <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
                                        class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
-                                       class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
-                                    </a>
+                                    {{-- <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
+                                       class="btn btn-success btn-sm" title="ছুটি প্রদান"><i class="fa fa-sign-out"></i>
+                                    </a> --}}
+                                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstituteModal{{ $institute->id }}" data-backdrop="static" title="শিক্ষক/ অফিস সহকারি ডিলেট করুন">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <!-- Delete Modal -->
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteInstituteModal{{ $institute->id }}" role="dialog">
+                                      <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                          <div class="modal-header modal-header-danger">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> শিক্ষক/ অফিস সহকারি ডিলেট</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            আপনি কি নিশ্চিতভাবে এই শিক্ষক/ অফিস সহকারিটিকে (<b>{{ $institute->name }}</b>) মুছে দিতে চান?<br/>
+                                            <small>* সকল শিক্ষক/ অফিস সহকারি এবং তথ্য মুছে যাবে!</small>
+                                          </div>
+                                          <div class="modal-footer">
+                                            {!! Form::model($institute, ['route' => ['dashboard.institutes.delete', $institute->id], 'method' => 'DELETE', 'class' => 'form-default']) !!}
+                                                {!! Form::submit('ডিলেট', array('class' => 'btn btn-danger')) !!}
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ফিরে যান</button>
+                                            {!! Form::close() !!}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- Delete Modal -->
+                                    <!-- Delete Modal -->
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
