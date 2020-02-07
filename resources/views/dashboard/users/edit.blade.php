@@ -73,6 +73,9 @@
                                                 <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
                                                     শিক্ষক
                                                 </option>
+                                                <option value="officeassistant" @if($teacher->role == 'officeassistant') selected="" @endif>
+                                                    অফিস সহকারি
+                                                </option>
                                             @endif
                                         @endif
                                     </select>
