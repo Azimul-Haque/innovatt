@@ -64,12 +64,12 @@
                                        class="btn btn-success btn-sm" title="ছুটি প্রদান"><i class="fa fa-sign-out"></i>
                                     </a> --}}
                                     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstituteModal{{ $institute->id }}" data-backdrop="static" title="শিক্ষক/ অফিস সহকারি ডিলেট করুন">
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteTeacherModal{{ $teacher->id }}" data-backdrop="static" title="শিক্ষক/ অফিস সহকারি ডিলেট করুন">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- Delete Modal -->
                                     <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteInstituteModal{{ $institute->id }}" role="dialog">
+                                    <div class="modal fade" id="deleteTeacherModal{{ $teacher->id }}" role="dialog">
                                       <div class="modal-dialog modal-md">
                                         <div class="modal-content">
                                           <div class="modal-header modal-header-danger">
@@ -77,11 +77,11 @@
                                             <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> শিক্ষক/ অফিস সহকারি ডিলেট</h4>
                                           </div>
                                           <div class="modal-body">
-                                            আপনি কি নিশ্চিতভাবে এই শিক্ষক/ অফিস সহকারিটিকে (<b>{{ $institute->name }}</b>) মুছে দিতে চান?<br/>
-                                            <small>* সকল শিক্ষক/ অফিস সহকারি এবং তথ্য মুছে যাবে!</small>
+                                            আপনি কি নিশ্চিতভাবে এই শিক্ষক/ অফিস সহকারিটিকে (<b>{{ $teacher->name }}</b>) মুছে দিতে চান?<br/>
+                                            <small>* এ সংক্রান্ত সকল তথ্য মুছে যাবে!</small>
                                           </div>
                                           <div class="modal-footer">
-                                            {!! Form::model($institute, ['route' => ['dashboard.institutes.delete', $institute->id], 'method' => 'DELETE', 'class' => 'form-default']) !!}
+                                            {!! Form::model($teacher, ['route' => ['dashboard.user.delete', $teacher->id], 'method' => 'DELETE', 'class' => 'form-default']) !!}
                                                 {!! Form::submit('ডিলেট', array('class' => 'btn btn-danger')) !!}
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">ফিরে যান</button>
                                             {!! Form::close() !!}
@@ -100,7 +100,7 @@
                 </div>
                 <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><i class="fa fa-pie-chart"></i> প্রতিষ্ঠানের রিপোর্ট</h3>
+                        <h3 class="box-title"><i class="fa fa-pie-chart"></i> প্রতিষ্ঠানের রিপোর্ট <small><b>(ডিভাইস আইডি SN: {{ $institute->device_id }})</b></small></h3>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <div class="box-body">

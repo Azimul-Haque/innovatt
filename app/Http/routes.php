@@ -51,6 +51,7 @@ Route::get('/user/{id}/edit', ['as'=>'dashboard.users.edit','uses'=>'DashboardCo
 Route::put('/user/{id}/update', ['as'=>'dashboard.users.update','uses'=>'DashboardController@updateUser']);
 Route::put('/user/{id}/update/ateo', ['as'=>'dashboard.users.update.ateo','uses'=>'DashboardController@updateAteo']);
 Route::get('/user/{id}', ['as'=>'dashboard.user.single','uses'=>'DashboardController@getSingleUser']);
+Route::delete('/user/{id}/delete', ['as'=>'dashboard.user.delete','uses'=>'DashboardController@deleteUser']);
 
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
 Route::get('/upazillas/ateo/{id}', ['as'=>'dashboard.upazillas.ateo','uses'=>'DashboardController@getAteo']);

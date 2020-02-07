@@ -21,7 +21,7 @@ class DashboardController extends Controller
         parent::__construct();
         $this->middleware('auth');
         $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList',
- 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact');
+ 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact');
     }
 
     public function index()
@@ -356,6 +356,15 @@ class DashboardController extends Controller
         }
     }
 
+    public function deleteUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        Session::flash('success', 'সফলভাবে ডিলেট করা হয়েছে!');
+        return redirect()->back();
+    }
+
 
     public function updateAteo(Request $request, $id)
     {
@@ -660,7 +669,7 @@ class DashboardController extends Controller
         }
         $institute->delete();
 
-        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        Session::flash('success', 'সফলভাবে ডিলেট করা হয়েছে!');
         return redirect()->route('dashboard.institutes');
     }
 
