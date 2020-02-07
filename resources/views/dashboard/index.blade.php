@@ -3,6 +3,7 @@
 @section('title', 'ড্যাশবোর্ড')
 
 @section('css')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
     <style>
         input, label {
             display: block;
@@ -168,15 +169,31 @@
                 </div>
             </a>
         </div>
-        <div class="row">
-            {!! Form::open(['route' => ['dashboard.upazilla.contact', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                    <label for="contact">যোগাযোগ নম্বরঃ </label>
-                    <input type="number" id="contact" name="contact" class="form-control"
-                           @if(Auth::user()->upazilla->contact!=null) value="{{Auth::user()->upazilla->contact}}" @endif>
-                    <button type="submit" class="btn btn-primary">দাখিল করুন</button>
-            </div><br/>
-            {!! Form::close() !!}
+        <div class="box box-info" style="position: relative; left: 0px; top: 0px;">
+            <div class="box-header ui-sortable-handle" style="">
+                <i class="fa fa-university"></i>
+                <h3 class="box-title">উপজেলা তথ্য</h3>
+            </div>
+            <div class="box-body">
+                {!! Form::open(['route' => ['dashboard.upazilla.update', Auth::user()->upazilla->id], 'method' => 'POST', 'class' => 'form-inline']) !!}
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <label for="contact">প্রতিষ্ঠানে প্রবেশের সময়</label>
+                        <input type="text" id="entrance" name="entrance" class="form-control" @if(Auth::user()->upazilla->contact!=null) value="{{ date('h:i A', strtotime(Auth::user()->upazilla->entrance)) }}" @endif required="">
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <label for="contact">প্রতিষ্ঠানে ত্যাগের সময়</label>
+                        <input type="text" id="departure" name="departure" class="form-control" @if(Auth::user()->upazilla->contact!=null) value="{{ date('h:i A', strtotime(Auth::user()->upazilla->departure)) }}" @endif required="">
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <label for="contact">যোগাযোগ নম্বর</label>
+                        <input type="number" id="contact" name="contact" class="form-control" @if(Auth::user()->upazilla->contact != null) value="{{ Auth::user()->upazilla->contact }}" @endif required="">
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <label for="contact" style="color: #ffffff;">.</label>
+                        <button type="submit" class="btn btn-primary btn-block">দাখিল করুন</button>
+                    </div>
+                {!! Form::close() !!}
+            </div>
         </div><br/>
         <div class="row">
             <div class="col-md-6">
@@ -216,9 +233,17 @@
 @stop
 
 @section('js')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-
+    <script>
+        $("#entrance").datetimepicker({
+            format: 'LT',
+        });
+        $("#departure").datetimepicker({
+            format: 'LT',
+        });
+    </script>
 
     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
         <script type="text/javascript">
@@ -297,5 +322,4 @@
         </script>
 
     @endif
-
-@stop
+@endsection

@@ -801,10 +801,20 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.personal.profile');
     }
 
-    public function updateUpazilla(Request $request, $id){
-       $upazilla = Upazilla::find($id);
-       $upazilla->contact = $request->contact;
-       $upazilla->save();
+    public function updateUpazilla(Request $request, $id) 
+    {
+        $this->validate($request, [
+            'entrance'   => 'required',
+            'departure'   => 'required',
+            'contact'    => 'required'
+        ]);
+        
+        $upazilla = Upazilla::find($id);
+        $upazilla->entrance = date('H:i:s', strtotime($request->entrance));
+        $upazilla->departure = date('H:i:s', strtotime($request->departure));
+        $upazilla->contact = $request->contact;
+        $upazilla->save();
+
        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
        return redirect()->route('dashboard.index');
     }
