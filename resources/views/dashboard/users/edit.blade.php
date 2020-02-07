@@ -3,6 +3,7 @@
 @section('title', 'তথ্য হালনাগাদ')
 
 @section('css')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
     <style>
         input, label {
@@ -223,4 +224,6 @@
             autoclose: true,
         });
     </script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 @endsection
