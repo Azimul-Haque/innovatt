@@ -801,7 +801,7 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.personal.profile');
     }
 
-    public function setUpazillaContact(Request $request, $id){
+    public function updateUpazilla(Request $request, $id){
        $upazilla = Upazilla::find($id);
        $upazilla->contact = $request->contact;
        $upazilla->save();
