@@ -56,12 +56,12 @@
                                        class="btn btn-success btn-sm" title="প্রতিষ্ঠান সম্পাদনা করুন"><i
                                                 class="fa fa-pencil"></i></a>
                                     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstituteModal" data-backdrop="static" title="প্রতিষ্ঠান ডিলেট করুন">
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstituteModal{{ $institute->id }}" data-backdrop="static" title="প্রতিষ্ঠান ডিলেট করুন">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- Delete Modal -->
                                     <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteInstituteModal" role="dialog">
+                                    <div class="modal fade" id="deleteInstituteModal{{ $institute->id }}" role="dialog">
                                       <div class="modal-dialog modal-md">
                                         <div class="modal-content">
                                           <div class="modal-header modal-header-danger">
@@ -73,12 +73,10 @@
                                             <small>* সকল শিক্ষক/ অফিস সহকারি এবং তথ্য মুছে যাবে!</small>
                                           </div>
                                           <div class="modal-footer">
-                                            {{-- @if(!($totalloanoutstanding > 0) && !($totalsavingsbalance > 0))
-                                              {!! Form::model($member, ['route' => ['dashboard.member.close', $member->id], 'method' => 'PUT', 'class' => 'form-default']) !!}
-                                                  {!! Form::submit('Submit', array('class' => 'btn btn-danger')) !!}
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                              {!! Form::close() !!}
-                                            @endif --}}
+                                            {!! Form::model($institute, ['route' => ['dashboard.institutes.delete', $institute->id], 'method' => 'DELETE', 'class' => 'form-default']) !!}
+                                                {!! Form::submit('ডিলেট', array('class' => 'btn btn-danger')) !!}
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ফিরে যান</button>
+                                            {!! Form::close() !!}
                                           </div>
                                         </div>
                                       </div>

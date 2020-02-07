@@ -74,6 +74,7 @@ Route::get('/institutes/create', ['as'=>'dashboard.institutes.create','uses'=>'D
 Route::post('/institutes/store', ['as'=>'dashboard.institutes.store','uses'=>'DashboardController@storeInstitute']);
 Route::get('/institutes/{id}/edit', ['as'=>'dashboard.institutes.edit','uses'=>'DashboardController@editInstitute']);
 Route::put('/institutes/{id}/update', ['as'=>'dashboard.institutes.update','uses'=>'DashboardController@updateInstitute']);
+Route::delete('/institutes/{id}/delete', ['as'=>'dashboard.institutes.delete','uses'=>'DashboardController@deleteInstitute']);
 Route::get('/institute/{device_id}', ['as'=>'dashboard.institute.single','uses'=>'DashboardController@getSingleInstitute']);
 Route::get('/institute/user/create/{device_id}', ['as'=>'dashboard.institute.user.create','uses'=>'DashboardController@createInstituteUser']);
 Route::post('/institute/user/sote', ['as'=>'dashboard.institute.user.store','uses'=>'DashboardController@storeInstituteUser']);

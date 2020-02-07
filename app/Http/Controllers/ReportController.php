@@ -76,7 +76,7 @@ class ReportController extends Controller
         // dd($absents);
         $pdf = PDF::loadView('dashboard.reports.combined_report', ['querydate' => $date, 'institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absents]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
-        return $pdf->stream($fileName); // stream
+        return $pdf->download($fileName); // stream
     }
 
     public function getInstituteMonthlyReport($device_id) 

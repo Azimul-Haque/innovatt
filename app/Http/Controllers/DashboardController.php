@@ -21,7 +21,7 @@ class DashboardController extends Controller
         parent::__construct();
         $this->middleware('auth');
         $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList',
- 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact');
+ 'getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact');
     }
 
     public function index()
@@ -647,6 +647,19 @@ class DashboardController extends Controller
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();
 
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        return redirect()->route('dashboard.institutes');
+    }
+
+    public function deleteInstitute(Request $request, $id)
+    {
+        $institute = Institute::find($id);
+
+        foreach ($institute->users as $user) {
+            $user->delete;
+        }
+        $institute->delete();
+        
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
         return redirect()->route('dashboard.institutes');
     }
