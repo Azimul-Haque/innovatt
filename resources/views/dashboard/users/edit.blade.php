@@ -56,8 +56,11 @@
                                         <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
                                             প্রধান শিক্ষক
                                         </option>
-                                        <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
+                                        <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
                                             শিক্ষক
+                                        </option>
+                                        <option value="officeassistant" @if($teacher->role == 'officeassistant') selected="" @endif>
+                                            অফিস সহকারি
                                         </option>
                                         <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
                                         @elseif(Auth::user()->role=='teo')
@@ -67,7 +70,7 @@
                                                 <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
                                                     প্রধান শিক্ষক
                                                 </option>
-                                                <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারী
+                                                <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
                                                     শিক্ষক
                                                 </option>
                                             @endif

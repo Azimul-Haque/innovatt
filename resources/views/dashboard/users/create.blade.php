@@ -46,7 +46,8 @@
                   <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>
                   <option value="teo">শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</option>
                   <option value="headmaster">প্রধান শিক্ষক</option>
-                  <option value="teacher">সহকারী শিক্ষক</option>
+                  <option value="teacher">সহকারি শিক্ষক</option>
+                  <option value="officeassistant">অফিস সহকারি</option>
                   <option value="ateo">ATEO</option>
                   @elseif(Auth::user()->role == 'teo')
                     <option value="ateo" selected>ATEO</option>
