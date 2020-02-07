@@ -157,7 +157,6 @@
                     <div class="panel-heading">ছুটির বর্ণনা</div>
                     <div class="panel-body">
                         <div class="row">
-                            <br>
                             <div class="col-md-6">
                                 <label for="leave_start_date">শুরু</label>
                                 <input  type="text" class="form-control" name="leave_start_date" id='leave_start_date' placeholder="F d, Y" @if($teacher->leave_start_date!=null) value="{{ date('F d, Y', strtotime($teacher->leave_start_date)) }}" @endif readonly="">

@@ -324,10 +324,9 @@ class DashboardController extends Controller
         if( $request->leave_start_date!= '' ||  $request->leave_end_date!= ''){
             $start_date = Carbon::createFromFormat('F d, Y', $request->leave_start_date);
             $end_date = Carbon::createFromFormat('F d, Y', $request->leave_end_date);
-            if ($end_date->gt($start_date)) {
-                $user->leave_start_date = $start_date;
-                $user->leave_end_date = $end_date;
-            }
+            
+            $user->leave_start_date = $start_date;
+            $user->leave_end_date = $end_date;
         } else{
             $user->leave_start_date = null;
             $user->leave_end_date = null;
