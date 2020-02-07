@@ -59,7 +59,10 @@
                                 <td>
                                     <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
                                        class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
-                                        সম্পাদনা</a>
+                                    </a>
+                                    <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
+                                       class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

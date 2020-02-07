@@ -656,10 +656,10 @@ class DashboardController extends Controller
         $institute = Institute::find($id);
 
         foreach ($institute->users as $user) {
-            $user->delete;
+            $user->delete();
         }
         $institute->delete();
-        
+
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
         return redirect()->route('dashboard.institutes');
     }
