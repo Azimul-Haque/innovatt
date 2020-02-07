@@ -68,6 +68,7 @@
                     }
                 }
             }
+            print_r($datearray);
         @endphp
         @foreach($datearray as $teacher)
             <tr>
@@ -75,9 +76,6 @@
                     {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span
                                 style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                 </td>
-
-
-
                     <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
                     <td align="center">
                         @if(reset($teacher) != end($teacher))

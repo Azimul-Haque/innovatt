@@ -22,13 +22,17 @@ class ReportController extends Controller
         $teachersPresent = [];
         $queryTeachers = $totalTeachers;
         foreach ($queryTeachers as $teacher) {
-            if($teacher->leave_start_date != null && $teacher->leave_end_date!=null) continue;
+            if($teacher->leave_start_date != null && $teacher->leave_end_date != null)
+            {
+                
+            } else {
                 $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                         ->where('device_id', $teacher->institute->device_id)
                                         ->where('device_pin', $teacher->device_pin)
                                         ->first();
+            }
             if (!empty($attendance)) {
-                $teachersPresent[] = $teacher;
+                $teachersPresent[] = $teacher->toArray();
             }
         }
         return $teachersPresent;
@@ -49,21 +53,30 @@ class ReportController extends Controller
 
     public function getInstituteDailyCombinedReport(Request $request, $device_id)
     {
-        $date = Carbon::createFromFormat('F d, Y', $request->query_date);
+        $date = date('Y-m-d', strtotime($request->query_date));
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
                                  ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)  // teachers der jonno daily data
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
         $teachers = $institute->users;
-//        $allTeachers = $this->getAllTeachers();
-        $teachersPresent = $this->getPresentTeachers($teachers);
-        dd($teachersPresent);
-        $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
-//        dd($absentTeachers);
-        $pdf = PDF::loadView('dashboard.reports.combined_report', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absentTeachers]);
+        dd($attendances);
+        // $teachersPresent = $this->getPresentTeachers($teachers);
+        // $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
+        $absents = [];
+        foreach ($teachers as $teacher){
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                    ->where('device_id', $teacher->institute->device_id)
+                                    ->where('device_pin', $teacher->device_pin)
+                                    ->first();
+            if (empty($attendance)) {
+                $absents[] = $teacher;
+            }
+        }
+        // dd($absents);
+        $pdf = PDF::loadView('dashboard.reports.combined_report', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absents]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
-        return $pdf->download($fileName); // stream
+        return $pdf->stream($fileName); // stream
     }
 
     public function getInstituteMonthlyReport($device_id) 
@@ -92,6 +105,11 @@ class ReportController extends Controller
     }
     public function getInstituteQueryReport(Request $request, $device_id)
     {
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
         $start_date = Carbon::createFromFormat('F d, Y', $request->query_start_date);
         $end_date = Carbon::createFromFormat('F d, Y', $request->query_end_date);
 //         if($start_date->gt($end_date))
@@ -118,6 +136,11 @@ class ReportController extends Controller
         return $pdf->download($fileName); // stream
     }
     public function getTeacherQueryReport(Request $request, $unique_key){
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
+        // createFromFormat e somossa ache
         $start_date = Carbon::createFromFormat('F d, Y', $request->query_start_date);
         $end_date = Carbon::createFromFormat('F d, Y', $request->query_end_date);
         $teachers = User::where('unique_key', $unique_key)->get();
