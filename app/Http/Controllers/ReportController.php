@@ -60,7 +60,7 @@ class ReportController extends Controller
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
         $teachers = $institute->users;
-        dd($attendances);
+        // dd($attendances);
         // $teachersPresent = $this->getPresentTeachers($teachers);
         // $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
         $absents = [];
