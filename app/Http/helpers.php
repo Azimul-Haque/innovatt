@@ -103,7 +103,9 @@
     } elseif($var == 'headmaster') {
       return 'প্রধান শিক্ষক';
     } elseif ($var == 'teacher') {
-      return 'সহকারী শিক্ষক';
+      return 'সহকারি শিক্ষক';
+    } elseif ($var == 'officeassistant') {
+      return 'অফিস সহকারি';
     }
   }
 

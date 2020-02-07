@@ -36,9 +36,11 @@
                 {!! Form::label('role', 'ধরন') !!}
                 <select name="role" class="form-control" disabled="">
                   <option value="" selected="" disabled="">ধরন নির্ধারণ করুন</option>
+                  <option value="admin" @if(Auth::user()->role == 'admin') selected="" @endif>এডমিন</option>
                   <option value="teo" @if(Auth::user()->role == 'teo') selected="" @endif>শিক্ষা অফিসার/ অনুমোদিত কর্তৃপক্ষ</option>
                   <option value="headmaster" @if(Auth::user()->role == 'headmaster') selected="" @endif>প্রধান শিক্ষক</option>
-                  <option value="teacher" @if(Auth::user()->role == 'teacher') selected="" @endif>সহকারী শিক্ষক</option>
+                  <option value="teacher" @if(Auth::user()->role == 'teacher') selected="" @endif>সহকারি শিক্ষক</option>
+                  <option value="officeassistant" @if(Auth::user()->role == 'officeassistant') selected="" @endif>অফিস সহকারি</option>
                 </select>
               </div>
               <div class="col-md-6">

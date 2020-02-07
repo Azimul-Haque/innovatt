@@ -144,6 +144,7 @@ class DashboardController extends Controller
         $ateos = User::where('role', 'ateo')->get();
         $teachers = User::where('role', 'headmaster')
             ->orWhere('role', 'teacher')
+            ->orWhere('role', 'officeassistant')
             ->paginate(10);
 
         return view('dashboard.users.index')
