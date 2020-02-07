@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-6">
                                 {!! Form::label('phone', 'মোবাইল নম্বর (১১ ডিজিট) *') !!}
-                                {!! Form::text('phone', null, array('class' => 'form-control', 'required' => '', 'onkeypress' => 'if(this.value.length==11) return false;')) !!}
+                                {!! Form::text('phone', $teacher->phone, array('class' => 'form-control', 'required' => '', 'onkeypress' => 'if(this.value.length==11) return false;')) !!}
                             </div>
                         </div>
                         <br/>

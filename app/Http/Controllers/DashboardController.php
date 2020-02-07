@@ -333,22 +333,16 @@ class DashboardController extends Controller
         }
 
         if ($request->role != 'ateo'){
-            if($request->role == 'teo')
+            if($request->role == 'teo') {
                 $user->institute_id = 0;
-            else
+            } else {
                 $user->institute_id = $request->institute_id[0];
-            $user->save();
-        }
-
-        else {
-            $user->institute_id = 0;
-            $user->save();
-
+            }
+        } else {
             foreach ($request->institute_id as $institute) {
                 $ateoInstitute = Institute::find($institute);
                 $ateoInstitute->user_id = $user->id;
                 $ateoInstitute->save();
-//                dd($ateoInstitute);
             }
         }
 
