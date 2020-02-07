@@ -47,7 +47,7 @@
                         <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">মোট শিক্ষক</span>
+                            <span class="info-box-text">মোট শিক্ষক/ অফিস সহকারি</span>
                             <span class="info-box-number">
                 @php
                     $totalteachersupazilla = 0;
@@ -99,7 +99,7 @@
                         <span class="info-box-icon bg-aqua"><i class="fa fa-female"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">মোট মহিলা শিক্ষক</span>
+                            <span class="info-box-text">মোট মহিলা শিক্ষক/ অফিস সহকারি</span>
                             <span class="info-box-number">
                 @php
                     $totalfemalesupazilla = 0;
@@ -123,7 +123,7 @@
                         <span class="info-box-icon bg-red"><i class="fa fa-male"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">মোট পুরুষ শিক্ষক</span>
+                            <span class="info-box-text">মোট পুরুষ শিক্ষক/ অফিস সহকারি</span>
                             <span class="info-box-number">
                 @php
                     $totalmalesupazilla = 0;
