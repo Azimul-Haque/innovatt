@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('title')
-    About Us
+    Innova Attendance Management Solution | About Us
 @endsection
 
 @section('css')

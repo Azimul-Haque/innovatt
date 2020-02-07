@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('title')
-    Microfinance Management Solution | FAQ
+    Innova Attendance Management Solution | FAQ
 @endsection
 
 @section('css')
