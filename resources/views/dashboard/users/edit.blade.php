@@ -116,7 +116,7 @@
                                     multiple="multiple" @endif>
     {{--                                    <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>--}}
 
-                                        @if($teacher->role=='teacher' || $teacher->role=='headmaster')
+                                        @if($teacher->role=='teacher' || $teacher->role=='headmaster' || $teacher->role=='officeassistant')
                                             @foreach($institutes as $institute)
                                                 <option value="{{ $institute->id }}"
                                                         @if($teacher->institute_id == $institute->id ) selected="" @endif>{{ $institute->name }}
