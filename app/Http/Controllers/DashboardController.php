@@ -662,9 +662,9 @@ class DashboardController extends Controller
         $absents = [];
         foreach ($teachers as $queryTeacher){
             $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
-                ->where('device_id', $queryTeacher->institute->device_id)
-                ->where('device_pin', $queryTeacher->device_pin)
-                ->first();
+                                    ->where('device_id', $queryTeacher->institute->device_id)
+                                    ->where('device_pin', $queryTeacher->device_pin)
+                                    ->first();
             if (empty($attendance)) {
                 $absents[] = $queryTeacher;
             }

@@ -33,6 +33,7 @@ class ReportController extends Controller
         }
         return $teachersPresent;
     }
+
     public function getInstituteDailyReport($device_id) 
     {
         $institute = Institute::where('device_id', $device_id)->first();
@@ -45,6 +46,7 @@ class ReportController extends Controller
         $fileName = 'Institute_Daily_Report_'. $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
+    
     public function getInstituteDailyCombinedReport(Request $request, $device_id)
     {
         $date = Carbon::createFromFormat('F d, Y', $request->query_date);

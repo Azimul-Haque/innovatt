@@ -14,11 +14,11 @@
 @section('content_header')
     <h1>
         {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
-        (@if(Auth::user()->upazilla->contact != null)
-          (<a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
-              <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
-          </a>)
-      @endif)
+        @if(Auth::user()->upazilla->contact != null)
+            <a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
+                (<i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }})
+            </a>
+      @endif
         <div class="pull-right">
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
                 <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary"
