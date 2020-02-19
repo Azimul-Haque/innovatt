@@ -15,14 +15,9 @@
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo')
             {{ Auth::user()->upazilla->upazilla_bangla }}, {{ Auth::user()->upazilla->district_bangla }}
         @endif
-        @if(Auth::user()->upazilla->contact != null)
-            <div class="pull-right" style="font-size: 0.7em">
-                যোগাযোগ:
-                <a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)">
-                    <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
-                </a>
-            </div>
-        @endif
+        <div class="pull-right" style="font-size: 0.7em">
+            <button class="btn btn-primary" id="printBtn"><i class="fa fa-print"></i> প্রিন্ট করুন</button>
+        </div>
     </h1>
 @stop
 
@@ -161,6 +156,10 @@
                 }
             });
         </script>
-
+        <script type="text/javascript">
+            $('#printBtn').click(function(){
+                 window.print();
+            });
+        </script>
     @endif
 @endsection
