@@ -25,7 +25,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $this->updateUserLeaveStatus(User::where('upazilla_id', Auth::user()->upazilla_id)->get());
+        // $this->updateUserLeaveStatus(User::where('upazilla_id', Auth::user()->upazilla_id)->get());
+        // $this->updateUserLeaveStatus(User::where('upazilla_id', Auth::user()->upazilla_id)->get());
+        // $this->updateUserLeaveStatus(User::where('upazilla_id', Auth::user()->upazilla_id)->get());
 
         if (Auth::user()->role == 'headmaster') {
             return redirect()->route('dashboard.institute.single', Auth::user()->institute->device_id);
