@@ -84,7 +84,7 @@ class DashboardController extends Controller
             }
 
             $totalpresentarray = [];
-            for ($i=0; $i < 21; $i++) {
+            for ($i=0; $i < 15; $i++) {
                 $totalpresentarray[$i]['count'] = 0;
                 $totalpresentarray[$i]['date'] = Carbon::now()->subDays($i)->format('Y-m-d');
                 foreach ($queryTeachers as $teacher) {
@@ -104,6 +104,7 @@ class DashboardController extends Controller
             if(count($totalpresentarray) > 7) {
                 $totalpresentarray = array_slice($totalpresentarray, 6);
             }
+            dd($totalpresentarray);
             $totalpresentarray = array_reverse($totalpresentarray);
 
             return view('dashboard.index')
