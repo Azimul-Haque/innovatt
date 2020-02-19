@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact');
+        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact', 'getAtaGlance');
     }
 
     public function index()
@@ -82,30 +82,6 @@ class DashboardController extends Controller
                     $totalearlyleavetoday++;
                 }
             }
-
-            // $totalpresentarray = [];
-            // for ($i=0; $i < 10; $i++) {
-            //     $totalpresentarray[$i]['count'] = 0;
-            //     $totalpresentarray[$i]['date'] = Carbon::now()->subDays($i)->format('Y-m-d');
-            //     foreach ($queryTeachers as $teacher) {
-            //         $attendanceforarray = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), Carbon::now()->subDays($i)->format('Y-m-d'))
-            //                                         ->where('device_id', $teacher->institute->device_id)
-            //                                         ->where('device_pin', $teacher->device_pin)
-            //                                         ->first();
-            //         if (!empty($attendanceforarray)) {
-            //             $totalpresentarray[$i]['count']++;
-            //         }
-            //     }
-            //     if($totalpresentarray[$i]['count'] == 0) {
-            //         unset($totalpresentarray[$i]);
-            //     }
-            // }
-            // $totalpresentarray = array_values($totalpresentarray);
-            // if(count($totalpresentarray) > 7) {
-            //     $totalpresentarray = array_slice($totalpresentarray, 0, 7);
-            // }
-            // // dd($totalpresentarray);
-            // $totalpresentarray = array_reverse($totalpresentarray);
 
             return view('dashboard.index')
                 ->withTotalpresenttoday($totalpresenttoday)
