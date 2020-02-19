@@ -53,7 +53,6 @@ class DashboardController extends Controller
                     ->first();
                 if (!empty($attendance)) {
                     $totalpresenttoday++;
-
                 }
                 $late = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                     ->where('device_id', $teacher->institute->device_id)
@@ -76,8 +75,6 @@ class DashboardController extends Controller
                 ->withTotalpresenttoday($totalpresenttoday)
                 ->withTotallateentrytoday($totallateentrytoday)
                 ->withTotalearlyleavetoday($totalearlyleavetoday);
-
-
         }
     }
 
