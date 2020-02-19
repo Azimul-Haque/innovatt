@@ -16,7 +16,7 @@
         {{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}
         @if(Auth::user()->upazilla->contact != null)
             <a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
-                (<i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }})
+                (<i class="fa fa-phone"></i> {{ bangla($institute->upazilla->contact) }})
             </a>
       @endif
         <div class="pull-right">
