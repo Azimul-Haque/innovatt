@@ -102,7 +102,7 @@ class DashboardController extends Controller
             }
             $totalpresentarray = array_values($totalpresentarray);
             if(count($totalpresentarray) > 7) {
-                $totalpresentarray = array_slice($totalpresentarray, 6);
+                $totalpresentarray = array_slice($totalpresentarray, 0, 7);
             }
             dd(count($totalpresentarray));
             $totalpresentarray = array_reverse($totalpresentarray);
