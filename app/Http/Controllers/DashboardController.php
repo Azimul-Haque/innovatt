@@ -80,7 +80,7 @@ class DashboardController extends Controller
                     $totalearlyleavetoday++;
                 }
             }
-            dd($totalpresenttoday);
+            dd($queryTeachers);
             return view('dashboard.index')
                 ->withTotalpresenttoday($totalpresenttoday)
                 ->withTotallateentrytoday($totallateentrytoday)
