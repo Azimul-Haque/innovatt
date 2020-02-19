@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Upazilla;
+use App\Institute;
 use App\User;
 
 use Carbon\Carbon;
@@ -22,7 +24,14 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('index.index');
+        $totalupazillas = Institute::distinct()->count('upazilla_id');
+        $totalinstitutes = Institute::count();
+        $totalusers = User::count();
+
+        return view('index.index')
+                    ->withTotalupazillas($totalupazillas)
+                    ->withTotalinstitutes($totalinstitutes)
+                    ->withTotalusers($totalusers);
     }
 
     public function homeAdhoc()

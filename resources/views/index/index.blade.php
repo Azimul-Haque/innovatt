@@ -165,7 +165,7 @@
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="300ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="8" data-speed="4000"></span>
+                        <span class="timer counter-number" data-to="{{ $totalupazillas }}" data-speed="4000"></span>
                         <span class="counter-title">Upazillas</span>
                     </a>
                 </div>
@@ -173,7 +173,7 @@
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="600ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="248" data-speed="4000"></span>
+                        <span class="timer counter-number" data-to="{{ $totalinstitutes }}" data-speed="4000"></span>
                         <span class="counter-title">Institutions/ Schools</span>
                     </a>
                 </div>
@@ -181,8 +181,8 @@
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten" data-wow-duration="900ms">
                     <a href="#!">
-                        <span class="timer counter-number" data-to="20" data-speed="4000"></span>
-                        <span class="counter-title">Projects Completed</span>
+                        <span class="timer counter-number" data-to="{{ $totalusers }}" data-speed="4000"></span>
+                        <span class="counter-title">Total Users</span>
                     </a>
                 </div>
                 <!-- end counter -->
