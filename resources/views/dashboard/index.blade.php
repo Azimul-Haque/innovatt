@@ -217,7 +217,7 @@
                         <i class="fa fa-bar-chart"></i>
                         <h3 class="box-title">উপস্থিতি ও অনুপস্থিতির তুলনা</h3>
                         <div class="box-tools pull-right text-muted">
-                            {{ date('F, Y') }}
+                            সর্বশেষ ০৭ কর্মদিবস
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -292,14 +292,26 @@
                 type: 'line',
                 // The data for our dataset
                 data: {
-                    labels: ['Nov 29', 'Nov 30', 'Dec 01', 'Dec 02', 'Dec 03'],
+                    labels: [
+                        @foreach($totalpresentarray as $presentdata)
+                            "{{ date('M d', strtotime($presentdata['date'])) }}",
+                        @endforeach
+                    ],
                     datasets: [{
-                        data: [10, 11, 8, 14, 10],
+                        data: [
+                            @foreach($totalpresentarray as $presentdata)
+                                "{{ $presentdata['count'] }}",
+                            @endforeach
+                        ],
                         label: "উপস্থিত",
                         borderColor: "#3e95cd",
                         fill: false
                     }, {
-                        data: [4, 3, 6, 4, 4],
+                        data: [
+                            @foreach($totalpresentarray as $presentdata)
+                                "{{ $totalteachersupazilla - $presentdata['count'] }}",
+                            @endforeach
+                        ],
                         label: "অনুপস্থিত",
                         borderColor: "#DD4B39",
                         fill: false
