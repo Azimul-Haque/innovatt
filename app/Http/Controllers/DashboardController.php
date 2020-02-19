@@ -83,35 +83,34 @@ class DashboardController extends Controller
                 }
             }
 
-            $totalpresentarray = [];
-            for ($i=0; $i < 10; $i++) {
-                $totalpresentarray[$i]['count'] = 0;
-                $totalpresentarray[$i]['date'] = Carbon::now()->subDays($i)->format('Y-m-d');
-                foreach ($queryTeachers as $teacher) {
-                    $attendanceforarray = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), Carbon::now()->subDays($i)->format('Y-m-d'))
-                                                    ->where('device_id', $teacher->institute->device_id)
-                                                    ->where('device_pin', $teacher->device_pin)
-                                                    ->first();
-                    if (!empty($attendanceforarray)) {
-                        $totalpresentarray[$i]['count']++;
-                    }
-                }
-                if($totalpresentarray[$i]['count'] == 0) {
-                    unset($totalpresentarray[$i]);
-                }
-            }
-            $totalpresentarray = array_values($totalpresentarray);
-            if(count($totalpresentarray) > 7) {
-                $totalpresentarray = array_slice($totalpresentarray, 0, 7);
-            }
-            // dd(count($totalpresentarray));
-            $totalpresentarray = array_reverse($totalpresentarray);
+            // $totalpresentarray = [];
+            // for ($i=0; $i < 10; $i++) {
+            //     $totalpresentarray[$i]['count'] = 0;
+            //     $totalpresentarray[$i]['date'] = Carbon::now()->subDays($i)->format('Y-m-d');
+            //     foreach ($queryTeachers as $teacher) {
+            //         $attendanceforarray = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), Carbon::now()->subDays($i)->format('Y-m-d'))
+            //                                         ->where('device_id', $teacher->institute->device_id)
+            //                                         ->where('device_pin', $teacher->device_pin)
+            //                                         ->first();
+            //         if (!empty($attendanceforarray)) {
+            //             $totalpresentarray[$i]['count']++;
+            //         }
+            //     }
+            //     if($totalpresentarray[$i]['count'] == 0) {
+            //         unset($totalpresentarray[$i]);
+            //     }
+            // }
+            // $totalpresentarray = array_values($totalpresentarray);
+            // if(count($totalpresentarray) > 7) {
+            //     $totalpresentarray = array_slice($totalpresentarray, 0, 7);
+            // }
+            // // dd($totalpresentarray);
+            // $totalpresentarray = array_reverse($totalpresentarray);
 
             return view('dashboard.index')
                 ->withTotalpresenttoday($totalpresenttoday)
                 ->withTotallateentrytoday($totallateentrytoday)
-                ->withTotalearlyleavetoday($totalearlyleavetoday)
-                ->withTotalpresentarray($totalpresentarray);
+                ->withTotalearlyleavetoday($totalearlyleavetoday);
         }
     }
 
@@ -804,6 +803,56 @@ class DashboardController extends Controller
 
         Session::flash('success', 'সফলভাবে যোগ করা হয়েছে!');
         return redirect()->route('dashboard.institute.single', $request->device_id);
+    }
+
+    public function getAtaGlance()
+    {
+        $queryTeachers = User::where('upazilla_id', Auth::user()->upazilla_id)
+                             ->where(function ($query) {
+                                    $query->where('role', 'headmaster')
+                                          ->orWhere('role', 'teacher')
+                                          ->orWhere('role', 'officeassistant');
+                                })
+                             ->get();
+
+        $totalpresenttoday = 0;
+        foreach ($queryTeachers as $teacher) {
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                    ->where('device_id', $teacher->institute->device_id)
+                                    ->where('device_pin', $teacher->device_pin)
+                                    ->first();
+            if (!empty($attendance)) {
+                $totalpresenttoday++;
+            }
+        }
+
+        $totalpresentarray = [];
+        for ($i=0; $i < 10; $i++) {
+            $totalpresentarray[$i]['count'] = 0;
+            $totalpresentarray[$i]['date'] = Carbon::now()->subDays($i)->format('Y-m-d');
+            foreach ($queryTeachers as $teacher) {
+                $attendanceforarray = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), Carbon::now()->subDays($i)->format('Y-m-d'))
+                                                ->where('device_id', $teacher->institute->device_id)
+                                                ->where('device_pin', $teacher->device_pin)
+                                                ->first();
+                if (!empty($attendanceforarray)) {
+                    $totalpresentarray[$i]['count']++;
+                }
+            }
+            if($totalpresentarray[$i]['count'] == 0) {
+                unset($totalpresentarray[$i]);
+            }
+        }
+        $totalpresentarray = array_values($totalpresentarray);
+        if(count($totalpresentarray) > 7) {
+            $totalpresentarray = array_slice($totalpresentarray, 0, 7);
+        }
+        // dd($totalpresentarray);
+        $totalpresentarray = array_reverse($totalpresentarray);
+
+        return view('dashboard.ataglance')
+            ->withTotalpresenttoday($totalpresenttoday)
+            ->withTotalpresentarray($totalpresentarray);
     }
 
     public function getPersonalProfile()

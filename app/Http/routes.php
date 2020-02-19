@@ -80,6 +80,8 @@ Route::get('/institute/{device_id}', ['as'=>'dashboard.institute.single','uses'=
 Route::get('/institute/user/create/{device_id}', ['as'=>'dashboard.institute.user.create','uses'=>'DashboardController@createInstituteUser']);
 Route::post('/institute/user/sote', ['as'=>'dashboard.institute.user.store','uses'=>'DashboardController@storeInstituteUser']);
 
+Route::get('/at-a-glance', ['as'=>'dashboard.ataglance','uses'=>'DashboardController@getAtaGlance']);
+
 Route::get('/personal/profile', ['as'=>'dashboard.personal.profile','uses'=>'DashboardController@getPersonalProfile']);
 Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','uses'=>'DashboardController@updatePersonalProfile']);
 

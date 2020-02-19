@@ -170,6 +170,12 @@
                                 <span>প্রতিষ্ঠান তালিকা</span>
                             </a>
                         </li>
+                        <li class="{{ Request::is('at-a-glance') ? 'active' : '' }} {{ Request::is('at-a-glance/*') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.ataglance') }}">
+                                <i class="fa fa-fw fa-pie-chart"></i>
+                                <span>এক নজরে</span>
+                            </a>
+                        </li>
                     @endif
                     {{-- <li class="header">Personal Profile</li> --}}
                     <li class="{{ Request::is('personal/profile') ? 'active' : '' }}">
