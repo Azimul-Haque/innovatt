@@ -38,10 +38,12 @@ class DashboardController extends Controller
             if (Auth::user()->role == 'ateo') {
                return redirect()->route('dashboard.upazillas.ateo', Auth::user()->unique_key);
             } else {
-                $queryTeachers = User::where('role', 'headmaster')
-                                     ->orWhere('role', 'teacher')
-                                     ->orWhere('role', 'officeassistant')
-                                     ->where('upazilla_id', Auth::user()->upazilla_id)
+                $queryTeachers = User::where('upazilla_id', Auth::user()->upazilla_id)
+                                     ->where(function ($query) {
+                                            $query->where('role', 'headmaster')
+                                                  ->orWhere('role', 'teacher')
+                                                  ->orWhere('role', 'officeassistant');
+                                        })
                                      ->get();
             }
 
