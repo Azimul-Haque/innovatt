@@ -201,7 +201,7 @@ class DashboardController extends Controller
         $user->role = $request->role;
         $user->type = $request->role;
         $user->phone = $request->phone;
-        $user->email = $request->phone . '@innovaatt.com';
+        $user->email = $request->phone . '@innovaatt' . mannan_chughli(3) . '.com';
         $user->device_pin = $request->device_pin;
         $user->upazilla_id = $request->upazilla_id;
         $user->password = Hash::make('secret');
@@ -250,7 +250,7 @@ class DashboardController extends Controller
         $user->role = $request->role;
         $user->type = $request->role;
         $user->phone = $request->phone;
-        $user->email = $request->phone . '@innovaatt.com';
+        $user->email = $request->phone . '@innovaatt' . mannan_chughli(3) . '.com';
         $user->device_pin = 0;
         $user->upazilla_id = $request->upazilla_id;
         $user->password = Hash::make('secret');
