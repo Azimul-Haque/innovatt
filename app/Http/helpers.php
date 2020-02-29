@@ -52,6 +52,12 @@
         $random_string = substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
         return $random_string;
   }
+  
+  function mannan_chughli($length){
+        $pool = 'abcdefghijklmnopqrstuvwxyz';
+        $random_string = substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+        return $random_string;
+  }
 
   function ordinal($number) {
       $ends = array('th','st','nd','rd','th','th','th','th','th','th');
