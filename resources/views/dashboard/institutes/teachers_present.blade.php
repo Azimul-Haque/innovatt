@@ -26,9 +26,9 @@
                         <tr>
                             <th>শিক্ষক</th>
                             <th>প্রতিষ্ঠান</th>
-    {{--                        <th>প্রবেশ</th>--}}
-    {{--                        <th>প্রস্থান</th>--}}
-    {{--                        <th>অবস্থানকাল</th>--}}
+                            <th>প্রবেশ</th>
+                            <th>প্রস্থান</th>
+                            <th>অবস্থানকাল</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,17 +43,17 @@
                                     <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
                                     <br/><small> {{ $teacher->institute->device_id }}</small>
                                 </td>
-    {{--                            <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>--}}
-    {{--                            <td>--}}
-    {{--                                @if(reset($teacher) != end($teacher))--}}
-    {{--                                    {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}--}}
-    {{--                                @endif--}}
-    {{--                            </td>--}}
-    {{--                            <td>--}}
-    {{--                                @if(reset($teacher) != end($teacher))--}}
-    {{--                                    <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>--}}
-    {{--                                @endif--}}
-    {{--                            </td>--}}
+                                <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                                <td>
+                                    @if(reset($teacher) != end($teacher))
+                                        {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(reset($teacher) != end($teacher))
+                                        <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

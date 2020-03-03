@@ -532,7 +532,7 @@ class DashboardController extends Controller
         $queryTeachers = $this->getAllTeachers();
 
         foreach ($queryTeachers as $teacher) {
-            if($teacher->leave_start_date!=null && $teacher->leave_end_date!=null) continue;
+            if($teacher->leave_start_date != null && $teacher->leave_end_date != null) continue;
 
             $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                     ->where('device_id', $teacher->institute->device_id)
