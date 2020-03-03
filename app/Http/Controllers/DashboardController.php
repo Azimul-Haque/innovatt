@@ -738,7 +738,7 @@ class DashboardController extends Controller
             ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))  // teachers der jonno daily data
             ->orderBy('timestampdata', 'asc')
             ->get();
-        $teachers = User::where('institute_id', $institute->id)->get();
+        $teachers = User::where('institute_id', $institute->id)->orderBy('device_pin', 'asc')->get();
         $absents = [];
         foreach ($teachers as $queryTeacher){
             $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
@@ -750,7 +750,6 @@ class DashboardController extends Controller
             }
         }
 //        dd($absents);
-
 
         return view('dashboard.institutes.single')
             ->withInstitute($institute)

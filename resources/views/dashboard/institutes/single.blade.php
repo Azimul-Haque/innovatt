@@ -46,7 +46,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($institute->users as $teacher)
+                        @foreach($teachers as $teacher)
                             <tr>
                                 <td>
                                     <a href="{{ route('dashboard.user.single', $teacher->id) }}"
