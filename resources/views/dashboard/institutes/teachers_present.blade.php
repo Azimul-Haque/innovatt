@@ -45,14 +45,22 @@
                                 @php
                                     foreach ($attendances as $attendance) {
                                         if($teacher->institute->device_id == $attendance->device_id && $teacher->device_pin == $attendance->device_pin)
+                                        $teacheratt[] = $attendance;
                                     }
                                 @endphp
-                                {{-- <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td> --}}
-                                {{-- <td>
-                                    @if(reset($teacher) != end($teacher))
-                                        {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+                                <td>
+                                    @if(!empty($teacheratt[0]))
+                                        {{ bangla(date('F d, Y h:i A', strtotime($teacheratt[0]->timestampdata))) }}
                                     @endif
-                                </td>--}}
+                                </td>
+                                <td>
+                                    @if(!empty($teacheratt[1]))
+                                        {{ bangla(date('F d, Y h:i A', strtotime($teacheratt[1]->timestampdata))) }}
+                                    @endif
+                                </td>
+                                @php
+                                    $teacheratt = [];
+                                @endphp
                             </tr>
                         @endforeach
                         </tbody>
