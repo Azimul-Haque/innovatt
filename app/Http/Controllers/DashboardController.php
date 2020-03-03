@@ -117,7 +117,7 @@ class DashboardController extends Controller
 
         $totalTeachers = 0;
         $totalpresenttoday = 0;
-        
+
         foreach ($institutes as $institute) {
             $totalTeachers += $institute->users->count();
             foreach ($institute->users as $teacher) {
@@ -135,7 +135,6 @@ class DashboardController extends Controller
                 $totalpresenttoday++;
             }
         }
-
 
         return view('dashboard.upazillas.ateo')
             ->withAteo($ateo)
@@ -588,9 +587,7 @@ class DashboardController extends Controller
     {
         
         $ateo = User::where('unique_key', $id)->first();
-
         $teachers = $this->getAllTeachersForAteo($ateo->id);
-
         $attendances = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
@@ -628,12 +625,20 @@ class DashboardController extends Controller
     public function getUpazillaSchoolsTeachersAbsentListForAteo($id)
     {
         $ateo = User::where('unique_key', $id)->get()->first();
-//        dd($ateo);
-        $allTeachers = $this->getAllTeachersForAteo($ateo->id);
-        $teachersPresent = $this->getPresentTeachersForAteo($ateo->id);
+        $teachers = $this->getAllTeachersForAteo($ateo->id);
+        
+        $absents = [];
 
-        $absentTeachers = array_diff($allTeachers, $teachersPresent);
-        return view('dashboard.institutes.teachers_absent')->withAbsents($absentTeachers);
+        foreach ($teachers as $queryTeacher){
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                    ->where('device_id', $queryTeacher->institute->device_id)
+                                    ->where('device_pin', $queryTeacher->device_pin)
+                                    ->first();
+            if (empty($attendance)) {
+                $absents[] = $queryTeacher;
+            }
+        }
+        return view('dashboard.institutes.teachers_absent')->withAbsents($absents);
     }
 
 
