@@ -19,7 +19,7 @@
         <div class="col-md-8">
             <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b></big>
 
-            @if(count($presents)>0)
+            @if(count($presents) > 0)
                 <div class="table-responsive">
                     <table class="table table-condensed">
                         <thead>
@@ -28,7 +28,6 @@
                             <th>প্রতিষ্ঠান</th>
                             <th>প্রবেশ</th>
                             <th>প্রস্থান</th>
-                            <th>অবস্থানকাল</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,19 +40,19 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
-                                    <br/><small> {{ $teacher->institute->device_id }}</small>
+                                    <br/><small>ডিভাইস আইডিঃ {{ $teacher->institute->device_id }}</small>
                                 </td>
-                                <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
-                                <td>
+                                @php
+                                    foreach ($attendances as $attendance) {
+                                        if($teacher->institute->device_id == $attendance->device_id && $teacher->device_pin == $attendance->device_pin)
+                                    }
+                                @endphp
+                                {{-- <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td> --}}
+                                {{-- <td>
                                     @if(reset($teacher) != end($teacher))
                                         {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
                                     @endif
-                                </td>
-                                <td>
-                                    @if(reset($teacher) != end($teacher))
-                                        <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
-                                    @endif
-                                </td>
+                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>
