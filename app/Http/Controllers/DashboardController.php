@@ -588,18 +588,39 @@ class DashboardController extends Controller
         return view('dashboard.institutes.teachers_present')
             ->withPresents($presents)
             ->withAttendances($attendances);
-        // $teachersPresent = $this->getPresentTeachers();
-
-        // return view('dashboard.institutes.teachers_present')->withPresents($teachersPresent);
     }
 
     public function getUpazillaSchoolsTeachersPresentListForAteo($id)
     {
+        
         $ateo = User::where('unique_key', $id)->get()->first();
 
         $teachersPresent = $this->getPresentTeachersForAteo($ateo->id);
 
         return view('dashboard.institutes.teachers_present')->withPresents($teachersPresent);
+
+        // $attendances = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+        //                          ->orderBy('timestampdata', 'asc')
+        //                          ->get();
+        // $teachers = User::where('upazilla_id', Auth::user()->upazilla_id)
+        //                 ->where('role', '!=', 'admin')
+        //                 ->where('role', '!=', 'teo')
+        //                 ->where('role', '!=', 'ateo')
+        //                 ->get();
+        // $presents = [];
+        // foreach ($teachers as $queryTeacher){
+        //     $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+        //                             ->where('device_id', $queryTeacher->institute->device_id)
+        //                             ->where('device_pin', $queryTeacher->device_pin)
+        //                             ->first();
+        //     if (!empty($attendance)) {
+        //         $presents[] = $queryTeacher;
+        //     }
+        // }
+
+        // return view('dashboard.institutes.teachers_present')
+        //     ->withPresents($presents)
+        //     ->withAttendances($attendances);
     }
 
 
