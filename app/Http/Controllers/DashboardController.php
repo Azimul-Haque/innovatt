@@ -540,6 +540,7 @@ class DashboardController extends Controller
                                     ->first();
             if (!empty($attendance)) {
                 $teachersPresent[] = $teacher;
+                $teachersPresent[] = $teacher;
             }
         }
         return $teachersPresent;
