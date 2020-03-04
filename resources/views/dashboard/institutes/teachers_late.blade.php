@@ -93,7 +93,7 @@
                                 </td>
                                 <td>
                                     @if(!empty($teacherearly[0]))
-                                        {{ bangla(date('F d, Y h:i A', strtotime($teacherearly[0]->timestampdata))) }}
+                                        {{ bangla(Carbon::parse($teacherearly[0]->timestampdata)->diffForHumans(Carbon::parse($teacher->institute->entrance))) }}
                                     @endif
                                 </td>
                                 @php
