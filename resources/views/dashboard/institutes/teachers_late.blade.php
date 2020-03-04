@@ -78,25 +78,25 @@
                                 @php
                                     foreach ($todaysattendances as $attendance) {
                                         if($attendance->device_id == $teacher->institute->device_id && $attendance->device_pin == $teacher->device_pin) {
-                                            $teacherearly[] = $attendance;
+                                            $teacherlate[] = $attendance;
                                         }
                                     }
                                 @endphp
                                 <td>
-                                    @if(!empty($teacherearly[0]))
-                                        {{ bangla(date('F d, Y h:i A', strtotime($teacherearly[0]->timestampdata))) }}
+                                    @if(!empty($teacherlate[0]))
+                                        {{ bangla(date('F d, Y h:i A', strtotime($teacherlate[0]->timestampdata))) }}
                                     @endif
                                 </td>
                                 <td>
                                     {{ bangla(date('F d, Y h:i A', strtotime($teacher->institute->entrance))) }}
                                 </td>
                                 <td>
-                                    @if(!empty($teacherearly[0]))
-                                        {{ bangla(Carbon::parse($teacherearly[0]->timestampdata)->diffForHumans(Carbon::parse($teacher->institute->entrance))) }}
+                                    @if(!empty($teacherlate[0]))
+                                        {{ bangla(Carbon::parse($teacherlate[0]->timestampdata)->diffForHumans(Carbon::parse($teacher->institute->entrance))) }}
                                     @endif
                                 </td>
                                 @php
-                                    $teacherearly = [];
+                                    $teacherlate = [];
                                 @endphp
                             </tr>
                         @endforeach

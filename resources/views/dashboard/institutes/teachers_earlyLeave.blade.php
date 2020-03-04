@@ -56,8 +56,9 @@
                             <th>শিক্ষক</th>
                             <th>লিঙ্গ</th>
                             <th>প্রতিষ্ঠান</th>
-                            {{--                        <th>প্রস্থান</th>--}}
-                            {{--                        <th>অবস্থানকাল</th>--}}
+                            <th>পূর্বে প্রস্থানের সময়</th>
+                            <th>প্রতিষ্ঠানে ত্যাগের নির্ধারিত সময়</th>
+                            <th>মোট অনুপস্থিত সময়</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,17 +84,29 @@
                                     <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
                                     <br/><small> {{ $teacher->institute->device_id }}</small>
                                 </td>
-                                {{--                            <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>--}}
-                                {{--                            <td>--}}
-                                {{--                                @if(reset($teacher) != end($teacher))--}}
-                                {{--                                    {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}--}}
-                                {{--                                @endif--}}
-                                {{--                            </td>--}}
-                                {{--                            <td>--}}
-                                {{--                                @if(reset($teacher) != end($teacher))--}}
-                                {{--                                    <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>--}}
-                                {{--                                @endif--}}
-                                {{--                            </td>--}}
+                                @php
+                                    foreach ($todaysattendances as $attendance) {
+                                        if($attendance->device_id == $teacher->institute->device_id && $attendance->device_pin == $teacher->device_pin) {
+                                            $teacherearly[] = $attendance;
+                                        }
+                                    }
+                                @endphp
+                                <td>
+                                    @if(!empty($teacherearly[1]))
+                                        {{ bangla(date('F d, Y h:i A', strtotime($teacherearly[1]->timestampdata))) }}
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ bangla(date('F d, Y h:i A', strtotime($teacher->institute->departure))) }}
+                                </td>
+                                <td>
+                                    @if(!empty($teacherearly[1]))
+                                        {{ bangla(Carbon::parse($teacherearly[1]->timestampdata)->diffForHumans(Carbon::parse($teacher->institute->departure))) }}
+                                    @endif
+                                </td>
+                                @php
+                                    $teacherearly = [];
+                                @endphp
                             </tr>
                         @endforeach
                         </tbody>
