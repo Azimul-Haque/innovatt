@@ -47,7 +47,6 @@
                                                    ->whereIn('device_id', $deviceids)
                                                    ->orderBy('timestampdata', 'asc')
                                                    ->get();
-
             @endphp
 
             @if(count($allLateTeachers)>0)

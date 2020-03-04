@@ -24,24 +24,28 @@
                     $allLeaveEarlyTeachers = [];
                     if(Auth::user()->role=='admin' || Auth::user()->role=='teo'){
                         $intitutes = Auth::user()->upazilla->institutes;
+                        $deviceids = Auth::user()->upazilla->institutes->lists('device_id');
                     } elseif(Auth::user()->role=='ateo'){
                         $intitutes = Auth::user()->institutes;
+                        $deviceids = Auth::user()->institutes->lists('device_id');
                     }
                     foreach ($intitutes as $institute) {
                         $teachers = $institute->users;
                         foreach ($teachers as $teacher) {
 
                             $earlyLeave = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
-                                ->where('device_id', $teacher->institute->device_id)
-                                ->where('device_pin', $teacher->device_pin)
-                                ->get();
-                            if (!empty($earlyLeave[1]) && (date('h-i', strtotime($earlyLeave[1]->timestampdata)) < date('h-i', strtotime('15:50')))) {
-                                            $allLeaveEarlyTeachers[] = $teacher;
+                                                    ->where('device_id', $teacher->institute->device_id)
+                                                    ->where('device_pin', $teacher->device_pin)
+                                                    ->get();
+                            if (!empty($earlyLeave[1]) && (date('h:i', strtotime($earlyLeave[1]->timestampdata)) < date('h:i', strtotime($teacher->institute->departure)))) {
+                                $allLeaveEarlyTeachers[] = $teacher;
                             }
                         }
                     }
-
-
+                    $todaysattendances = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                                   ->whereIn('device_id', $deviceids)
+                                                   ->orderBy('timestampdata', 'asc')
+                                                   ->get();
             @endphp
 
             @if(count($allLeaveEarlyTeachers)>0)
