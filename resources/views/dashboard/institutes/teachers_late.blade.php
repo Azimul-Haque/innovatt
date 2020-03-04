@@ -34,7 +34,7 @@
                             $late = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                 ->where('device_id', $teacher->institute->device_id)
                                 ->where('device_pin', $teacher->device_pin)
-                                ->where(DB::raw("DATE_FORMAT(timestampdata, '%h:%i')"), ">", date('h-i', strtotime('09:00')))
+                                ->where(DB::raw("DATE_FORMAT(timestampdata, '%h:%i')"), ">", date('h-i', strtotime($teacher->institute->entrance)))
                                 ->first();
                             if (!empty($late)) {
                                             $allLateTeachers[] = $teacher;
