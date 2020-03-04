@@ -660,15 +660,19 @@ class DashboardController extends Controller
     public function storeInstitute(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'serial' => 'required',
-            'device_id' => 'required|unique:institutes',
-            'upazilla_id' => 'required'
+            'name'         => 'required',
+            'serial'       => 'required',
+            'entrance'     => 'required',
+            'departure'    => 'required',
+            'device_id'    => 'required|unique:institutes',
+            'upazilla_id'  => 'required'
         ]);
 
         $institute = new Institute;
         $institute->name = $request->name;
         $institute->serial = $request->serial;
+        $institute->entrance = date('H:i:s', strtotime($request->entrance));
+        $institute->departure = date('H:i:s', strtotime($request->departure));
         $institute->device_id = $request->device_id;
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();
@@ -692,16 +696,20 @@ class DashboardController extends Controller
         $institute = Institute::find($id);
 
         $this->validate($request, [
-            'name' => 'required',
-            'serial' => 'required',
-            'device_id' => 'required|unique:institutes,device_id,' . $institute->id,
-            'upazilla_id' => 'required'
+            'name'         => 'required',
+            'serial'       => 'required',
+            'entrance'     => 'required',
+            'departure'    => 'required',
+            'device_id'    => 'required|unique:institutes,device_id,' . $institute->id,
+            'upazilla_id'  => 'required'
         ]);
         
         $old_device_id = $institute->device_id;
         
         $institute->name = $request->name;
         $institute->serial = $request->serial;
+        $institute->entrance = date('H:i:s', strtotime($request->entrance));
+        $institute->departure = date('H:i:s', strtotime($request->departure));
         $institute->device_id = $request->device_id;
         $institute->upazilla_id = $request->upazilla_id;
         $institute->save();

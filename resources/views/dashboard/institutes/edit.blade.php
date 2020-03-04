@@ -31,6 +31,18 @@
             </div>
             <br/>
 
+            <div class="row">
+              <div class="col-md-6">
+                {!! Form::label('name', 'প্রতিষ্ঠানে প্রবেশের সময় *') !!}
+                <input type="text" id="entrance" name="entrance" class="form-control" value="{{ date('h:i A', strtotime($institute->entrance)) }}" autocomplete="off" required="">
+              </div>
+              <div class="col-md-6">
+                {!! Form::label('serial', 'প্রতিষ্ঠানে ত্যাগের সময় *') !!}
+                <input type="text" id="departure" name="departure" class="form-control" value="{{ date('h:i A', strtotime($institute->departure)) }}" autocomplete="off" required="">
+              </div>
+            </div>
+            <br/>
+
             {!! Form::label('device_id', 'ডিভাইস আইডি (বক্স/ মেশিনের গায়ে স্টিকারে SN এর পরের অংশটুকু) *') !!}
             {!! Form::text('device_id', null, array('class' => 'form-control', 'required' => '', 'autocomplete' => 'off')) !!} <br/>
             
@@ -55,6 +67,7 @@
 @stop
 
 @section('js')
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
   <script>
       $("#entrance").datetimepicker({

@@ -29,15 +29,15 @@
                 {!! Form::text('serial', null, array('class' => 'form-control', 'required' => '')) !!}
               </div>
             </div><br/>
-            
+
             <div class="row">
               <div class="col-md-6">
-                {!! Form::label('name', 'প্রতিষ্ঠানের নাম *') !!}
-                {!! Form::text('name', null, array('class' => 'form-control', 'required' => '')) !!}
+                {!! Form::label('name', 'প্রতিষ্ঠানে প্রবেশের সময় *') !!}
+                <input type="text" id="entrance" name="entrance" class="form-control" value="{{ date('h:i A', strtotime(Auth::user()->upazilla->entrance)) }}" autocomplete="off" required="">
               </div>
               <div class="col-md-6">
-                {!! Form::label('serial', 'প্রতিষ্ঠানের ক্রমিক *') !!}
-                {!! Form::text('serial', null, array('class' => 'form-control', 'required' => '')) !!}
+                {!! Form::label('serial', 'প্রতিষ্ঠানে ত্যাগের সময় *') !!}
+                <input type="text" id="departure" name="departure" class="form-control" value="{{ date('h:i A', strtotime(Auth::user()->upazilla->departure)) }}" autocomplete="off" required="">
               </div>
             </div>
             <br/>
@@ -66,6 +66,7 @@
 @stop
 
 @section('js')
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
   <script>
       $("#entrance").datetimepicker({
