@@ -3,7 +3,7 @@
 @section('title', 'প্রতিষ্ঠান যোগ')
 
 @section('css')
-
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 @stop
 
 @section('content_header')
@@ -55,6 +55,15 @@
 @stop
 
 @section('js')
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+  <script>
+      $("#entrance").datetimepicker({
+          format: 'LT',
+      });
+      $("#departure").datetimepicker({
+          format: 'LT',
+      });
+  </script>
   <script type="text/javascript">
     $('#upazilla_id').select2();
   </script>
