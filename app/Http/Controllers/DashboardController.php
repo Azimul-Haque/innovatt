@@ -50,6 +50,7 @@ class DashboardController extends Controller
             $totalpresenttoday = 0;
             $totallateentrytoday = 0;
             $totalearlyleavetoday = 0;
+
             foreach ($queryTeachers as $teacher) {
                 $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                         ->where('device_id', $teacher->institute->device_id)
@@ -68,14 +69,11 @@ class DashboardController extends Controller
                     $totallateentrytoday++;
                 }
 
-                // early er ekhane kaaj ache
-                // early er ekhane kaaj ache
-                // early er ekhane kaaj ache
                 $earlies = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
-                    ->where('device_id', $teacher->institute->device_id)
-                    ->where('device_pin', $teacher->device_pin)
-                    ->get();
-                    
+                                     ->where('device_id', $teacher->institute->device_id)
+                                     ->where('device_pin', $teacher->device_pin)
+                                     ->get();
+
                 if (!empty($earlies[1]) && (date('h:i', strtotime($earlies[1]->timestampdata)) < date('h:i', strtotime($teacher->institute->departure)))) {
                     $totalearlyleavetoday++;
                 }
@@ -112,9 +110,7 @@ class DashboardController extends Controller
         $instituteIds = Institute::where('user_id', $ateo->id)->lists('id');
         $institutes = Institute::where('user_id', $ateo->id)->get();
         $queryTeachers = [];
-
         $totalTeachers = 0;
-        $totalpresenttoday = 0;
 
         foreach ($institutes as $institute) {
             $totalTeachers += $institute->users->count();
@@ -122,8 +118,12 @@ class DashboardController extends Controller
                 $queryTeachers[] = $teacher;
             }
         }
-        // dd($queryTeachers);
 
+        
+        $totalpresenttoday = 0;
+        $totallateentrytoday = 0;
+        $totalearlyleavetoday = 0;
+        
         foreach ($queryTeachers as $teacher) {
             $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
                                     ->where('device_id', $teacher->institute->device_id)
@@ -132,13 +132,33 @@ class DashboardController extends Controller
             if (!empty($attendance)) {
                 $totalpresenttoday++;
             }
+
+            $late = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                              ->where('device_id', $teacher->institute->device_id)
+                              ->where('device_pin', $teacher->device_pin)
+                              ->where(DB::raw("DATE_FORMAT(timestampdata, '%h:%i')"), ">", date('h:i', strtotime($teacher->institute->entrance)))
+                              ->first();
+            if (!empty($late)) {
+                $totallateentrytoday++;
+            }
+
+            $earlies = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", Carbon::now()->format('Y-m-d'))
+                                 ->where('device_id', $teacher->institute->device_id)
+                                 ->where('device_pin', $teacher->device_pin)
+                                 ->get();
+                
+            if (!empty($earlies[1]) && (date('h:i', strtotime($earlies[1]->timestampdata)) < date('h:i', strtotime($teacher->institute->departure)))) {
+                $totalearlyleavetoday++;
+            }
         }
 
         return view('dashboard.upazillas.ateo')
             ->withAteo($ateo)
             ->withInstitutes($institutes)
             ->withTotalteachers($totalTeachers)
-            ->withTotalpresenttoday($totalpresenttoday);
+            ->withTotalpresenttoday($totalpresenttoday)
+            ->withTotallateentrytoday($totallateentrytoday)
+            ->withTotalearlyleavetoday($totalearlyleavetoday);
     }
 
 

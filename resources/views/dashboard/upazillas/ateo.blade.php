@@ -71,6 +71,32 @@
             </div>
         </a>
     </div>
+    <div class="row">
+        <a href="{{route('dashboard.institute.teachers.late')}}">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">বিলম্বিত প্রবেশ</span>
+                        <span class="info-box-number">{{ bangla($totallateentrytoday) }} জন</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="{{route('dashboard.institute.teachers.early')}}">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-exclamation-triangle"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">পূর্বে প্রস্থান</span>
+                        <span class="info-box-number">{{ bangla($totalearlyleavetoday) }} জন</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 
     <div class="row">
         <div class="col-md-9">
