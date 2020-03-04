@@ -87,6 +87,11 @@ Route::put('/personal/profile/{id}/update', ['as'=>'dashboard.profile.update','u
 
 
 
+// Temporary
+Route::get('/delete/temporary', ['as'=>'index.deletetemporary','uses'=>'IndexController@deleteUpazillasInstitutes']);
+
+
+
 
 // reports
 Route::post('/report/institute/pdf/daily/{device_id}', ['as'=>'report.institute.daily','uses'=>'ReportController@getInstituteDailyCombinedReport']);

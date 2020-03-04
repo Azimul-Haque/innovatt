@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Upazilla;
 use App\Institute;
 use App\User;
+use App\Attendance;
 
 use Carbon\Carbon;
 
@@ -71,6 +72,18 @@ class IndexController extends Controller
         // } else {
         //     return redirect()->route('index.contact')->with('warning', 'যোগফল ভুল হয়েছে! আবার চেষ্টা করুন।')->withInput();
         // }
+    }
+
+    public function deleteUpazillasInstitutes()
+    {
+        $institutes = Institute::whereIn('upazilla_id', [23, 517, 519])->get();
+        $attendances = Attendance::all();
+
+        dd($institutes);
+        foreach ($institutes as $institute) {
+            
+        }
+
     }
 
     // clear configs, routes and serve
