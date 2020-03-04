@@ -79,11 +79,13 @@ class IndexController extends Controller
         $institutes = Institute::whereIn('upazilla_id', [23, 517, 519])->get();
         $attendances = Attendance::all();
 
-        dd($institutes);
         foreach ($institutes as $institute) {
-            
+            foreach ($attendances as $attendance) {
+                if($attendance->device_id == $institute->device_id) {
+                    $attendance->delete();
+                }
+            }
         }
-
     }
 
     // clear configs, routes and serve
