@@ -75,7 +75,7 @@ class DashboardController extends Controller
                     ->where('device_id', $teacher->institute->device_id)
                     ->where('device_pin', $teacher->device_pin)
                     ->get();
-                if (!empty($earlies[1]) && (date('h-i', strtotime($earlies[1]->timestampdata)) < date('h:i', strtotime('15:50')))) {
+                if (!empty($earlies[1]) && (date('h-i', strtotime($earlies[1]->timestampdata)) < date('h:i', strtotime($teacher->institute->departure)))) {
                     $totalearlyleavetoday++;
                 }
             }

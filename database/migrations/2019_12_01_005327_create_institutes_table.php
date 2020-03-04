@@ -19,7 +19,7 @@ class CreateInstitutesTable extends Migration
             $table->integer('upazilla_id')->unsigned();
             $table->string('serial')->default('1');
             $table->time('entrance')->default('09:00:00');
-            $table->time('departure')->default('09:00:00');
+            $table->time('departure')->default('16:30:00');
             $table->integer('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
