@@ -210,7 +210,7 @@
                             <tr>
                                 <td>
                                     <a href="{{ route('dashboard.user.single', $teacher['id']) }}" title="বিস্তারিত দেখুন">
-                                       {{ $teacher['name'] }}s
+                                       {{ $teacher['name'] }}
                                     </a>
                                     <br/>
                                     <small>
@@ -235,10 +235,17 @@
                         @endforeach
                         @foreach($absents as $teacher)
                             <tr>
-                                <td>{{ $teacher['name'] }}<br/><small><a href="tel:{{ $teacher['phone'] }}"
-                                                                         title="ফোন করুন"><i
-                                                    class="fa fa-phone"></i> {{$teacher['phone'] }}</a></small></td>
-
+                                <td>
+                                    <a href="{{ route('dashboard.user.single', $teacher['id']) }}" title="বিস্তারিত দেখুন">
+                                       {{ $teacher['name'] }}
+                                    </a>
+                                    <br/>
+                                    <small>
+                                        <a href="tel:{{ $teacher['phone'] }}" title="ফোন করুন">
+                                            <i class="fa fa-phone"></i> {{$teacher['phone'] }}
+                                        </a>
+                                    </small>
+                                </td>
                                 <td>
                                     @if($teacher['leave_start_date'] == null)
                                         অনুপস্থিত

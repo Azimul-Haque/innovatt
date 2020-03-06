@@ -14,11 +14,11 @@
 @section('content_header')
     <h1>
       {{ $teacher->name }}, {{ $teacher->institute->name }}, {{ $teacher->institute->upazilla->upazilla_bangla }}
-      (@if(Auth::user()->upazilla->contact != null)
+      @if(Auth::user()->upazilla->contact != null)
           (<a href="tel:{{ Auth::user()->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
               <i class="fa fa-phone"></i> {{ bangla(Auth::user()->upazilla->contact) }}
           </a>)
-      @endif)
+      @endif
       <div class="pull-right">
         <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
       </div>
