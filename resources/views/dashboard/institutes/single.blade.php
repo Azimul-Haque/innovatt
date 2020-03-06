@@ -272,7 +272,7 @@
                             <th>ছুটি শুরুর তারিখ</th>
                             <th>ছুটি শেষের তারিখ</th>
                             <th>ছুটির কারণ</th>
-                            <th>প্রদানকারী</th>
+                            <th>ছুটি প্রদানকারী</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -282,7 +282,7 @@
                                 <td>{{ bangla(date('F d, Y', strtotime($leave->leave_start))) }}</td>
                                 <td>{{ bangla(date('F d, Y', strtotime($leave->leave_end))) }}</td>
                                 <td>{{ $leave->reason }}</td>
-                                <td>{{ $leave->issuer->name }} {{ designation($leave->issuer->role) }}</td>
+                                <td>{{ $leave->issuer->name }} ({{ designation($leave->issuer->role) }})</td>
                             </tr>
                             @endforeach
                         </tbody>
