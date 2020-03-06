@@ -50,19 +50,21 @@
                                 {!! Form::label('role', 'ধরন *') !!}
                                     <select name="role" id="role_dropdown"  onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)" class="form-control" required="">
                                         @if(Auth::user()->role == 'admin')
-                                        <option value="teo" @if($teacher->role == 'teo') selected="" @endif>শিক্ষা অফিসার/
-                                            অনুমোদিত কর্তৃপক্ষ
-                                        </option>
-                                        <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
-                                            প্রধান শিক্ষক
-                                        </option>
-                                        <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
-                                            শিক্ষক
-                                        </option>
-                                        <option value="officeassistant" @if($teacher->role == 'officeassistant') selected="" @endif>
-                                            অফিস সহকারি
-                                        </option>
-                                        <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
+                                            <option value="teo" @if($teacher->role == 'admin') selected="" @endif>অ্যাডমিন
+                                            </option>
+                                            <option value="teo" @if($teacher->role == 'teo') selected="" @endif>শিক্ষা অফিসার/
+                                                অনুমোদিত কর্তৃপক্ষ
+                                            </option>
+                                            <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
+                                                প্রধান শিক্ষক
+                                            </option>
+                                            <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
+                                                শিক্ষক
+                                            </option>
+                                            <option value="officeassistant" @if($teacher->role == 'officeassistant') selected="" @endif>
+                                                অফিস সহকারি
+                                            </option>
+                                            <option value="ateo"  @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
                                         @elseif(Auth::user()->role=='teo')
                                             @if($teacher->role == 'ateo')
                                                 <option value="ateo" @if($teacher->role == 'ateo') selected="" @endif>ATEO</option>
@@ -154,31 +156,6 @@
 
                 </div>
             </div>
-            @if($teacher->role=='teacher' || $teacher->role=='headmaster' || $teacher->role=='officeassistant')
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">ছুটির বর্ণনা</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="leave_start_date">শুরু</label>
-                                <input  type="text" class="form-control" name="leave_start_date" id='leave_start_date' placeholder="F d, Y" @if($teacher->leave_start_date!=null) value="{{ date('F d, Y', strtotime($teacher->leave_start_date)) }}" @endif readonly="">
-                                {{--                                {!! Form::label('leave_end_date', 'শেষ') !!}--}}
-{{--                                {!! Form::label('leave_start_date', 'শুরু') !!}--}}
-{{--                                {!! Form::date('leave_start_date', null, array('class'=>'form-control')) !!}--}}
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leave_end_date">শেষ</label>
-{{--                                {!! Form::label('leave_end_date', 'শেষ') !!}--}}
-                                <input  type="text" class="form-control" name="leave_end_date" id='leave_end_date' placeholder="F d, Y" @if($teacher->leave_end_date!=null) value="{{ date('F d, Y', strtotime($teacher->leave_end_date)) }}" @endif readonly="">
-                            </div>
-                            </div>
-                        </div>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
         {!! Form::close() !!}
     @endif
