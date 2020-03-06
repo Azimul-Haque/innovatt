@@ -20,6 +20,7 @@
           </a>)
       @endif
       <div class="pull-right">
+        <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-primary" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
         <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
       </div>
     </h1>

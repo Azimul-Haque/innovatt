@@ -57,8 +57,7 @@
                                 </td>
                                 <td>{{ designation($teacher->role) }}</td>
                                 <td>
-                                    <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
-                                       class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
+                                    <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-success btn-sm" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i>
                                     </a>
                                     {{-- <a href="{{ route('dashboard.users.edit', $teacher->id) }}"
                                        class="btn btn-success btn-sm" title="ছুটি প্রদান"><i class="fa fa-sign-out"></i>
