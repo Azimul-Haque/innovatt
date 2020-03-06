@@ -374,11 +374,7 @@ class DashboardController extends Controller
         $user->save();
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
-        if (Auth::user()->role == 'admin') {
-            return redirect()->route('dashboard.users');
-        } else {
-            return redirect()->route('dashboard.institute.single', $user->institute->device_id);
-        }
+        return redirect()->route('dashboard.institute.single', $user->institute->device_id);
     }
 
     public function deleteUser(Request $request, $id)
