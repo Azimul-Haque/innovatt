@@ -195,6 +195,7 @@
                             foreach($attendances as $attendance) {
                               foreach($teachers as $teacher) {
                                 if(($attendance->device_pin == $teacher->device_pin)) {
+                                  $datearray[$teacher->id][$counter]['id'] = $teacher->id;
                                   $datearray[$teacher->id][$counter]['name'] = $teacher->name;
                                   $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
                                   $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
@@ -208,9 +209,15 @@
                         @foreach($datearray as $teacher)
                             <tr>
                                 <td>
-                                    {{ reset($teacher)['name'] }}<br/><small><a
-                                                href="tel:{{ reset($teacher)['phone'] }}" title="ফোন করুন"><i
-                                                    class="fa fa-phone"></i> {{ reset($teacher)['phone'] }}</a></small>
+                                    <a href="{{ route('dashboard.user.single', $teacher['id']) }}" title="বিস্তারিত দেখুন">
+                                       {{ $teacher['name'] }}s
+                                    </a>
+                                    <br/>
+                                    <small>
+                                        <a href="tel:{{ reset($teacher)['phone'] }}" title="ফোন করুন">
+                                            <i class="fa fa-phone"></i> {{ reset($teacher)['phone'] }}
+                                        </a>
+                                    </small>
                                 </td>
 
                                 <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
