@@ -21,12 +21,12 @@
             <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
-                {!! Form::label('leave_start_date', 'ছুটি শুরুর তারিখ') !!}
-                {!! Form::text('leave_start_date', null, array('class' => 'form-control', 'placeholder' => 'ছুটি শুরুর তারিখ', 'autocomplete' => 'off', 'required' => '')) !!}
+                {!! Form::label('leave_start', 'ছুটি শুরুর তারিখ') !!}
+                {!! Form::text('leave_start', null, array('class' => 'form-control', 'placeholder' => 'ছুটি শুরুর তারিখ', 'autocomplete' => 'off', 'required' => '')) !!}
               </div>
               <div class="col-md-6">
-                {!! Form::label('leave_end_date', 'ছুটি শেষের তারিখ') !!}
-                {!! Form::text('leave_end_date', null, array('class' => 'form-control', 'placeholder' => 'ছুটি শেষের তারিখ', 'autocomplete' => 'off', 'required' => '')) !!}
+                {!! Form::label('leave_end', 'ছুটি শেষের তারিখ') !!}
+                {!! Form::text('leave_end', null, array('class' => 'form-control', 'placeholder' => 'ছুটি শেষের তারিখ', 'autocomplete' => 'off', 'required' => '')) !!}
               </div>
             </div> <br/>
             <div class="row">
@@ -65,12 +65,12 @@
 @section('js')
     <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script>
-        $("#leave_start_date").datepicker({
+        $("#leave_start").datepicker({
             format: 'MM dd, yyyy',
             todayHighlight: true,
             autoclose: true,
         });
-        $("#leave_end_date").datepicker({
+        $("#leave_end").datepicker({
             format: 'MM dd, yyyy',
             todayHighlight: true,
             autoclose: true,

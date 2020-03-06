@@ -18,6 +18,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Institute');
     }
 
+    public function leaves() {
+      return $this->hasMany('App\Payment', 'member_id', 'id');
+    }
+
+    public function leaveissuers() {
+      return $this->hasMany('App\Payment', 'payer_id', 'id');
+    }
+
 
     protected $hidden = [
         'password', 'remember_token',
