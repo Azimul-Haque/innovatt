@@ -17,10 +17,12 @@
       <div class="col-md-6">
         <div class="panel panel-primary">
           <div class="panel-heading">ছুটি প্রদান ফরম</div>
-          {!! Form::open(['route' => 'dashboard.users.store', 'method' => 'POST']) !!}
+          {!! Form::open(['route' => 'dashboard.storeleave', 'method' => 'POST']) !!}
             <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
+                {!! Form::hidden('teacher_id', $teacher->id) !!}
+
                 {!! Form::label('leave_start', 'ছুটি শুরুর তারিখ') !!}
                 {!! Form::text('leave_start', null, array('class' => 'form-control', 'placeholder' => 'ছুটি শুরুর তারিখ', 'autocomplete' => 'off', 'required' => '')) !!}
               </div>

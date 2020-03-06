@@ -9,6 +9,7 @@ use App\User;
 use App\Upazilla;
 use App\Institute;
 use App\Attendance;
+use App\Leave;
 
 use Carbon\Carbon;
 use DB, Hash, Auth, Image, File, Session;
@@ -396,19 +397,30 @@ class DashboardController extends Controller
 
     public function storeLeave(Request $request)
     {
-        $user = User::find($id);
         $this->validate($request, [
-            'name' => 'required',
-            'gender' => 'required',
-            'role' => 'required',
-            'phone' => 'required|unique:users,phone,' . $user->id,
-            'upazilla_id' => 'required',
-            'institute_id' => 'sometimes',
-            'password' => 'sometimes'
+            'leave_start'       => 'required',
+            'leave_end'         => 'required',
+            'reason'            => 'required'
         ]);
 
-        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
-        return redirect()->route('dashboard.institutes');
+        $teacher = User::find($request->teacher_id);
+
+        $leave = new Leave;
+        $leave->leave_start = date('Y-m-d', strtotime($request->leave_start));
+        $leave->leave_end = date('Y-m-d', strtotime($request->leave_end));
+        if($leave->reason == 'other') {
+            $leave->reason = $request->otherreason;
+        } else {
+            $leave->reason = $request->reason;
+        }
+        
+        $leave->institute_id = $teacher->institute_id;
+        $leave->teacher_id = $teacher->id;
+        $leave->issuer_id = Auth::user()->id;
+        $leave->save();
+
+        Session::flash('success', 'সফলভাবে সংরক্ষণ করা হয়েছে!');
+        return redirect()->route('dashboard.institute.single', $teacher->institute->device_id);
 
     }
 

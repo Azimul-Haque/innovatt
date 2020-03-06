@@ -17,4 +17,8 @@ class Institute extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+
+    public function leaves() {
+      return $this->hasMany('App\Leave');
+    }
 }

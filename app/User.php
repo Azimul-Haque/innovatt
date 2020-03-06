@@ -19,11 +19,11 @@ class User extends Authenticatable
     }
 
     public function leaves() {
-      return $this->hasMany('App\Payment', 'member_id', 'id');
+      return $this->hasMany('App\Leave', 'teacher_id', 'id');
     }
 
-    public function leaveissuers() {
-      return $this->hasMany('App\Payment', 'payer_id', 'id');
+    public function issuedleaves() {
+      return $this->hasMany('App\Leave', 'issuer_id', 'id');
     }
 
 
