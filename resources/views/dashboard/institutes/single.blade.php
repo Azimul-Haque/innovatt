@@ -262,6 +262,32 @@
                         </tbody>
                     </table>
                 </div>
+
+                <big>চলতি ছুটিতে আছেন যারা</big>
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>শিক্ষক/ অফিস সহকারি</th>
+                            <th>ছুটি শুরুর তারিখ</th>
+                            <th>ছুটি শেষের তারিখ</th>
+                            <th>ছুটির কারণ</th>
+                            <th>প্রদানকারী</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($leaves as $leave)
+                            <tr>
+                                <td>{{ $leave->teacher->name }}</td>
+                                <td>{{ bangla(date('F d, Y', strtotime($leave->leave_start))) }}</td>
+                                <td>{{ bangla(date('F d, Y', strtotime($leave->leave_end))) }}</td>
+                                <td>{{ $leave->reason }}</td>
+                                <td>{{ $leave->issuer->name }} {{ designation($leave->issuer->role) }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     @endif

@@ -10,7 +10,7 @@ class Leave extends Model
       return $this->belongsTo('App\Institute');
     }
 
-    public function leave() {
+    public function teacher() {
       return $this->belongsTo('App\User', 'teacher_id', 'id');
     }
 

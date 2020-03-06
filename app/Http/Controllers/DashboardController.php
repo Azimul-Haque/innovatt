@@ -403,12 +403,33 @@ class DashboardController extends Controller
             'reason'            => 'required'
         ]);
 
+        // check if wrong format date...
+        if(date('Y-m-d', strtotime($request->leave_start)) > date('Y-m-d', strtotime($request->leave_end))) {
+            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! যাচাই করুন।');
+            return redirect()->back();
+        }
+
         $teacher = User::find($request->teacher_id);
+
+        // check if between...
+        $leave1check = Leave::where('teacher_id', $request->teacher_id)
+                            ->where('leave_start', '<=', date('Y-m-d', strtotime($request->leave_start)))
+                            ->where('leave_end', '>=', date('Y-m-d', strtotime($request->leave_start)))
+                            ->first();
+        $leave2check = Leave::where('teacher_id', $request->teacher_id)
+                            ->where('leave_start', '<=', date('Y-m-d', strtotime($request->leave_end)))
+                            ->where('leave_end', '>=', date('Y-m-d', strtotime($request->leave_end)))
+                            ->first();
+
+        if(($leave1check != null) || ($leave2check != null)) {
+            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! যাচাই করুন।');
+            return redirect()->back();
+        }
 
         $leave = new Leave;
         $leave->leave_start = date('Y-m-d', strtotime($request->leave_start));
         $leave->leave_end = date('Y-m-d', strtotime($request->leave_end));
-        if($leave->reason == 'other') {
+        if($request->reason == 'other') {
             $leave->reason = $request->otherreason;
         } else {
             $leave->reason = $request->reason;
@@ -802,13 +823,18 @@ class DashboardController extends Controller
                 $absents[] = $queryTeacher;
             }
         }
-//        dd($absents);
 
+        $leaves = Leave::where('institute_id', $institute->id)
+                       ->where('leave_start', '<=', date('Y-m-d'))
+                       ->where('leave_end', '>=', date('Y-m-d'))
+                       ->orderBy('id', 'desc')
+                       ->get();
         return view('dashboard.institutes.single')
             ->withInstitute($institute)
             ->withAbsents($absents)
             ->withAttendances($attendances)
-            ->withTeachers($teachers);
+            ->withTeachers($teachers)
+            ->withLeaves($leaves);
     }
 
     public function getInstituteList(){
