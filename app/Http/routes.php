@@ -53,6 +53,8 @@ Route::put('/user/{id}/update/ateo', ['as'=>'dashboard.users.update.ateo','uses'
 Route::get('/user/{id}', ['as'=>'dashboard.user.single','uses'=>'DashboardController@getSingleUser']);
 Route::delete('/user/{id}/delete', ['as'=>'dashboard.user.delete','uses'=>'DashboardController@deleteUser']);
 
+Route::get('/teacher/leave/page/{id}', ['as'=>'dashboard.leavepage','uses'=>'DashboardController@getLeaveaPage']);
+
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
 Route::get('/upazillas/ateo/{id}', ['as'=>'dashboard.upazillas.ateo','uses'=>'DashboardController@getAteo']);
 Route::get('/upazilla/{id}/school/list', ['as'=>'dashboard.upazillas.schools','uses'=>'DashboardController@getUpazillaSchools']);
