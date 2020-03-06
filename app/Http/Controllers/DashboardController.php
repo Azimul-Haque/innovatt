@@ -343,19 +343,18 @@ class DashboardController extends Controller
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
-//        dd($request->leave_start_date);
 
 
-        if( $request->leave_start_date!= '' ||  $request->leave_end_date!= ''){
-            $start_date = Carbon::createFromFormat('F d, Y', $request->leave_start_date);
-            $end_date = Carbon::createFromFormat('F d, Y', $request->leave_end_date);
+        // if( $request->leave_start_date!= '' ||  $request->leave_end_date!= ''){
+        //     $start_date = Carbon::createFromFormat('F d, Y', $request->leave_start_date);
+        //     $end_date = Carbon::createFromFormat('F d, Y', $request->leave_end_date);
             
-            $user->leave_start_date = $start_date;
-            $user->leave_end_date = $end_date;
-        } else{
-            $user->leave_start_date = null;
-            $user->leave_end_date = null;
-        }
+        //     $user->leave_start_date = $start_date;
+        //     $user->leave_end_date = $end_date;
+        // } else{
+        //     $user->leave_start_date = null;
+        //     $user->leave_end_date = null;
+        // }
 
         if ($request->role != 'ateo'){
             if($request->role == 'teo') {
