@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact', 'getAtaGlance');
+        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact', 'getAtaGlance', 'getLeavePage', 'storeLeave');
     }
 
     public function index()
@@ -385,6 +385,32 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function getLeavePage($unique_key, $id)
+    {
+        $teacher = User::where('id', $id)
+                       ->where('unique_key', $unique_key)
+                       ->first();
+
+        return view('dashboard.users.leavepage')->withTeacher($teacher);
+    }
+
+    public function storeLeave(Request $request)
+    {
+        $user = User::find($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'gender' => 'required',
+            'role' => 'required',
+            'phone' => 'required|unique:users,phone,' . $user->id,
+            'upazilla_id' => 'required',
+            'institute_id' => 'sometimes',
+            'password' => 'sometimes'
+        ]);
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        return redirect()->route('dashboard.institutes');
+
+    }
 
     public function updateAteo(Request $request, $id)
     {
@@ -410,9 +436,6 @@ class DashboardController extends Controller
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
-//        dd($request->leave_start_date);
-
-
 
         if ($request->role != 'ateo'){
             if($request->role == 'teo')
@@ -420,9 +443,7 @@ class DashboardController extends Controller
             else
                 $user->institute_id = $request->institute_id[0];
             $user->save();
-        }
-
-        else {
+        } else {
             $user->institute_id = 0;
             $user->save();
 
@@ -430,7 +451,6 @@ class DashboardController extends Controller
                 $ateoInstitute = Institute::find($institute);
                 $ateoInstitute->user_id = $user->id;
                 $ateoInstitute->save();
-//                dd($ateoInstitute);
             }
         }
 

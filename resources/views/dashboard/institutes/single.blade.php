@@ -92,8 +92,7 @@
                                     <!-- Delete Modal -->
                                     @endif
 
-                                    <a href="{{ route('dashboard.leavepage', $teacher->id) }}" class="btn btn-warning btn-sm" title="ছুটি প্রদান করুন"><i class="fa fa-power-off"></i>
-                                    </a>
+                                    <a href="{{ route('dashboard.leavepage', [$teacher->unique_key, $teacher->id]) }}" class="btn btn-warning btn-sm" title="ছুটি প্রদান করুন"><i class="fa fa-power-off"></i></a>
                                 </td>
                             </tr>
                         @endforeach
