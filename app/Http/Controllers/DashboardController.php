@@ -408,7 +408,7 @@ class DashboardController extends Controller
 
         // check if wrong format date...
         if(date('Y-m-d', strtotime($request->leave_start)) > date('Y-m-d', strtotime($request->leave_end))) {
-            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! যাচাই করুন।');
+            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! সঠিকভাবে দিন।');
             return redirect()->back();
         }
 
@@ -425,7 +425,7 @@ class DashboardController extends Controller
                             ->first();
 
         if(($leave1check != null) || ($leave2check != null)) {
-            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! যাচাই করুন।');
+            Session::flash('warning', 'তারিখ দিতে ভুল হচ্ছে! সঠিকভাবে দিন।');
             return redirect()->back();
         }
 

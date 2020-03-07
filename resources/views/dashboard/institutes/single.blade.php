@@ -210,8 +210,8 @@
                         @foreach($datearray as $teacher)
                             <tr>
                                 <td>
-                                    <a href="{{ route('dashboard.user.single', $teacher['id']) }}" title="বিস্তারিত দেখুন">
-                                       {{ $teacher['name'] }}
+                                    <a href="{{ route('dashboard.user.single', reset($teacher)['id']) }}" title="বিস্তারিত দেখুন">
+                                       {{ reset($teacher)['name'] }}
                                     </a>
                                     <br/>
                                     <small>
@@ -258,9 +258,9 @@
                                         }
                                     @endphp
                                     @if($inleave == 1)
-                                        <span style="color: #"><b>ছুটিতে</b></span>
+                                        <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে</b></span>
                                     @else
-                                        অনুপস্থিত
+                                        <span style="color: #FF0000;"><b><i class="fa fa-exclamation-triangle"></i> অনুপস্থিত</b></span>
                                     @endif
                                 </td>
                                 <td></td>
@@ -291,7 +291,11 @@
                                 <td>{{ bangla(date('F d, Y', strtotime($leave->leave_start))) }}</td>
                                 <td>{{ bangla(date('F d, Y', strtotime($leave->leave_end))) }}</td>
                                 <td>{{ $leave->reason }}</td>
-                                <td>{{ $leave->issuer->name }} ({{ designation($leave->issuer->role) }})</td>
+                                <td>
+                                    @if($leave->issuer !=null)
+                                        {{ $leave->issuer->name }} ({{ designation($leave->issuer->role) }})
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

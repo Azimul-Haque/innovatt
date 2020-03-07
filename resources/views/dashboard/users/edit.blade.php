@@ -79,6 +79,16 @@
                                                     অফিস সহকারি
                                                 </option>
                                             @endif
+                                        @elseif(Auth::user()->role=='headmaster')
+                                            <option value="headmaster" @if($teacher->role == 'headmaster') selected="" @endif>
+                                                প্রধান শিক্ষক
+                                            </option>
+                                            <option value="teacher" @if($teacher->role == 'teacher') selected="" @endif>সহকারি
+                                                শিক্ষক
+                                            </option>
+                                            <option value="officeassistant" @if($teacher->role == 'officeassistant') selected="" @endif>
+                                                অফিস সহকারি
+                                            </option>
                                         @endif
                                     </select>
 
