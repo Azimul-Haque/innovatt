@@ -60,10 +60,10 @@
             foreach($attendances as $attendance) {
                 foreach($teachers as $teacher) {
                     if(($attendance->device_pin == $teacher->device_pin)) {
-                        $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-                        $datearray[$teacher->id][$counter]['present'] = 'present';
+                        $datearray[$teacher->id][$counter]['id'] = $teacher->id;
                         $datearray[$teacher->id][$counter]['name'] = $teacher->name;
                         $datearray[$teacher->id][$counter]['phone'] = $teacher->phone;
+                        $datearray[$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                         $counter++;
                     }
                 }
@@ -98,10 +98,21 @@
                 </td>
 
                 <td  align="center">
-                    @if($teacher['leave_start_date'] == null)
-                        অনুপস্থিত
+                    @php
+                        $inleave = 0;
+                        $reason = '';
+                        foreach($leaves as $leave)
+                        {
+                            if($teacher['id'] == $leave->teacher_id) {
+                                $inleave = 1;
+                                $reason = $leave->reason;        
+                            }
+                        }
+                    @endphp
+                    @if($inleave == 1)
+                        <span style="color: #4D7902;"><b>ছুটিতে ({{ $reason }})</b></span>
                     @else
-                        ছুটিতে
+                        <span style="color: #FF0000;"><b>অনুপস্থিত</b></span>
                     @endif
                 </td>
                 <td></td>
