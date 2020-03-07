@@ -25,8 +25,7 @@
                         <tr>
                             <th>শিক্ষক</th>
                             <th>প্রতিষ্ঠান</th>
-                            {{--                        <th>প্রস্থান</th>--}}
-                            {{--                        <th>অবস্থানকাল</th>--}}
+                            <th>অনুপস্থিতি/ ছুটিতে</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,26 +33,32 @@
                         @foreach($absents as $teacher)
                             <tr>
                                 <td>
-                                    <a href="{{ route('dashboard.user.single', $teacher->id) }}">{{ $teacher->name }}</a>
-                                    <br/><small><a href="tel:{{ $teacher->phone }}"
-                                                                       title="ফোন করুন"><i
-                                                    class="fa fa-phone"></i> {{ $teacher->phone }}</a></small>
+                                    <a href="{{ route('dashboard.user.single', $teacher->id) }}">{{ $teacher->name }}</a><br/>
+                                    <small>
+                                        <a href="tel:{{ $teacher->phone }}" title="ফোন করুন">
+                                            <i class="fa fa-phone"></i> {{ $teacher->phone }}
+                                        </a>
+                                    </small>
                                 </td>
                                 <td>
                                     <a href="{{ route('dashboard.institute.single', $teacher->institute->device_id) }}">{{ $teacher->institute->name }}</a>
                                     <br/><small> {{ $teacher->institute->device_id }}</small>
                                 </td>
-                                {{--                            <td>{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>--}}
-                                {{--                            <td>--}}
-                                {{--                                @if(reset($teacher) != end($teacher))--}}
-                                {{--                                    {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}--}}
-                                {{--                                @endif--}}
-                                {{--                            </td>--}}
-                                {{--                            <td>--}}
-                                {{--                                @if(reset($teacher) != end($teacher))--}}
-                                {{--                                    <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>--}}
-                                {{--                                @endif--}}
-                                {{--                            </td>--}}
+                                <td>
+                                    @php
+                                        $inleave = 0;
+                                        foreach ($teacher->leaves as $leave) {
+                                            if(($leave->leave_start <= date('Y-m-d')) && ($leave->leave_end >= date('Y-m-d'))) {
+                                                $inleave = 1;
+                                            }
+                                        }
+                                    @endphp
+                                    @if($inleave == 1)
+                                        <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে</b></span>
+                                    @else
+                                        <span style="color: #FF0000;"><b><i class="fa fa-exclamation-triangle"></i> অনুপস্থিত</b></span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
