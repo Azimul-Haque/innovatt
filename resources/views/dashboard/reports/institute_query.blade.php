@@ -62,12 +62,14 @@
               foreach($teachers as $teacher) {
                 if(($attendance->device_pin == $teacher->device_pin)) {
                     $found = true;
-                  $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-                  $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-                  $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
                 }
               }
-              if($found) $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+              if($found) {
+                $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+              }
               $counter++;
             }
         @endphp
