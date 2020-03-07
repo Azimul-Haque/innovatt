@@ -134,9 +134,18 @@ class ReportController extends Controller
 //        $allTeachers = $this->getAllTeachers();
         $teachersPresent = $this->getPresentTeachers($teachers);
 
-        $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
+        $absents = [];
+        foreach ($teachers as $teacher){
+            $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)
+                                    ->where('device_id', $teacher->institute->device_id)
+                                    ->where('device_pin', $teacher->device_pin)
+                                    ->first();
+            if (empty($attendance)) {
+                $absents[] = $teacher;
+            }
+        }
 //        dd(bangla(date('F d, Y', strtotime($request->query_start_date))));
-        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absentTeachers, 'start_date'=>$request->query_start_date, 'end_date'=>$request->query_end_date]);
+        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date]);
         $fileName = 'Institute_Query_Combined_Report_' . $request->query_start_date . '_' . $request->query_end_date . '_' . $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
