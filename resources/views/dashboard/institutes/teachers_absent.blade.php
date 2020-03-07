@@ -47,14 +47,16 @@
                                 <td>
                                     @php
                                         $inleave = 0;
+                                        $reason = '';
                                         foreach ($teacher->leaves as $leave) {
                                             if(($leave->leave_start <= date('Y-m-d')) && ($leave->leave_end >= date('Y-m-d'))) {
                                                 $inleave = 1;
+                                                $reason = $leave->reason;
                                             }
                                         }
                                     @endphp
                                     @if($inleave == 1)
-                                        <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে</b></span>
+                                        <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে ({{ $reason }})</b></span>
                                     @else
                                         <span style="color: #FF0000;"><b><i class="fa fa-exclamation-triangle"></i> অনুপস্থিত</b></span>
                                     @endif
