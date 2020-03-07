@@ -84,7 +84,7 @@
                         <span class="info-box-icon bg-yellow"><i class="fa fa-flag-o"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">আজকের অনুপস্থিতি</span>
+                            <span class="info-box-text">আজকের অনুপস্থিতি/ ছুটিতে</span>
                             <span class="info-box-number">{{ bangla($totalteachersupazilla - $totalpresenttoday) }} জন</span>
                         </div>
                     </div>
