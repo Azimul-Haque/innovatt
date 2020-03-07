@@ -112,23 +112,15 @@ class ReportController extends Controller
     {
         // createFromFormat e somossa ache
         // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        $start_date = Carbon::createFromFormat('F d, Y', $request->query_start_date);
-        $end_date = Carbon::createFromFormat('F d, Y', $request->query_end_date);
-//         if($start_date->gt($end_date))
-//            Session::flash('warning', 'সথিকভাবে দিন প্রবেশ করুন!');
-//         return redirect()->route('dashboard.institute.single', $device_id)->with('warning', 'সথিকভাবে দিন প্রবেশ করুন!');
-//         elseif($start_date->eq($end_date))
-//             return $this->getInstituteDailyCombinedReport($device_id);
-//         dd($device_id);
+        $start_date = date('F d, Y', strtotime($request->query_start_date));
+        $end_date = date('F d, Y', strtotime($request->query_end_date));
+        
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
-            ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), ">=", $start_date)
-            ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "<=", $end_date)
-            ->orderBy('timestampdata', 'asc')
-            ->get();
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), ">=", $start_date)
+                                 ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "<=", $end_date)
+                                 ->orderBy('timestampdata', 'asc')
+                                 ->get();
         $teachers = $institute->users;
 //        dd($teachers);
 //        $allTeachers = $this->getAllTeachers();
@@ -144,7 +136,7 @@ class ReportController extends Controller
                 $absents[] = $teacher;
             }
         }
-//        dd(bangla(date('F d, Y', strtotime($request->query_start_date))));
+
         $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date]);
         $fileName = 'Institute_Query_Combined_Report_' . $request->query_start_date . '_' . $request->query_end_date . '_' . $device_id .'.pdf';
         return $pdf->download($fileName); // stream
