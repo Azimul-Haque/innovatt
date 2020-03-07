@@ -380,6 +380,9 @@ class DashboardController extends Controller
     public function deleteUser(Request $request, $id)
     {
         $user = User::find($id);
+        foreach ($user->leaves as $leave) {
+            $leave->delete();
+        }
         $user->delete();
 
         Session::flash('success', 'সফলভাবে ডিলেট করা হয়েছে!');

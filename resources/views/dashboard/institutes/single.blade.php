@@ -248,11 +248,13 @@
                                     </small>
                                 </td>
                                 <td>
-                                    @if($teacher['leave_start_date'] == null)
-                                        অনুপস্থিত
-                                    @else
-                                        ছুটিতে
-                                    @endif
+                                    @foreach($leaves as $leave)
+                                        @if($teacher['leave_start_date'] == null)
+                                            অনুপস্থিত
+                                        @else
+                                            ছুটিতে
+                                        @endif
+                                    @endforeach
                                 </td>
                                 <td></td>
                                 <td></td>
