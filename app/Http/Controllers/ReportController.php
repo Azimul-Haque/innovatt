@@ -7,6 +7,7 @@ use App\User;
 use App\Upazilla;
 use App\Institute;
 use App\Attendance;
+use App\Leave;
 use Carbon\Carbon;
 use DB, Hash, Auth, Image, File, Session;
 use Purifier;
@@ -60,9 +61,7 @@ class ReportController extends Controller
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
         $teachers = $institute->users;
-        // dd($attendances);
-        // $teachersPresent = $this->getPresentTeachers($teachers);
-        // $absentTeachers = array_diff($teachers->toArray(), $teachersPresent);
+
         $absents = [];
         foreach ($teachers as $teacher){
             $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)
@@ -73,10 +72,16 @@ class ReportController extends Controller
                 $absents[] = $teacher;
             }
         }
-        // dd($absents);
-        $pdf = PDF::loadView('dashboard.reports.combined_report', ['querydate' => $date, 'institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents'=>$absents]);
+
+        // get leaves
+        $leaves = Leave::where('institute_id', $institute->id)
+                       ->where('leave_start', '<=', $date)
+                       ->where('leave_end', '>=', $date)
+                       ->orderBy('id', 'desc')
+                       ->get();
+        $pdf = PDF::loadView('dashboard.reports.combined_report', ['querydate' => $date, 'institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'leaves' => $leaves]);
         $fileName = 'Institute_Daily_Combined_Report_'. $device_id .'.pdf';
-        return $pdf->download($fileName); // stream
+        return $pdf->stream($fileName); // stream
     }
 
     public function getInstituteMonthlyReport($device_id) 
