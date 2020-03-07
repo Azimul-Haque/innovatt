@@ -17,7 +17,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 sm-4 ">
-            <big>অনুপস্থিতি/ ছুটি তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b></big>
+            <big>অনুপস্থিতির/ ছুটির তালিকাঃ <b>{{ bangla(date('F d, Y')) }}</b></big>
             @if(count($absents)>0)
                 <div class="table-responsive">
                     <table class="table table-condensed">
