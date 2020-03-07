@@ -127,26 +127,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Form::label('institute_id', 'প্রতিষ্ঠান *') !!}
-                                    <select name="institute_id[]" id="institute_id" class="form-control" required   @if($teacher->role=='ateo')
+                                    <select name="institute_id[]" id="institute_id" class="form-control" required @if($teacher->role=='ateo')
                                     multiple="multiple" @endif>
     {{--                                    <option value="" selected="" disabled="">প্রতিষ্ঠান নির্ধারণ করুন</option>--}}
 
                                         @if($teacher->role=='teacher' || $teacher->role=='headmaster' || $teacher->role=='officeassistant')
                                             @foreach($institutes as $institute)
-                                                <option value="{{ $institute->id }}"
-                                                        @if($teacher->institute_id == $institute->id ) selected="" @endif>{{ $institute->name }}
-                                                    , {{ $institute->upazilla->upazilla_bangla }}</option>
+                                                <option value="{{ $institute->id }}" @if($teacher->institute_id == $institute->id ) selected="" @endif>{{ $institute->name }} , {{ $institute->upazilla->upazilla_bangla }}</option>
                                             @endforeach
                                         @elseif($teacher->role=='ateo')
                                             @foreach($ateoinstitutes as $institute)
-                                                <option value="{{ $institute->id }}"
-                                                        selected="" >{{ $institute->name }}
-                                                    , {{ $institute->upazilla->upazilla_bangla }}</option>
+                                                <option value="{{ $institute->id }}" selected="">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                                             @endforeach
                                             @foreach($institutes as $institute)
-                                                <option value="{{ $institute->id }}"
-                                                        >{{ $institute->name }}
-                                                    , {{ $institute->upazilla->upazilla_bangla }}</option>
+                                                <option value="{{ $institute->id }}">{{ $institute->name }}, {{ $institute->upazilla->upazilla_bangla }}</option>
                                             @endforeach
                                         @endif
 {{--                                        <option value="0">শিক্ষা অফিসার (স্কুল প্রযোজ্য নয়)</option>--}}

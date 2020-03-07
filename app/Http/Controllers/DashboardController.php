@@ -325,14 +325,14 @@ class DashboardController extends Controller
     {
         $user = User::find($id);
         $this->validate($request, [
-            'name' => 'required',
-            'gender' => 'required',
-            'role' => 'required',
-            'phone' => 'required|unique:users,phone,' . $user->id,
-            'device_pin' => 'required',
-            'upazilla_id' => 'required',
-            'institute_id' => 'sometimes',
-            'password' => 'sometimes'
+            'name'          => 'required',
+            'gender'        => 'required',
+            'role'          => 'required',
+            'phone'         => 'required|unique:users,phone,' . $user->id,
+            'device_pin'    => 'required',
+            'upazilla_id'   => 'required',
+            'institute_id'  => 'sometimes',
+            'password'      => 'sometimes'
         ]);
 
         $user->name = $request->name;
