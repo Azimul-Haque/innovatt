@@ -111,19 +111,17 @@ class ReportController extends Controller
     public function getInstituteQueryReport(Request $request, $device_id)
     {
         // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
         $start_date = date('F d, Y', strtotime($request->query_start_date));
         $end_date = date('F d, Y', strtotime($request->query_end_date));
-        
+
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
                                  ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), ">=", $start_date)
                                  ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "<=", $end_date)
                                  ->orderBy('timestampdata', 'asc')
                                  ->get();
+                                 
         $teachers = $institute->users;
-//        dd($teachers);
-//        $allTeachers = $this->getAllTeachers();
         $teachersPresent = $this->getPresentTeachers($teachers);
 
         $absents = [];
@@ -141,14 +139,11 @@ class ReportController extends Controller
         $fileName = 'Institute_Query_Combined_Report_' . $request->query_start_date . '_' . $request->query_end_date . '_' . $device_id .'.pdf';
         return $pdf->download($fileName); // stream
     }
-    public function getTeacherQueryReport(Request $request, $unique_key){
+    public function getTeacherQueryReport(Request $request, $unique_key)
+    {
         // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        // createFromFormat e somossa ache
-        $start_date = Carbon::createFromFormat('F d, Y', $request->query_start_date);
-        $end_date = Carbon::createFromFormat('F d, Y', $request->query_end_date);
+        $start_date = date('F d, Y', strtotime($request->query_start_date));
+        $end_date = date('F d, Y', strtotime($request->query_end_date));
         $teachers = User::where('unique_key', $unique_key)->get();
 //        $teachers = [];
 //        $teachers[] = $teacher;
