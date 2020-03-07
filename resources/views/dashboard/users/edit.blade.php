@@ -50,7 +50,7 @@
                                 {!! Form::label('role', 'ধরন *') !!}
                                     <select name="role" id="role_dropdown"  onchange="checkRoleDrowpdown(this.options[this.selectedIndex].value)" class="form-control" required="">
                                         @if(Auth::user()->role == 'admin')
-                                            <option value="teo" @if($teacher->role == 'admin') selected="" @endif>অ্যাডমিন
+                                            <option value="admin" @if($teacher->role == 'admin') selected="" @endif>অ্যাডমিন
                                             </option>
                                             <option value="teo" @if($teacher->role == 'teo') selected="" @endif>শিক্ষা অফিসার/
                                                 অনুমোদিত কর্তৃপক্ষ
