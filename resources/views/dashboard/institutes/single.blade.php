@@ -248,13 +248,20 @@
                                     </small>
                                 </td>
                                 <td>
-                                    @foreach($leaves as $leave)
-                                        @if($teacher['leave_start_date'] == null)
-                                            অনুপস্থিত
-                                        @else
-                                            ছুটিতে
-                                        @endif
-                                    @endforeach
+                                    @php
+                                        $inleave = 0;
+                                        foreach($leaves as $leave)
+                                        {
+                                            if($teacher['id'] == $leave->teacher_id) {
+                                                $inleave = 1;           
+                                            }
+                                        }
+                                    @endphp
+                                    @if($inleave == 1)
+                                        <span style="color: #"><b>ছুটিতে</b></span>
+                                    @else
+                                        অনুপস্থিত
+                                    @endif
                                 </td>
                                 <td></td>
                                 <td></td>
