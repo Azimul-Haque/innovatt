@@ -66,10 +66,17 @@
                     $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
                     $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                 } else {
-                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
-                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
-                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    if(!empty($datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id]) && (count($datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id]) > 0)) {
+                        // $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
+                        // $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                        // $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                        // $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    } else {
+                        $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
+                        $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                        $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                        $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    }
                 }
               }
               $datearray[date('ymd', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
@@ -84,7 +91,7 @@
                 $atleastteacher = 0;
             @endphp
             @foreach($datearray as $datesingles)
-                @if(date('Y-m-d', strtotime($datesingles['date'])) == $dayfromallarray)
+                @if((date('Y-m-d', strtotime($datesingles['date'])) == $dayfromallarray) && (date('Y-m-d', strtotime($datesingles['date'])) == $dayfromallarray))
                     <tr>
                         <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
                     </tr>
@@ -95,7 +102,7 @@
                                 {{ reset($teacher)['name'] }}<br/>
                                 <small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                             </td>
-                            @if(date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
+                            @if(count($teacher) == 1 && date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
                                 <td align="center">
                                     @php
                                         $inleave = 0;
@@ -116,17 +123,51 @@
                                 <td align="center"></td>
                                 <td align="center"></td>
                             @else
-                                <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
-                                <td align="center">
-                                    @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
-                                        {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
-                                    @endif
-                                </td>
-                                <td align="center">
-                                    @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
-                                        <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
-                                    @endif
-                                </td>
+                                @if(count($teacher) == 2 && date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
+                                    <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}</td>
+                                    <td align="center">
+                                        
+                                    </td>
+                                    <td align="center">
+                                        
+                                    </td>
+                                @elseif(count($teacher) == 2 && date('Y-m-d', strtotime(end($teacher)['timestampdata'])) == '1970-01-01')
+                                    <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                                    <td align="center">
+                                        
+                                    </td>
+                                    <td align="center">
+                                        
+                                    </td>
+                                @elseif(count($teacher) > 2 && date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
+                                    @php
+                                        $key = key($teacher);
+                                        unset($teacher[$key]);
+                                    @endphp
+                                    <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                                    <td align="center">
+                                        @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                            {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+                                        @endif
+                                    </td>
+                                    <td align="center">
+                                        @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                            <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
+                                        @endif
+                                    </td>
+                                @else
+                                    <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                                    <td align="center">
+                                        @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                            {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+                                        @endif
+                                    </td>
+                                    <td align="center">
+                                        @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                            <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
+                                        @endif
+                                    </td>
+                                @endif
                             @endif
                         </tr>
                     @endforeach
