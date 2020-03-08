@@ -83,6 +83,9 @@
             }
         @endphp
         @foreach($alldatearray as $dayfromallarray)
+            @php
+                $atleastteacher = 0;
+            @endphp
             @foreach($datearray as $datesingles)
                 @if(date('Y-m-d', strtotime($datesingles['date'])) == $dayfromallarray)
                     <tr>
@@ -112,8 +115,32 @@
                             @endif
                         </tr>
                     @endforeach
+                    @php
+                        $atleastteacher = 1;
+                    @endphp
                 @endif
             @endforeach
+            @if($atleastteacher == 0)
+                <tr>
+                    <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($dayfromallarray))) }}</td>
+                </tr>
+                @foreach($teachers as $teacher)
+                    <tr>
+                        <td>
+                            {{ $teacher->name }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ $teacher->phone }}</span></small>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         @endforeach
     </table>
 </div>
