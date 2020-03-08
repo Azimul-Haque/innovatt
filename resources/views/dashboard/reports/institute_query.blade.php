@@ -98,7 +98,6 @@
                     @foreach($datesingles['data'] as $teacher)
                         <tr>
                             <td>
-                                {{ count($teacher) }}<br/>
                                 {{ reset($teacher)['name'] }}<br/>
                                 <small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                             </td>
