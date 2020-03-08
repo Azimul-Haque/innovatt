@@ -59,23 +59,20 @@
             $alldatearray = [];
             $counter = 0;
             foreach($attendances as $attendance) {
-                $found = false;
               foreach($teachers as $teacher) {
                 if(($attendance->device_pin == $teacher->device_pin)) {
-                    $found = true;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
                 } else {
-                    $found = true;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
                 }
               }
-              if($found) {
-                $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
-              }
+              $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
               $counter++;
             }
             for ($i=0; $i<=$daysbetween; $i++) { 
@@ -97,7 +94,23 @@
                                 {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                             </td>
                             @if(date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
-                                <td align="center"></td>
+                                <td align="center">
+                                    @php
+                                        $inleave = 0;
+                                        $reason = '';
+                                        foreach ($leaves as $leave) {
+                                            if(($leave->teacher_id == reset($teacher)['id']) && ($leave->leave_start <= date('Y-m-d', strtotime($dayfromallarray))) && ($leave->leave_end >= date('Y-m-d', strtotime($dayfromallarray)))) {
+                                                $inleave = 1;
+                                                $reason = $leave->reason;
+                                            }
+                                        }
+                                    @endphp
+                                    @if($inleave == 1)
+                                        <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে ({{ $reason }})</b></span>
+                                    @else
+                                        <span style="color: #FF0000;"><b><i class="fa fa-exclamation-triangle"></i> অনুপস্থিত</b></span>
+                                    @endif
+                                </td>
                                 <td align="center"></td>
                                 <td align="center"></td>
                             @else
@@ -129,12 +142,12 @@
                         <td>
                             {{ $teacher->name }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ $teacher->phone }}</span></small>
                         </td>
-                        <td>
+                        <td align="center">
                             @php
                                 $inleave = 0;
                                 $reason = '';
                                 foreach ($leaves as $leave) {
-                                    if(($leave->teacher_id == $teacher->id) && ($leave->leave_start <= date('Y-m-d', strtotime($dayfromallarray))) && ($leave->leave_end >= date('Y-m-d'))) {
+                                    if(($leave->teacher_id == $teacher->id) && ($leave->leave_start <= date('Y-m-d', strtotime($dayfromallarray))) && ($leave->leave_end >= date('Y-m-d', strtotime($dayfromallarray)))) {
                                         $inleave = 1;
                                         $reason = $leave->reason;
                                     }
