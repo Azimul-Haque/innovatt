@@ -129,18 +129,18 @@ class ReportController extends Controller
         $teachers = $institute->users;
         $teachersPresent = $this->getPresentTeachers($teachers);
 
-        $absents = [];
-        // foreach ($teachers as $teacher){
-        //     $attendance = Attendance::where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), "=", $date)
-        //                             ->where('device_id', $teacher->institute->device_id)
-        //                             ->where('device_pin', $teacher->device_pin)
-        //                             ->first();
-        //     if (empty($attendance)) {
-        //         $absents[] = $teacher;
-        //     }
-        // }
-
-        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date, 'daysbetween' => $daysbetween]);
+        $leaves = Leave::where('institute_id', $institute->id)
+                               ->where(function($query) use ($start_date){
+                                   $query->where('leave_start', '<=', $start_date)
+                                         ->where('leave_end', '>=', $start_date);
+                               })
+                               ->orWhere(function($query) use ($end_date){
+                                   $query->where('leave_start', '<=', $end_date)
+                                         ->where('leave_end', '>=', $end_date);
+                               })
+                               ->orderBy('id', 'desc')
+                               ->get();
+        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'leaves' => $leaves, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date, 'daysbetween' => $daysbetween]);
         $fileName = 'Institute_Query_Combined_Report_' . $request->query_start_date . '_' . $request->query_end_date . '_' . $device_id .'.pdf';
         return $pdf->stream($fileName); // stream
     }

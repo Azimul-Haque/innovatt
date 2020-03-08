@@ -130,7 +130,21 @@
                             {{ $teacher->name }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ $teacher->phone }}</span></small>
                         </td>
                         <td>
-                            
+                            @php
+                                $inleave = 0;
+                                $reason = '';
+                                foreach ($leaves as $leave) {
+                                    if(($leave->teacher_id == $teacher->id) && ($leave->leave_start <= date('Y-m-d', strtotime($dayfromallarray))) && ($leave->leave_end >= date('Y-m-d'))) {
+                                        $inleave = 1;
+                                        $reason = $leave->reason;
+                                    }
+                                }
+                            @endphp
+                            @if($inleave == 1)
+                                <span style="color: #4D7902;"><b><i class="fa fa-power-off"></i> ছুটিতে ({{ $reason }})</b></span>
+                            @else
+                                <span style="color: #FF0000;"><b><i class="fa fa-exclamation-triangle"></i> অনুপস্থিত</b></span>
+                            @endif
                         </td>
                         <td>
                             
