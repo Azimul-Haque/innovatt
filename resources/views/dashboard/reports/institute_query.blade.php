@@ -91,7 +91,8 @@
                     @foreach($datesingles['data'] as $teacher)
                         <tr>
                             <td>
-                                {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
+                                {{ reset($teacher)['name'] }}<br/>
+                                <small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                             </td>
                             @if(date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
                                 <td align="center">
