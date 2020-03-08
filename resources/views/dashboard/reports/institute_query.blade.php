@@ -61,18 +61,18 @@
             foreach($attendances as $attendance) {
               foreach($teachers as $teacher) {
                 if(($attendance->device_pin == $teacher->device_pin)) {
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                 } else {
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
-                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['id'] = $teacher->id;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                    $datearray[date('ymd', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
                 }
               }
-              $datearray[date('mdy', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
+              $datearray[date('ymd', strtotime($attendance->timestampdata))]['date'] = $attendance->timestampdata;
               $counter++;
             }
             for ($i=0; $i<=$daysbetween; $i++) { 
@@ -91,10 +91,11 @@
                     @foreach($datesingles['data'] as $teacher)
                         <tr>
                             <td>
+                                {{ count($teacher) }}<br/>
                                 {{ reset($teacher)['name'] }}<br/>
                                 <small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
                             </td>
-                            @if(date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
+                            @if((count($teacher) == 1) && (date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01'))
                                 <td align="center">
                                     @php
                                         $inleave = 0;
