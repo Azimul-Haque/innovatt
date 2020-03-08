@@ -114,6 +114,12 @@ class ReportController extends Controller
         $start_date = date('Y-m-d', strtotime($request->query_start_date));
         $end_date = date('Y-m-d', strtotime($request->query_end_date));
 
+        $datetime1 = new Carbon($start_date);
+        $datetime2 = new Carbon($end_date);
+        $interval = $datetime1->diff($datetime2);
+        $daysbetween = $interval->format('%a');
+        // dd(date('Y-m-d', strtotime($start_date. ' + 1 day')));
+
         $institute = Institute::where('device_id', $device_id)->first();
         $attendances = Attendance::where('device_id', $device_id)
                                  ->where(DB::raw("DATE_FORMAT(timestampdata, '%Y-%m-%d')"), ">=", $start_date)
@@ -134,7 +140,7 @@ class ReportController extends Controller
         //     }
         // }
 
-        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date]);
+        $pdf = PDF::loadView('dashboard.reports.institute_query', ['institute' => $institute, 'attendances' => $attendances, 'teachers' => $teachers, 'absents' => $absents, 'start_date' => $request->query_start_date, 'end_date' => $request->query_end_date, 'daysbetween' => $daysbetween]);
         $fileName = 'Institute_Query_Combined_Report_' . $request->query_start_date . '_' . $request->query_end_date . '_' . $device_id .'.pdf';
         return $pdf->stream($fileName); // stream
     }

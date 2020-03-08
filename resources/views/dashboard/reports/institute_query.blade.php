@@ -56,6 +56,7 @@
         </tr>
         @php
             $datearray = [];
+            $alldatearray = [];
             $counter = 0;
             foreach($attendances as $attendance) {
                 $found = false;
@@ -65,6 +66,11 @@
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = $attendance->timestampdata;
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
                     $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
+                } else {
+                    $found = true;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['timestampdata'] = '1970-01-01';
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['name'] = $teacher->name;
+                    $datearray[date('mdy', strtotime($attendance->timestampdata))]['data'][$teacher->id][$counter]['phone'] = $teacher->phone;
                 }
               }
               if($found) {
@@ -72,28 +78,41 @@
               }
               $counter++;
             }
+            for ($i=0; $i<=$daysbetween; $i++) { 
+                $alldatearray[$i] = date('Y-m-d', strtotime($start_date. ' + '. $i .' day'));
+            }
         @endphp
-        @foreach($datearray as $datesingles)
-            <tr>
-                <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
-            </tr>
-            @foreach($datesingles['data'] as $teacher)
-                <tr>
-                    <td>
-                        {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
-                    </td>
-                    <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
-                    <td align="center">
-                        @if(reset($teacher) != end($teacher))
-                            {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
-                        @endif
-                    </td>
-                    <td align="center">
-                        @if(reset($teacher) != end($teacher))
-                            <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
-                        @endif
-                    </td>
-                </tr>
+        @foreach($alldatearray as $dayfromallarray)
+            @foreach($datearray as $datesingles)
+                @if(date('Y-m-d', strtotime($datesingles['date'])) == $dayfromallarray)
+                    <tr>
+                        <td colspan="4" class="yellowbackground">{{ bangla(date('F d, Y', strtotime($datesingles['date']))) }}</td>
+                    </tr>
+                    @foreach($datesingles['data'] as $teacher)
+                        <tr>
+                            <td>
+                                {{ reset($teacher)['name'] }}<br/><small>যোগাযোগঃ <span style="font-family: Calibri;">{{ reset($teacher)['phone'] }}</span></small>
+                            </td>
+                            @if(date('Y-m-d', strtotime(reset($teacher)['timestampdata'])) == '1970-01-01')
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                            @else
+                                <td align="center">{{ bangla(date('F d, Y h:i A', strtotime(reset($teacher)['timestampdata']))) }}</td>
+                                <td align="center">
+                                    @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                        {{ bangla(date('F d, Y h:i A', strtotime(end($teacher)['timestampdata']))) }}
+                                    @endif
+                                </td>
+                                <td align="center">
+                                    @if((reset($teacher) != end($teacher)) && (date('Y-m-d', strtotime(end($teacher)['timestampdata'])) != '1970-01-01'))
+                                        <span class="badge badge-success">{{ bangla(Carbon::parse(end($teacher)['timestampdata'])->diffForHumans(Carbon::parse(reset($teacher)['timestampdata']))) }}</span>
+                                    @endif
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
+                @endif
             @endforeach
         @endforeach
     </table>
