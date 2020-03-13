@@ -116,12 +116,15 @@
               <th>ছুটি শুরুর তারিখ</th>
               <th>ছুটি শেষের তারিখ</th>
               <th>ছুটির কারণ</th>
-              <th>ছুটি প্রদানকারী</th>
             </tr>
           </thead>
           <tbody>
             @foreach($teacher->leaves as $leave)
-
+              <tr>
+                <td>{{ bangla(date('F d, Y', strtotime($leave->leave_start))) }}</td>
+                <td>{{ bangla(date('F d, Y', strtotime($leave->leave_end))) }}</td>
+                <td>{{ $leave->reason }}</td>
+              </tr>
             @endforeach
           </tbody>
         </table>
