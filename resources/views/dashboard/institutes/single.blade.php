@@ -21,6 +21,8 @@
       @endif
         <div class="pull-right">
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
+                <a href="{{ route('dashboard.leavelist') }}" class="btn btn-warning"
+                   title="ছুটি তালিকা দেখুন"><i class="fa fa-plus"></i> ছুটি তালিকা</a>
                 <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary"
                    title="নতুন শিক্ষক/ অফিস সহকারি যোগ করুন"><i class="fa fa-plus"></i> শিক্ষক/ অফিস সহকারি যোগ</a>
             @endif
@@ -284,7 +286,7 @@
                             <th>ছুটি শেষের তারিখ</th>
                             <th>ছুটির কারণ</th>
                             <th>ছুটি প্রদানকারী</th>
-                            <th>ছুটি প্রদানকারী</th>
+                            <th>কার্যক্রম</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -300,7 +302,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteLeave{{ $leave->id }}" data-backdrop="static" title="শিক্ষক/ অফিস সহকারি ডিলেট করুন">
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteLeave{{ $leave->id }}" data-backdrop="static" title="ছুটি ডিলেট করুন">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- Delete Modal -->
@@ -310,7 +312,7 @@
                                         <div class="modal-content">
                                           <div class="modal-header modal-header-danger">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> শিক্ষক/ অফিস সহকারি ডিলেট</h4>
+                                            <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> ছুটি ডিলেট</h4>
                                           </div>
                                           <div class="modal-body">
                                             আপনি কি নিশ্চিতভাবে <b>{{ $leave->teacher->name }}</b> এর ছুটি বাতিল করতে চান??
