@@ -465,7 +465,14 @@ class DashboardController extends Controller
     public function getLeaveList($device_id)
     {
         $institute = Institute::where('device_id', $device_id)->first();
-        $leaves = Leave::where('institute_id', $institute->id)->get();
+
+        $leaves = Leave::where('institute_id', $institute->id)
+                       ->orderBy('id', 'desc')
+                       ->get();
+
+        return view('dashboard.institutes.leavelist')
+                                ->withInstitute($institute)
+                                ->withLeaves($leaves);
     }
 
     public function updateAteo(Request $request, $id)

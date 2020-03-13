@@ -18,7 +18,7 @@
             <a href="tel:{{ $institute->upazilla->contact }}" title="ফোন করুন (উপজেলা)" style="font-size: 0.7em">
                 (<i class="fa fa-phone"></i> {{ bangla($institute->upazilla->contact) }})
             </a>
-      @endif
+        @endif
         <div class="pull-right">
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
                 <a href="{{ route('dashboard.leavelist', $institute->device_id) }}" class="btn btn-warning" title="ছুটি তালিকা দেখুন"><i class="fa fa-power-off"></i> ছুটি তালিকা</a>
