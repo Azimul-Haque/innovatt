@@ -21,7 +21,7 @@
         @endif
         <div class="pull-right">
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
-                <a href="{{ route('dashboard.leavelist', $institute->device_id) }}" class="btn btn-info" title="উপস্থিতি যোগ করুন"><i class="fa fa-check"></i> উপস্থিতি যোগ</a>
+                <a href="{{ route('dashboard.manualentry', $institute->device_id) }}" class="btn btn-info" title="উপস্থিতি যোগ করুন"><i class="fa fa-check"></i> উপস্থিতি যোগ</a>
                 <a href="{{ route('dashboard.leavelist', $institute->device_id) }}" class="btn btn-warning" title="ছুটি তালিকা দেখুন"><i class="fa fa-power-off"></i> ছুটি তালিকা</a>
                 <a href="{{ route('dashboard.institute.user.create', $institute->device_id ) }}" class="btn btn-primary" title="নতুন শিক্ষক/ অফিস সহকারি যোগ করুন"><i class="fa fa-plus"></i> ব্যবহারকারী যোগ</a>
             @endif
