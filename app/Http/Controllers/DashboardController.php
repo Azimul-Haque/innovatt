@@ -462,6 +462,12 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function getLeaveList($device_id)
+    {
+        $institute = Institute::where('device_id', $device_id)->first();
+        $leaves = Leave::where('institute_id', $institute->id)->get();
+    }
+
     public function updateAteo(Request $request, $id)
     {
         $user = User::find($id);
