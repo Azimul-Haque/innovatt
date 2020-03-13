@@ -107,6 +107,25 @@
           </ul>
         </div>
       </div>
+
+      <big>{{ $teacher->name }} এর ছুটিসমূহ</big>
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>ছুটি শুরুর তারিখ</th>
+              <th>ছুটি শেষের তারিখ</th>
+              <th>ছুটির কারণ</th>
+              <th>ছুটি প্রদানকারী</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($teacher->leaves as $leave)
+
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="col-md-8">
       <big>উপস্থিতি তালিকাঃ <b>{{ bangla(date('F, Y')) }}</b></big>
