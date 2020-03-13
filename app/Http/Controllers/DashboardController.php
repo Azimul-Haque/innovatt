@@ -21,7 +21,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
-        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact', 'getAtaGlance', 'getLeavePage', 'storeLeave', 'deleteLeave', 'getLeaveList', 'getManualEntry');
+        $this->middleware('admin')->except('index', 'createAteo', 'storeAteo', 'updateAteo', 'getFemaleTeacherList', 'getMaleTeacherList', 'getAllTeacherList', 'getAllTeacherLateList', 'getAllTeacherEarlyLeaveList', 'getInstituteList','getAteo', 'getUpazillaSchoolsTeachersAbsentListForAteo', 'getUpazillaSchoolsTeachersAbsentList', 'getUpazillaSchoolsTeachersPresentListForAteo', 'getUpazillaSchoolsTeachersPresentList', 'getInstitutes', 'createInstitute', 'getSingleInstitute', 'storeInstitute', 'editInstitute', 'updateInstitute', 'deleteInstitute', 'createInstituteUser', 'storeInstituteUser', 'createUser', 'editUser', 'updateUser', 'deleteUser', 'getSingleUser', 'getPersonalProfile', 'updatePersonalProfile', 'setUpazillaContact', 'getAtaGlance', 'getLeavePage', 'storeLeave', 'deleteLeave', 'getLeaveList', 'getManualEntry', 'storeManualEntry');
     }
 
     public function index()
@@ -480,6 +480,36 @@ class DashboardController extends Controller
         $institute = Institute::where('device_id', $device_id)->first();
 
         return view('dashboard.institutes.manualentry')->withInstitute($institute);
+    }
+
+    public function storeManualEntry(Request $request)
+    {
+        $this->validate($request, [
+            'teacher_id'    => 'required',
+            'entrancetime'  => 'required',
+            'departuretime' => 'required'
+        ]);
+
+        $teacher = User::find($request->teacher_id);
+
+        $attendance1 = new Attendance;
+        $attendance1->device_pin = $teacher->device_pin;
+        $attendance1->timestampdata = date('Y-m-d H:i:s', strtotime($request->entrancetime));
+        $attendance1->device_id = $teacher->institute->device_id;
+        $attendance1->count = 1;
+        $attendance1->save();
+
+        $attendance2 = new Attendance;
+        $attendance2->device_pin = $teacher->device_pin;
+        $attendance2->timestampdata = date('Y-m-d H:i:s', strtotime($request->departuretime));
+        $attendance2->device_id = $teacher->institute->device_id;
+        $attendance2->count = 1;
+        $attendance2->save();
+
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        return redirect()->route('dashboard.institute.single', $teacher->institute->device_id);
+
     }
 
     public function updateAteo(Request $request, $id)

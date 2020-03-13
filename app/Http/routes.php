@@ -59,7 +59,7 @@ Route::delete('/teacher/leave/delete/{id}', ['as'=>'dashboard.deleteleave','uses
 Route::get('/teacher/leave/list/{device_id}', ['as'=>'dashboard.leavelist','uses'=>'DashboardController@getLeaveList']);
 
 Route::get('/presence/manual/entry/{device_id}', ['as'=>'dashboard.manualentry','uses'=>'DashboardController@getManualEntry']);
-// Route::post('/teacher/leave/store', ['as'=>'dashboard.storeleave','uses'=>'DashboardController@storeLeave']);
+Route::post('/teacher/manual/entry/store', ['as'=>'dashboard.storemanualentry','uses'=>'DashboardController@storeManualEntry']);
 
 
 Route::get('/upazillas', ['as'=>'dashboard.upazillas','uses'=>'DashboardController@getUpazillas']);
