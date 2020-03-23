@@ -21,7 +21,7 @@
         @endif
         <div class="pull-right">
             @mobile
-                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' && Auth::user()->institute->device_id == $institute->device_id)
+                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo')
                     <a href="{{ route('dashboard.manualentry', $institute->device_id) }}" class="btn btn-info" title="উপস্থিতি যোগ করুন"><i class="fa fa-check"></i></a>
                 @endif
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
@@ -32,7 +32,7 @@
                             class="fa fa-refresh"></i>
                 </button>
             @elsemobile
-                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' && Auth::user()->institute->device_id == $institute->device_id)
+                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo')
                     <a href="{{ route('dashboard.manualentry', $institute->device_id) }}" class="btn btn-info" title="উপস্থিতি যোগ করুন"><i class="fa fa-check"></i> উপস্থিতি যোগ</a>
                 @endif
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'teo' || Auth::user()->role == 'ateo' || (Auth::user()->role == 'headmaster' && Auth::user()->institute->device_id == $institute->device_id))
