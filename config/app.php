@@ -166,6 +166,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Riverskies\Laravel\MobileDetect\MobileDetectServiceProvider::class
 
 
     ],
@@ -222,6 +223,7 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'MobileDetect' => Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class
     ],
 
 ];
