@@ -20,11 +20,19 @@
           </a>)
       @endif
       <div class="pull-right">
-        @if(Auth::user()->role != 'teacher')
-          <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-primary" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
-          <a href="{{ route('dashboard.leavepage', [$teacher->unique_key, $teacher->id]) }}" class="btn btn-warning" title="ছুটি প্রদান করুন"><i class="fa fa-power-off"> ছুটি প্রদান</i></a>
-        @endif
-        <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
+        @mobile
+          @if(Auth::user()->role != 'teacher')
+            <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-primary" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i></a>
+            <a href="{{ route('dashboard.leavepage', [$teacher->unique_key, $teacher->id]) }}" class="btn btn-warning" title="ছুটি প্রদান করুন"><i class="fa fa-power-off"></i></a>
+          @endif
+          <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i></button>
+        @elsemobile
+          @if(Auth::user()->role != 'teacher')
+            <a href="{{ route('dashboard.users.edit', $teacher->id) }}" class="btn btn-primary" title="সম্পাদনা করুন"><i class="fa fa-pencil"></i> সম্পাদনা</a>
+            <a href="{{ route('dashboard.leavepage', [$teacher->unique_key, $teacher->id]) }}" class="btn btn-warning" title="ছুটি প্রদান করুন"><i class="fa fa-power-off"> ছুটি প্রদান</i></a>
+          @endif
+          <button type="button" onclick="location.reload();" class="btn btn-success" title="রিফ্রেশ করুন"><i class="fa fa-refresh"></i> রিফ্রেশ</button>
+        @endmobile
       </div>
     </h1>
 @stop
