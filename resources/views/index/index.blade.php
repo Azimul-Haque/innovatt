@@ -53,6 +53,35 @@
             </div>
         </div>
     </section>
+
+    <section class="padding-three bg-gray">
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-6 col-sm-6">
+                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Attendance App</span>
+                </div>
+                <!-- end section title -->
+                <!-- section highlight text -->
+                <div class="col-md-6 col-sm-6 text-right xs-text-left">
+
+                </div>
+                <!-- end section highlight text -->
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features wow fadeIn" style="margin-bottom: 40px; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                   <center>
+                       <a href="{{ asset('files/innoatt1.apk') }}" class="highlight-button btn btn-large button" download=""><i class="fa fa-android"></i>Download Android App</a>
+                   </center>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- end about section -->
     <section class="padding-three bg-gray">
         <div class="container">
@@ -143,21 +172,7 @@
             </div>
         </div>
     </section>
-    <section class="padding-three bg-gray">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-md-6 col-sm-6">
-                    <span class="text-large letter-spacing-2 black-text font-weight-600 agency-title">Attendance App</span>
-                </div>
-                <!-- end section title -->
-                <!-- section highlight text -->
-                <div class="col-md-6 col-sm-6 text-right xs-text-left">
-                </div>
-                <!-- end section highlight text -->
-            </div>
-        </div>
-    </section>
+
     <!-- counter section -->
     <section id="counter" class="wow fadeIn border-bottom">
         <div class="container">
